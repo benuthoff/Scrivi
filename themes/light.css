@@ -1,0 +1,16 @@
+/* Light Theme*/ 
+
+body.theme_Light {
+	--theme-bgcolor: #eee;
+}
+
+body.theme_Light #editor, body.theme_Light .divider, body.theme_Light #sidebar > div {
+	border-color: #aaa;
+}
+
+body.theme_Light .title, body.theme_Light .icon {
+	color: #888;
+}
+body.theme_Light .body {
+	color: #666;
+}
