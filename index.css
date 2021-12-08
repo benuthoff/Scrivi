@@ -23,3 +23,6 @@ body {
 	padding-bottom: 6px;
 	border-bottom: solid 1px #aaa;
 }
+#title:focus {
+	outline: none;
+}
