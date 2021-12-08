@@ -5,6 +5,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Courier New', monospace;
 }
 
 #editor {
@@ -12,4 +13,13 @@ body {
 	height: 80vh;
 	border: solid 2px #aaa;
 	border-radius: 4px;
+}
+
+#title {
+	color: #666;
+	color: #888;
+	font-size: 40px;
+	margin: 12px;
+	padding-bottom: 6px;
+	border-bottom: solid 1px #aaa;
 }
