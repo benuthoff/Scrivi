@@ -1,0 +1,14 @@
+body {
+	background-color: #eee;
+	margin: 0;
+	width: 100vw; height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#editor {
+	width: 45vw;
+	height: 80vh;
+	border: solid 2px #aaa;
+}
