@@ -80,6 +80,7 @@ body.blur #sidebar, body.blur #editor {
 	padding: 0 25px 30px 30px;
 	font-size: 20px;
 	text-align: justify;
+	min-height: calc(100vh - 230px);
 }
 
 .title:focus, .body:focus {
@@ -97,7 +98,7 @@ body.blur #sidebar, body.blur #editor {
 	justify-content: center;
 	align-items: center;
 
-	animation: fadeIn .4s;
+	animation: fadeIn .05s;
 }
 
 .dialog {

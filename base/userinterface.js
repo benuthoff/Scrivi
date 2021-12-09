@@ -2,6 +2,6 @@
 // Ben Uthoff
 
 function openDialog() {
-	$('.blind').toggle()
-    $('body').toggleClass('blur')
+	$('.blind').toggle();
+    $('body').toggleClass('blur');
 }
