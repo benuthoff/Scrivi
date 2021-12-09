@@ -2,6 +2,6 @@
 // Ben Uthoff
 
 function openDialog() {
-	let d = $('<div class="dialog"></div>');
-	console.log(d);
+	$('.blind').toggle()
+    $('body').toggleClass('blur')
 }
