@@ -4,13 +4,14 @@
 body.theme_Light {
 	--theme-bgcolor: #eee;
 	--theme-bordercolor: #aaa;
+	--theme-hovercolor: #dfdfdf;
 
 	--theme-titlecolor: #888;
 	--theme-bodycolor: #666;
 	--theme-iconcolor: #888;
 
-	--theme-blindcolor: #0000007e;
-	--theme-dialogborder: #b4b4b4;
+	--theme-blindcolor: #00000061;
+	--theme-dialogborder: #fff;
 }
 
 /* Dark Theme */
@@ -18,11 +19,12 @@ body.theme_Light {
 body.theme_Dark {
 	--theme-bgcolor: #191a1b;
 	--theme-bordercolor: #454545;
+	--theme-hovercolor: #2d2e2f;
 
 	--theme-titlecolor: #b9b9b9;
 	--theme-bodycolor: #848484;
 	--theme-iconcolor: #737373;
 
-	--theme-blindcolor: #0000007e;
+	--theme-blindcolor: #00000061;
 	--theme-dialogborder: #292a2b;
 }

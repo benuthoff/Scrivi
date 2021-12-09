@@ -34,6 +34,10 @@ body.blur #sidebar, body.blur #editor {
 	justify-content: center;
 
 	cursor: pointer;
+	transition: 0.1;
+}
+#sidebar > div:hover {
+	background-color: var(--theme-hovercolor);
 }
 
 .icon {
@@ -92,6 +96,8 @@ body.blur #sidebar, body.blur #editor {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	animation: fadeIn .4s;
 }
 
 .dialog {
@@ -118,4 +124,17 @@ body.blur #sidebar, body.blur #editor {
 	display: inline-block;
 	cursor: pointer;
 	border-radius: 2px;
+	transition: 0.1s;
+}
+.dialog .buttons > div:hover {
+	background-color: var(--theme-hovercolor);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
