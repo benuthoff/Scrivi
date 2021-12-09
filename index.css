@@ -9,10 +9,12 @@ body {
 	display: grid;
 	grid-template-columns: auto [sinistra] 160px auto [centro] 650px auto [destra] 160px auto;
 	grid-template-rows: 50px [main] auto 50px;
+
+	scrollbar-color: #28292c #141414;
 }
 
 body.blur #sidebar, body.blur #editor {
-	filter: blur(5px);
+	filter: blur(2px);
 }
 
 #sidebar {
@@ -51,7 +53,6 @@ body.blur #sidebar, body.blur #editor {
 	overflow-x: hidden;
 	overflow-y: auto;
 	position: relative;
-	
 	scrollbar-width: thin;
 }
 
@@ -63,7 +64,7 @@ body.blur #sidebar, body.blur #editor {
 .title {
 	color: var(--theme-titlecolor);
 	font-size: 36px;
-	word-break: break-word;
+	overflow-wrap: break-word;
 	padding: 18px 14px 12px 20px;
 	background-color: var(--theme-bgcolor);
 }
@@ -81,6 +82,8 @@ body.blur #sidebar, body.blur #editor {
 	font-size: 20px;
 	text-align: justify;
 	min-height: calc(100vh - 230px);
+	overflow: hidden;
+	overflow-wrap: break-word;
 }
 
 .title:focus, .body:focus {
@@ -110,6 +113,8 @@ body.blur #sidebar, body.blur #editor {
 	border-radius: 4px;
 	color: var(--theme-titlecolor);
 	font-size: 24px;
+	user-select: none;
+	cursor: default;
 }
 .dialog .buttons {
 	display: flex;
@@ -117,7 +122,7 @@ body.blur #sidebar, body.blur #editor {
 	justify-content: center;
 }
 .dialog .buttons > div {
-	margin-top: 24px;
+	margin: 24px 12px 0 12px;
 	border: solid 1px var(--theme-bordercolor);
 	min-width: 100px;
 	padding: 6px;

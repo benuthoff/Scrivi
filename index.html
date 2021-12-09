@@ -18,27 +18,17 @@
 
 </head>
 <body class='theme_Dark'>
-
-	<div class='blind' style='display:none'>
-
-		<div class='dialog'>
-			<div class='label'>This is a dialogue box.</div>
-			<div class='buttons right'>
-				<div onclick='openDialog()'>Okay</div>
-			</div>
-		</div>
-
-	</div>
 	
 	<div id='sidebar'>
 		
-		<div onclick='openDialog()'>
+		<div onclick='createDialog("Make the background color red?",
+		[["Yes!", ()=>{ $("body").css("backgroundColor", "red") }], "Ew, no."])'>
 			<i data-feather='plus'></i>
 		</div>
-		<div>
+		<div onclick='createDialog("Under construction.")'>
 			<i data-feather='folder'></i>
 		</div>
-		<div>
+		<div onclick='createDialog("Under construction.")'>
 			<i data-feather='sliders'></i>
 		</div>
 	
