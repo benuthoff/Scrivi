@@ -34,3 +34,43 @@ body.theme_Dark {
 	--theme-notiferror: #912f4b;
 	--theme-notifsuccess: #2e642e;
 }
+
+/* Beige Theme */
+
+body.theme_Beige {
+	--theme-bgcolor: #f4ecd8;
+	--theme-bordercolor: #ccb29b;
+	--theme-hovercolor: #ece3cc;
+
+	--theme-titlecolor: #bd936d;
+	--theme-bodycolor: #aa947f;
+	--theme-iconcolor: #bf956f;
+
+	--theme-blindcolor: #00000061;
+	--theme-dialogborder: #e6d8b5;
+
+	--theme-notiferror: #f48e8e;
+	--theme-notifsuccess: #6abf6a;
+
+	scrollbar-color: #bf956f #d5bfa9;
+}
+
+/* Mint Theme */
+
+body.theme_Mint {
+	--theme-bgcolor: #def4d8;
+	--theme-bordercolor: #60bfbf;
+	--theme-hovercolor: #dfdfdf;
+
+	--theme-titlecolor: #444;
+	--theme-bodycolor: #444;
+	--theme-iconcolor: #4faaaa;
+
+	--theme-blindcolor: #00000061;
+	--theme-dialogborder: #c0e7d2;
+
+	--theme-notiferror: #f48e8e;
+	--theme-notifsuccess: #6abf6a;
+
+	scrollbar-color: #bf956f #d5bfa9;
+}
