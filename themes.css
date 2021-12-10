@@ -60,10 +60,10 @@ body.theme_Beige {
 body.theme_Mint {
 	--theme-bgcolor: #def4d8;
 	--theme-bordercolor: #60bfbf;
-	--theme-hovercolor: #dfdfdf;
+	--theme-hovercolor: #cfecc8;
 
-	--theme-titlecolor: #444;
-	--theme-bodycolor: #444;
+	--theme-titlecolor: #368c84;
+	--theme-bodycolor: #315540;
 	--theme-iconcolor: #4faaaa;
 
 	--theme-blindcolor: #00000061;
@@ -72,5 +72,5 @@ body.theme_Mint {
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
-	scrollbar-color: #bf956f #d5bfa9;
+	scrollbar-color: #4eb0b0 #c0e7d2;
 }
