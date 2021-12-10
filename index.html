@@ -15,20 +15,23 @@
 
 	<!-- Base -->
 	<script src='./base/userinterface.js'></script>
+	<script src='./base/database.js'></script>
 
 </head>
 <body class='theme_Dark'>
 	
 	<div id='sidebar'>
 		
-		<div onclick='createDialog("Make the background color red?",
+		<div onclick='createDialog("Want to blind yourself?",
 		[["Yes!", ()=>{ $("body").css("backgroundColor", "red") }], "Ew, no."])'>
 			<i data-feather='plus'></i>
 		</div>
-		<div onclick='createDialog("Under construction.")'>
+		<div onclick='createNotif("Success!",
+		{icon: "check", color: "var(--theme-notifsuccess)"})'>
 			<i data-feather='folder'></i>
 		</div>
-		<div onclick='createDialog("Under construction.")'>
+		<div onclick='createNotif("There was an error...",
+		{icon: "alert-circle", color: "var(--theme-notiferror)"})'>
 			<i data-feather='sliders'></i>
 		</div>
 	
@@ -39,12 +42,10 @@
 			<div class='title' contenteditable spellcheck='false'>Title</div>
 			<div class='divider'></div>
 		</div>
-		<div class='body' contenteditable spellcheck='false'>
-
-			Type some text here...
-
-		</div>
+		<div class='body' contenteditable spellcheck='false'>Type some text here...</div>
 	</div>
+
+	<div id='notifplane'></div>
 
 <script>
 feather.replace({'stroke-width': 2, 'width': 44, 'height': 44, 'class': 'icon'});

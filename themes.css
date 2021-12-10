@@ -12,6 +12,9 @@ body.theme_Light {
 
 	--theme-blindcolor: #00000061;
 	--theme-dialogborder: #fff;
+
+	--theme-notiferror: #f48e8e;
+	--theme-notifsuccess: #6abf6a;
 }
 
 /* Dark Theme */
@@ -27,4 +30,7 @@ body.theme_Dark {
 
 	--theme-blindcolor: #00000047;
 	--theme-dialogborder: #292a2b;
+
+	--theme-notiferror: #912f4b;
+	--theme-notifsuccess: #2e642e;
 }

@@ -124,8 +124,7 @@ body.blur #sidebar, body.blur #editor {
 .dialog .buttons > div {
 	margin: 24px 12px 0 12px;
 	border: solid 1px var(--theme-bordercolor);
-	min-width: 100px;
-	padding: 6px;
+	padding: 6px 12px;
 	text-align: center;
 	display: inline-block;
 	cursor: pointer;
@@ -134,6 +133,34 @@ body.blur #sidebar, body.blur #editor {
 }
 .dialog .buttons > div:hover {
 	background-color: var(--theme-hovercolor);
+}
+
+#notifplane {
+	position: fixed;
+	top: 0; right: 0;
+}
+.notif {
+	margin: 24px 42px 0 0;
+	width: 360px;
+	padding: 14px 0;
+
+	font-size: 20px;
+	color: var(--theme-bodycolor);
+	background-color: var(--theme-bgcolor);
+	border: solid 2px var(--theme-dialogborder);
+	border-radius: 2px;
+	text-align: center;
+	user-select: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	box-shadow: #0000003d 0 4px 10px;
+	animation: fadeIn 0.1s;
+}
+.notif > .icon {
+	margin-right: 14px;
 }
 
 @keyframes fadeIn {

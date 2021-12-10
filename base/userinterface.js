@@ -56,7 +56,40 @@ function createDialog(label, buttons) {
 
 	};
 
-
 	$('body').append( $('<div class="blind"></div>').append(box) ).addClass('blur');
 
-}
+};
+
+function createNotif(text, options) {
+
+	// Set the icon
+	let icon = '';
+	if (options && options.icon) {
+		icon = '<i data-feather="' + options.icon + '"></i>'
+	};
+
+	// Function for dissapearing
+	var blip = (elmnt)=>{
+		$(elmnt).animate({ opacity: 0, height: '0px' }, 50, ()=>{ $(elmnt).remove(); })
+	}
+
+	// Create the html element
+	let notif = $('<div class="notif">'+icon+text+'</div>').on('click', (event)=>blip(event.currentTarget));
+
+	// Adds the custom color property
+	if (options && options.color) {
+		notif.css('border-color', options.color);
+	};
+
+	// Adds the element to the DOM
+	$('#notifplane').append(notif);
+
+	// Auto-delete after set time
+	setTimeout(function(){
+		blip($('#notifplane .notif').first())
+	}, 2000);
+
+	// Initializes Icon
+	if (options && options.icon) { feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'}) }
+
+};
