@@ -27,13 +27,12 @@
 	<meta name='theme-color' data-react-helmet='true' content='#00ada7'/>
 
 </head>
-<body class='theme_Dark'>
+<body class='theme_Mocha'>
 	
 	<!-- Side Buttons -->
 	<div id='sidebar'>
 		
-		<div onclick='createDialog("Want to blind yourself?",
-		[["Yes!", ()=>{ $("body").css("backgroundColor", "red") }], "Ew, no."])'>
+		<div onclick='createDialog("Hello World!")'>
 			<i data-feather='plus'></i>
 		</div>
 		<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
@@ -69,14 +68,26 @@
 		<div class='net' onclick='toggleSettings()'></div>
 		<div id='settings'>
 			<div id='tabs'>
-				<div><i data-feather='settings'></i> Basic</div>
-				<div class='sel'><i data-feather='type'></i> Appearance</div>
-				<div><i data-feather='command'></i> Keyboard</div>
-				<div><i data-feather='package'></i> Addons</div>
-				<div><i data-feather='info'></i> Credits</div>
+				<div tabid='basic' onclick='openSettingsTab("basic")'>
+					<i data-feather='settings'></i> Basic
+				</div>
+				<div tabid='appearance' onclick='openSettingsTab("appearance")'>
+					<i data-feather='type'></i> Appearance
+				</div>
+				<div tabid='keyboard' onclick='openSettingsTab("keyboard")'>
+					<i data-feather='command'></i> Keyboard
+				</div>
+				<div tabid='addons' onclick='openSettingsTab("addons")'>
+					<i data-feather='package'></i> Addons
+				</div>
+				<div tabid='credits' onclick='openSettingsTab("credits")'>
+					<i data-feather='info'></i> Credits
+				</div>
 			</div>
 			<div id='main'>
 				<div id='settings_basic' class='settingspage'>
+
+					<h1>Basic</h1>
 
 					<!--
 					- Autohide Side Buttons
@@ -90,13 +101,32 @@
 					<h2><i data-feather='corner-down-right'></i> Font and Size</h2>
 
 					<h2><i data-feather='corner-down-right'></i> Color Theme</h2>
+					<div class='gallery'>
 
+						<div simtheme='dark' onclick='setTheme("Dark")'>Dark</div>
+						<div simtheme='light' onclick='setTheme("Light")'>Light</div>
+						<div simtheme='beige' onclick='setTheme("Beige")'>Beige</div>
+						<div simtheme='mint' onclick='setTheme("Mint")'>Mint</div>
+						<div simtheme='mocha' onclick='setTheme("Mocha")'>Mocha</div>
+
+					</div>
+
+				</div>
+				<div id='settings_keyboard' class='settingspage'>
+					<h1>Keyboard</h1>
+				</div>
+				<div id='settings_addons' class='settingspage'>
+					<h1>Addons</h1>
+				</div>
+				<div id='settings_credits' class='settingspage'>
+					<h1>Credits</h1>
 				</div>
 			</div>
 		</div>
 
 		<script>
 			feather.replace({'stroke-width': 2, 'width': 28, 'height': 28, 'class': 'icon'});
+			openSettingsTab('basic');
 		</script>
 
 	</div>

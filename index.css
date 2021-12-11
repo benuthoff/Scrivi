@@ -9,8 +9,6 @@ body {
 	display: grid;
 	grid-template-columns: auto [sinistra] 160px auto [centro] 650px auto [destra] 160px auto;
 	grid-template-rows: 50px [main] auto 50px;
-
-	scrollbar-color: #28292c #141414;
 }
 
 body.blur #sidebar, body.blur #editor {
@@ -198,7 +196,7 @@ body.blur #sidebar, body.blur #editor {
 #settings > #tabs {
 	grid-column: tabs;
 	border-right: solid 2px var(--theme-dialogborder);
-	background-color: #121213e3;
+	background-color: var(--theme-settingtab);
 	padding-top: 4px;
 }
 #settings > #tabs > div {
@@ -206,6 +204,7 @@ body.blur #sidebar, body.blur #editor {
 	font-size: 20px;
 	width: 200px;
 	padding: 20px;
+	transition: 0.12s;
 
 	user-select: none;
 	cursor: pointer;
@@ -217,11 +216,14 @@ body.blur #sidebar, body.blur #editor {
 	border-top: solid 2px transparent;
 	border-bottom: solid 2px transparent;
 }
+#settings > #tabs > div:hover {
+	background-color: var(--theme-settingtabhov);
+}
 #settings > #tabs > div.sel {
-	background-color: #191a1b;
+	background-color: var(--theme-bgcolor);
 	border-top-color: var(--theme-dialogborder);
 	border-bottom-color: var(--theme-dialogborder);
-	border-right: solid 2px #191a1b;
+	border-right: solid 2px var(--theme-bgcolor);
 }
 #settings > #tabs > div .icon {
 	margin-right: 16px;
@@ -231,9 +233,15 @@ body.blur #sidebar, body.blur #editor {
 
 #settings > #main {
 	grid-column: main;
-	background-color: #191a1b;
+	background-color: var(--theme-bgcolor);
 	padding: 24px 32px;
 	user-select: none;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+#settings > #main .settingspage {
+	display: none;
+	animation: fadeIn 0.05s;
 }
 #settings > #main h1 {
 	margin: 0;
@@ -243,8 +251,36 @@ body.blur #sidebar, body.blur #editor {
 	margin-bottom: 16px;
 }
 #settings > #main h2 {
-	margin: 20px 0 16px 0;
+	margin: 20px 0 20px 0;
 	color: var(--theme-titlecolor);
+}
+
+#settings_appearance .gallery {
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin: 30px 0 0 30px;
+}
+#settings_appearance .gallery > div {
+	width: 240px;
+	height: 120px;
+	margin: 0 14px 24px 14px;
+
+	font-size: 32px;
+	text-align: center;
+	line-height: 120px;
+
+	cursor: pointer;
+	transition: 0.1s;
+
+	background-color: var(--theme-bgcolor);
+	border: solid 2px var(--theme-bordercolor);
+	border-radius: 4px;
+	color: var(--theme-titlecolor);
+	font-family: 'Courier New', monospace;
+}
+#settings_appearance .gallery > div:hover {
+	background-color: var(--theme-hovercolor);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');

@@ -1,7 +1,7 @@
 
 /* Light Theme*/ 
 
-body.theme_Light {
+body.theme_Light, div[simtheme=light] {
 	--theme-bgcolor: #eee;
 	--theme-bordercolor: #aaa;
 	--theme-hovercolor: #dfdfdf;
@@ -11,15 +11,20 @@ body.theme_Light {
 	--theme-iconcolor: #888;
 
 	--theme-blindcolor: #00000061;
-	--theme-dialogborder: #fff;
+	--theme-dialogborder: #d5d5d5;
 
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
+
+	--theme-settingtab: #c1c1c19e;
+	--theme-settingtabhov: #0000000f;
+
+	scrollbar-color: #d2d2d2 #e5e5e5;
 }
 
 /* Dark Theme */
 
-body.theme_Dark {
+body.theme_Dark, div[simtheme=dark] {
 	--theme-bgcolor: #191a1b;
 	--theme-bordercolor: #454545;
 	--theme-hovercolor: #151517;
@@ -33,11 +38,16 @@ body.theme_Dark {
 
 	--theme-notiferror: #912f4b;
 	--theme-notifsuccess: #2e642e;
+
+	--theme-settingtab: #121213e3;
+	--theme-settingtabhov: #ffffff05;
+
+	scrollbar-color: #28292c #141414;
 }
 
 /* Beige Theme */
 
-body.theme_Beige {
+body.theme_Beige, div[simtheme=beige] {
 	--theme-bgcolor: #f4ecd8;
 	--theme-bordercolor: #ccb29b;
 	--theme-hovercolor: #ece3cc;
@@ -52,12 +62,15 @@ body.theme_Beige {
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
+	--theme-settingtab: #2e2a2094;
+	--theme-settingtabhov: #0000001f;
+
 	scrollbar-color: #bf956f #d5bfa9;
 }
 
 /* Mint Theme */
 
-body.theme_Mint {
+body.theme_Mint, div[simtheme=mint] {
 	--theme-bgcolor: #def4d8;
 	--theme-bordercolor: #60bfbf;
 	--theme-hovercolor: #cfecc8;
@@ -72,12 +85,15 @@ body.theme_Mint {
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
+	--theme-settingtab: #5a877f9e;
+	--theme-settingtabhov: #0000000f;
+
 	scrollbar-color: #4eb0b0 #c0e7d2;
 }
 
 /* Mocha Theme */
 
-body.theme_Mocha {
+body.theme_Mocha, div[simtheme=mocha] {
 	--theme-bgcolor: #221915;
 	--theme-bordercolor: #846951;
 	--theme-hovercolor: #2e2523;
@@ -91,6 +107,9 @@ body.theme_Mocha {
 
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
+
+	--theme-settingtab: #171313e3;
+	--theme-settingtabhov: #ffb9b905;
 
 	scrollbar-color: #bf956f #d5bfa9;
 }

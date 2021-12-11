@@ -16,6 +16,27 @@ document.addEventListener('keydown', function(e) {
 
 	}
 
+	else if (e.key === 'Tab') {
+
+		if ($('#settings_blind').hasClass('visible')) {
+
+			e.preventDefault();
+
+			let tab;
+			if (e.shiftKey) {
+				tab = $('#settings #tabs .sel').prev();
+				if (tab.length === 0) { tab = $('#settings #tabs div').last() };
+			} else {
+				tab = $('#settings #tabs .sel').next();
+				if (tab.length === 0) { tab = $('#settings #tabs div').first() };
+			};
+
+			tab.click();
+
+		};
+
+	}
+
 	else if (e.key === 'q' && e.ctrlKey) {
 
 		e.preventDefault();
