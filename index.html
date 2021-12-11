@@ -16,10 +16,13 @@
 	<!-- Base -->
 	<script src='./base/userinterface.js'></script>
 	<script src='./base/database.js'></script>
+	<script src='./base/keyboard.js'></script>
+	<script src='./base/settings.js'></script>
 
 </head>
-<body class='theme_Mint'>
+<body class='theme_Dark'>
 	
+	<!-- Side Buttons -->
 	<div id='sidebar'>
 		
 		<div onclick='createDialog("Want to blind yourself?",
@@ -33,13 +36,16 @@
 		{icon: "check", color: "var(--theme-notifsuccess)"})'>
 			<i data-feather='folder'></i>
 		</div>
-		<div onclick='createNotif("There was an error...",
-		{icon: "alert-circle", color: "var(--theme-notiferror)"})'>
+		<div onclick='toggleSettings()'>
 			<i data-feather='sliders'></i>
 		</div>
+
+		<script>feather.replace({'stroke-width': 2, 'width': 44, 'height': 44, 'class': 'icon'});</script>
 	
 	</div>
 
+
+	<!-- Main Editor -->
 	<div id='editor' class='type_PlainText'>
 		<div class='topbound'>
 			<div class='title' contenteditable spellcheck='false'>Title</div>
@@ -50,9 +56,47 @@
 
 	<div id='notifplane'></div>
 
-<script>
-feather.replace({'stroke-width': 2, 'width': 44, 'height': 44, 'class': 'icon'});
-</script>
+
+	<!-- Settings Menu -->
+	<div id='settings_blind' class='blind'>
+		<div class='net' onclick='toggleSettings()'></div>
+		<div id='settings'>
+			<div id='tabs'>
+				<div><i data-feather='settings'></i> Basic</div>
+				<div class='sel'><i data-feather='type'></i> Appearance</div>
+				<div><i data-feather='command'></i> Keyboard</div>
+				<div><i data-feather='package'></i> Addons</div>
+				<div><i data-feather='info'></i> Credits</div>
+			</div>
+			<div id='main'>
+				<div id='settings_basic' class='settingspage'>
+
+					<!--
+					- Autohide Side Buttons
+					-->
+
+				</div>
+				<div id='settings_appearance' class='settingspage'>
+
+					<h1>Appearance</h1>
+
+					<h2><i data-feather='corner-down-right'></i> Font and Size</h2>
+
+					<h2><i data-feather='corner-down-right'></i> Color Theme</h2>
+
+				</div>
+			</div>
+		</div>
+
+		<script>
+			feather.replace({'stroke-width': 2, 'width': 28, 'height': 28, 'class': 'icon'});
+		</script>
+
+	</div>
+
+
+
+
 
 </body>
 </html>

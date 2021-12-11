@@ -29,7 +29,7 @@ body.theme_Dark {
 	--theme-iconcolor: #737373;
 
 	--theme-blindcolor: #00000047;
-	--theme-dialogborder: #292a2b;
+	--theme-dialogborder: #242526;
 
 	--theme-notiferror: #912f4b;
 	--theme-notifsuccess: #2e642e;
@@ -73,4 +73,24 @@ body.theme_Mint {
 	--theme-notifsuccess: #6abf6a;
 
 	scrollbar-color: #4eb0b0 #c0e7d2;
+}
+
+/* Mocha Theme */
+
+body.theme_Mocha {
+	--theme-bgcolor: #221915;
+	--theme-bordercolor: #846951;
+	--theme-hovercolor: #2e2523;
+
+	--theme-titlecolor: #bd936d;
+	--theme-bodycolor: #aa947f;
+	--theme-iconcolor: #997a5e;
+
+	--theme-blindcolor: #0000004a;
+	--theme-dialogborder: #372a24;
+
+	--theme-notiferror: #f48e8e;
+	--theme-notifsuccess: #6abf6a;
+
+	scrollbar-color: #bf956f #d5bfa9;
 }

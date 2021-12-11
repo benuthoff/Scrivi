@@ -70,7 +70,7 @@ function createNotif(text, options) {
 
 	// Function for dissapearing
 	var blip = (elmnt)=>{
-		$(elmnt).animate({ opacity: 0, height: '0px' }, 50, ()=>{ $(elmnt).remove(); })
+		$(elmnt).addClass('dying').animate({ opacity: 0, height: '0px', marginTop: 0 }, 200, ()=>{ $(elmnt).remove(); })
 	}
 
 	// Create the html element
@@ -86,7 +86,7 @@ function createNotif(text, options) {
 
 	// Auto-delete after set time
 	setTimeout(function(){
-		blip($('#notifplane .notif').first())
+		blip($('#notifplane .notif:not(.dying)').first())
 	}, 2000);
 
 	// Initializes Icon
