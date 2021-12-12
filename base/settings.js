@@ -28,6 +28,27 @@ function setTheme(id) {
 		};
 	});
 
+	// Apply Theme
 	$('body').addClass('theme_'+id);
+
+	// Save to Storage
+	let store = db.transaction('userdata', 'readwrite').objectStore('userdata')
+	let req = store.get('theme');
+	req.onerror = function() {
+		createNotif('Error reaching DB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'});
+	};
+	req.onsuccess = function(event) {
+		
+		let data = event.target.result;
+		data.value = id;
+		let upreq = store.put(data);
+		upreq.onsuccess = function() {
+			createNotif('Saved to ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
+		};
+		upreq.onerror = function() {
+			createNotif('Error saving theme.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'});
+		};
+
+	};
 
 };
