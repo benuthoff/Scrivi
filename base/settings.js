@@ -23,6 +23,20 @@ function openSettingsTab(id) {
 
 };
 
+function saveAllSettings() {
+
+	let scw = db.transaction(['userdata'], 'readwrite')
+		.objectStore('userdata').put({'label': 'settings', 'value': usersettings});
+	scw.onerror = ()=>{ createNotif('Error saving settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+
+};
+
+function executeSettings() {
+
+	setTheme(usersettings.theme);
+	
+}
+
 function setTheme(id) {
 
 	// Remove all themes

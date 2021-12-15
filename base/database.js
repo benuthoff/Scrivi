@@ -55,6 +55,9 @@ request.onsuccess = function(event) {
 			usersettings[indx] = savesettings[indx];
 		});
 
+		// Run saved settings;
+		executeSettings();
+
 	};
 
 };
