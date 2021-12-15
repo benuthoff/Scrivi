@@ -41,7 +41,7 @@ request.onupgradeneeded = function(event) {
 	nstore.createIndex('value', 'value', { unique: false });
 
 	metastore.transaction.oncomplete = (event)=>{
-		var uwrite = db.transaction('notes', 'readwrite').objectStore('notes');
+		var uwrite = db.transaction('userdata', 'readwrite').objectStore('userdata');
 		uwrite.add({'label': 'settings', 'value': usersettings});
 	};
 
