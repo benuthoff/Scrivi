@@ -35,31 +35,3 @@ function setTheme(id) {
 	editData('userdata', 'theme', id);
 
 };
-
-var __defaultsettings = [
-	['theme', 'Mocha'],
-	['sideBar_autoHide', false]
-];
-function saveDefaultSettings() {
-
-	var store = db.transaction('userdata', 'readwrite').objectStore('userdata');
-
-	// Get All Keys in Storage
-	store.getAllKeys().onsuccess = function(event) {
-
-		let list = event.target.result;
-
-		// Add Default Values for Keys not Present
-		for (let i=0; i<__defaultsettings.length; i++) {
-
-			let set = __defaultsettings[i];
-			if (!list.includes(set[0])) {
-				let radd = store.add({'setting': set[0], 'value': set[1]});
-				radd.onsuccess = function() {
-					createNotif('Added '+set[0]+' to DB.', {color: 'green'});
-				};
-			};
-
-		};
-	};
-};
