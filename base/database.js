@@ -4,6 +4,7 @@
 // For Test Purposes - Delete Database 
 var request = indexedDB.deleteDatabase('ScriviDB');
 request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
+request.onsuccess = function(event) {
 
 
 /* Test Data */
@@ -54,3 +55,5 @@ request.onsuccess = function(event) {
 	createNotif('Loaded ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
 	db = event.target.result;
 };
+
+}; // End
