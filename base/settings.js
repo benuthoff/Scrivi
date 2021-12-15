@@ -32,23 +32,34 @@ function setTheme(id) {
 	$('body').addClass('theme_'+id);
 
 	// Save to Storage
-	let store = db.transaction('userdata', 'readwrite').objectStore('userdata')
-	let req = store.get('theme');
-	req.onerror = function() {
-		createNotif('Error reaching DB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'});
-	};
-	req.onsuccess = function(event) {
-		
-		let data = event.target.result;
-		data.value = id;
-		let upreq = store.put(data);
-		upreq.onsuccess = function() {
-			createNotif('Saved to ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
-		};
-		upreq.onerror = function() {
-			createNotif('Error saving theme.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'});
-		};
+	editData('userdata', 'theme', id);
 
-	};
+};
 
+var __defaultsettings = [
+	['theme', 'Mocha'],
+	['sideBar_autoHide', false]
+];
+function saveDefaultSettings() {
+
+	var store = db.transaction('userdata', 'readwrite').objectStore('userdata');
+
+	// Get All Keys in Storage
+	store.getAllKeys().onsuccess = function(event) {
+
+		let list = event.target.result;
+
+		// Add Default Values for Keys not Present
+		for (let i=0; i<__defaultsettings.length; i++) {
+
+			let set = __defaultsettings[i];
+			if (!list.includes(set[0])) {
+				let radd = store.add({'setting': set[0], 'value': set[1]});
+				radd.onsuccess = function() {
+					createNotif('Added '+set[0]+' to DB.', {color: 'green'});
+				};
+			};
+
+		};
+	};
 };

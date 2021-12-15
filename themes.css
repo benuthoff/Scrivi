@@ -62,8 +62,8 @@ body.theme_Beige, div[simtheme=beige] {
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
-	--theme-settingtab: #2e2a2094;
-	--theme-settingtabhov: #0000001f;
+	--theme-settingtab: #fff0ca94;
+	--theme-settingtabhov: #ffffff21;
 
 	scrollbar-color: #bf956f #d5bfa9;
 }
@@ -96,7 +96,7 @@ body.theme_Mint, div[simtheme=mint] {
 body.theme_Mocha, div[simtheme=mocha] {
 	--theme-bgcolor: #221915;
 	--theme-bordercolor: #846951;
-	--theme-hovercolor: #2e2523;
+	--theme-hovercolor: #191311;
 
 	--theme-titlecolor: #bd936d;
 	--theme-bodycolor: #aa947f;

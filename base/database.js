@@ -40,23 +40,44 @@ request.onupgradeneeded = function(event) {
 };
 request.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
 request.onsuccess = function(event) {
-	createNotif('Loaded ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
+	//createNotif('Loaded ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
 	db = event.target.result;
 
-	/*var nstore = db.transaction('notes', 'readwrite').objectStore('notes');
-	nstore.add(notes[0]);
-	nstore.add(notes[1]);
-
-	var metastore = db.transaction('userdata', 'readwrite').objectStore('userdata');
-	metastore.add({ setting: 'theme', value: 'Mocha' });*/
-
+	// Auto-Load Theme
 	let autotheme = db.transaction('userdata').objectStore('userdata').get('theme');
 	autotheme.onerror = function() {
 		createNotif('Error loading theme.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'});
 	};
 	autotheme.onsuccess = function(event) {
-		setTheme(event.target.result.value);
+		$('body').addClass('theme_'+event.target.result.value);
 	};
-	
+
+	// Default Check
+	saveDefaultSettings();
+
+};
+
+function editData(storename, key, value) {
+
+	let store = db.transaction(storename, 'readwrite').objectStore(storename);
+	let req = store.get(key);
+	req.onerror = function() {
+		createNotif('Error reaching DB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'});
+	};
+	req.onsuccess = function(event) {
+		
+		let data = event.target.result;
+		data.value = value;
+
+		// Request to update;
+		let upreq = store.put(data);
+		upreq.onsuccess = function() {
+			createNotif('Saved to ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
+		};
+		upreq.onerror = function() {
+			createNotif('Error saving data.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'});
+		};
+
+	};
 
 };
