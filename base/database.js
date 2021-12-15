@@ -49,8 +49,11 @@ request.onsuccess = function(event) {
 	req.onerror = (event)=>{ createNotif('Error loading settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
 	req.onsuccess = (event)=>{
 
-		console.log('Settings:')
-		console.log(req.result.value);
+		// Saved values
+		let savesettings = req.result.value;
+		Object.keys(savesettings).forEach((indx)=>{
+			usersettings[indx] = savesettings[indx];
+		});
 
 	};
 
