@@ -2,8 +2,8 @@
 // Ben Uthoff
 
 // For Test Purposes - Delete Database 
-var request = indexedDB.deleteDatabase('ScriviDB');
-request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
+/*var request = indexedDB.deleteDatabase('ScriviDB');
+request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };*/
 
 
 /* Test Data */
@@ -31,9 +31,9 @@ request.onupgradeneeded = function(event) {
 	nstore.createIndex('metadata', 'metadata', { unique: false });
 
 	nstore.transaction.oncomplete = (event)=>{
-		var ntrans = db.transaction('notes', 'readwrite')
+		var ntrans = db.transaction(['notes'], 'readwrite');
+		ntrans.onerror = (event)=>{ console.log(event) };
 		var nwrite = nwrite.objectStore('notes');
-		ntrans.onerror = (event)=>{ createNotif('There was an error saving note data.') };
 		nwrite.add(notes[0]);
 		nwrite.add(notes[1]);
 	};
@@ -43,7 +43,7 @@ request.onupgradeneeded = function(event) {
 	nstore.createIndex('value', 'value', { unique: false });
 
 	metastore.transaction.oncomplete = (event)=>{
-		var uwrite = db.transaction('userdata', 'readwrite').objectStore('userdata');
+		var uwrite = db.transaction(['userdata'], 'readwrite').objectStore('userdata');
 		uwrite.add({'label': 'settings', 'value': usersettings});
 	};
 
