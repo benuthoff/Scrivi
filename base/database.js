@@ -4,7 +4,6 @@
 // For Test Purposes - Delete Database 
 var request = indexedDB.deleteDatabase('ScriviDB');
 request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
-request.onsuccess = ()=>{ createNotif('Deleted "ScriviDB".', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
 
 
 /* Test Data */
@@ -30,6 +29,12 @@ request.onupgradeneeded = function(event) {
 	nstore.createIndex('fileType', 'fileType', { unique: false });
 	nstore.createIndex('author', 'author', { unique: false })
 	nstore.createIndex('metadata', 'metadata', { unique: false });
+
+	nstore.transaction.oncomplete = (event)=>{
+		var nwrite = db.transaction('notes', 'readwrite').objectStore('notes');
+		nwrite.add(notes[0]);
+		nwrite.add(notes[1]);
+	};
 
 	// Create User Metadata Storage
 	var metastore = db.createObjectStore('userdata', { keyPath: 'label'});

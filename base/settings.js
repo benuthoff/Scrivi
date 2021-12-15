@@ -31,7 +31,4 @@ function setTheme(id) {
 	// Apply Theme
 	$('body').addClass('theme_'+id);
 
-	// Save to Storage
-	editData('userdata', 'theme', id);
-
 };
