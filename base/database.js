@@ -40,6 +40,11 @@ request.onupgradeneeded = function(event) {
 	var metastore = db.createObjectStore('userdata', { keyPath: 'label'});
 	nstore.createIndex('value', 'value', { unique: false });
 
+	metastore.transaction.oncomplete = (event)=>{
+		var uwrite = db.transaction('notes', 'readwrite').objectStore('notes');
+		uwrite.add({'label': 'settings', 'value': usersettings});
+	};
+
 };
 request.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
 request.onsuccess = function(event) {

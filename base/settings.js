@@ -1,6 +1,13 @@
 // Settings for Scrivi
 // Ben Uthoff
 
+var usersettings = {
+	'theme': 'Light',
+	'sidebar': {
+		'autoHide': false
+	}
+}
+
 function toggleSettings() {
 	$('#settings_blind').toggleClass('visible');
 	$('body').toggleClass('blur');
@@ -30,5 +37,6 @@ function setTheme(id) {
 
 	// Apply Theme
 	$('body').addClass('theme_'+id);
+	usersettings.theme = id;
 
 };
