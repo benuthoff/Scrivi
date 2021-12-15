@@ -2,9 +2,8 @@
 // Ben Uthoff
 
 // For Test Purposes - Delete Database 
-var request = indexedDB.deleteDatabase('ScriviDB');
-request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
-request.onsuccess = function(event) {
+/*var request = indexedDB.deleteDatabase('ScriviDB');
+request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };*/
 
 
 /* Test Data */
@@ -43,6 +42,30 @@ request.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-tr
 request.onsuccess = function(event) {
 	createNotif('Loaded ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
 	db = event.target.result;
+
+	// Get and load Settings;
+	let setstore = db.transaction(['userdata']).objectStore('userdata');
+	let req = setstore.get('settings');
+	req.onerror = (event)=>{ createNotif('Error loading settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
+	req.onsuccess = (event)=>{
+
+
+
+	};
+
 };
+
+function __resetAll() {
+
+	createDialog('Are you sure you want to reset everything? All data will be lost.', [
+		['Yes', ()=>{
+
+			var request = indexedDB.deleteDatabase('ScriviDB');
+			request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
+			request.onsuccess = ()=>{ location.reload() };
+
+		}],
+		'Escape'
+	]);
 
 };

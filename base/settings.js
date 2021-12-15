@@ -3,10 +3,8 @@
 
 var usersettings = {
 	'theme': 'Light',
-	'sidebar': {
-		'autoHide': false
-	}
-}
+	'sidebar_autoHide': false
+};
 
 function toggleSettings() {
 	$('#settings_blind').toggleClass('visible');
