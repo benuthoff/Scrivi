@@ -109,6 +109,7 @@ body.blur #sidebar, body.blur #editor {
 
 .dialog {
 	min-width: 200px;
+	max-width: 45vw;
 	padding: 24px;
 
 	background-color: var(--theme-bgcolor);
