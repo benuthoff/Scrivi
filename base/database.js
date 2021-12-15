@@ -65,7 +65,7 @@ function __resetAll() {
 		['Yes', ()=>{
 
 			var request = indexedDB.deleteDatabase('ScriviDB');
-			request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+			request.onerror = ()=>{ createNotif('Error Erasing ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
 			request.onsuccess = ()=>{
 				createNotif('Erasing ScriviDB...', {icon: 'check', color: 'var(--theme-notifsuccess)'})
 				setTimeout(function(){
