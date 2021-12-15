@@ -30,24 +30,13 @@ request.onupgradeneeded = function(event) {
 	nstore.createIndex('fileType', 'fileType', { unique: false });
 	nstore.createIndex('author', 'author', { unique: false })
 	nstore.createIndex('metadata', 'metadata', { unique: false });
-
-	nstore.transaction.oncomplete = (event)=>{
-		var ntrans = db.transaction(['notes'], 'readwrite');
-		ntrans.onerror = (event)=>{ console.log(event) };
-		ntrans.onsuccess = (event)=>{ createNotif('Saved notes.') }
-		var nwrite = ntrans.objectStore('notes');
-		nwrite.add(notes[0]);
-		nwrite.add(notes[1]);
-	};
+	nstore.add(notes[0]);
+	nstore.add(notes[1]);
 
 	// Create User Metadata Storage
-	var metastore = db.createObjectStore('userdata', { keyPath: 'label'});
-	metastore.createIndex('value', 'value', { unique: false });
-
-	metastore.transaction.oncomplete = (event)=>{
-		var uwrite = db.transaction(['userdata'], 'readwrite').objectStore('userdata');
-		uwrite.add({'label': 'settings', 'value': usersettings});
-	};
+	var ustore = db.createObjectStore('userdata', { keyPath: 'label'});
+	ustore.createIndex('value', 'value', { unique: false });
+	ustore.add({'label': 'settings', 'value': usersettings});
 
 };
 request.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
@@ -56,4 +45,4 @@ request.onsuccess = function(event) {
 	db = event.target.result;
 };
 
-}; // End
+};
