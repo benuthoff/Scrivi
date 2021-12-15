@@ -28,6 +28,7 @@ function saveAllSettings() {
 	let scw = db.transaction(['userdata'], 'readwrite')
 		.objectStore('userdata').put({'label': 'settings', 'value': usersettings});
 	scw.onerror = ()=>{ createNotif('Error saving settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+	scw.onsuccess = ()=>{ createNotif('Settings Saved', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
 
 };
 
@@ -50,5 +51,6 @@ function setTheme(id) {
 	// Apply Theme
 	$('body').addClass('theme_'+id);
 	usersettings.theme = id;
+	saveAllSettings();
 
 };
