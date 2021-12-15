@@ -51,6 +51,5 @@ function setTheme(id) {
 	// Apply Theme
 	$('body').addClass('theme_'+id);
 	usersettings.theme = id;
-	saveAllSettings();
 
 };
