@@ -2,8 +2,8 @@
 // Ben Uthoff
 
 // For Test Purposes - Delete Database 
-/*var request = indexedDB.deleteDatabase('ScriviDB');
-request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };*/
+var request = indexedDB.deleteDatabase('ScriviDB');
+request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
 
 
 /* Test Data */
@@ -33,7 +33,8 @@ request.onupgradeneeded = function(event) {
 	nstore.transaction.oncomplete = (event)=>{
 		var ntrans = db.transaction(['notes'], 'readwrite');
 		ntrans.onerror = (event)=>{ console.log(event) };
-		var nwrite = nwrite.objectStore('notes');
+		ntrans.onsuccess = (event)=>{ createNotif('Saved notes.') }
+		var nwrite = ntrans.objectStore('notes');
 		nwrite.add(notes[0]);
 		nwrite.add(notes[1]);
 	};
