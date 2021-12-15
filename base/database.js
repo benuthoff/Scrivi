@@ -60,7 +60,6 @@ function __resetAll() {
 	createDialog('Are you sure you want to reset everything? All data will be lost.', [
 		['Yes', ()=>{
 
-			alert('Halt')
 			var request = indexedDB.deleteDatabase('ScriviDB');
 			request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
 			request.onsuccess = ()=>{ location.reload() };
