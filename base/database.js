@@ -50,7 +50,7 @@ request.onsuccess = function(event) {
 	req.onsuccess = (event)=>{
 
 		console.log('Settings:')
-		console.log(request.result.value);
+		console.log(req.result.value);
 
 	};
 
