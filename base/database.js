@@ -31,9 +31,11 @@ request.onupgradeneeded = function(event) {
 	nstore.createIndex('metadata', 'metadata', { unique: false });
 
 	nstore.transaction.oncomplete = (event)=>{
-		var nwrite = db.transaction('notes', 'readwrite').objectStore('notes');
+		var ntrans = db.transaction('notes', 'readwrite')
+		var nwrite = nwrite.objectStore('notes');
 		nwrite.add(notes[0]);
 		nwrite.add(notes[1]);
+		ntrans.onerror = (event)=>{ createNotif('There was an error saving note data.') }
 	};
 
 	// Create User Metadata Storage
