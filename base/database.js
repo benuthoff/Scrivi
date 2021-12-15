@@ -3,7 +3,7 @@
 
 // For Test Purposes - Delete Database 
 /*var request = indexedDB.deleteDatabase('ScriviDB');
-request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };*/
+request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };*/
 
 
 /* Test Data */
@@ -46,10 +46,11 @@ request.onsuccess = function(event) {
 	// Get and load Settings;
 	let setstore = db.transaction(['userdata']).objectStore('userdata');
 	let req = setstore.get('settings');
-	req.onerror = (event)=>{ createNotif('Error loading settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
+	req.onerror = (event)=>{ createNotif('Error loading settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
 	req.onsuccess = (event)=>{
 
-
+		console.log('Settings:')
+		console.log(request.result.value);
 
 	};
 
@@ -61,8 +62,13 @@ function __resetAll() {
 		['Yes', ()=>{
 
 			var request = indexedDB.deleteDatabase('ScriviDB');
-			request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
-			request.onsuccess = ()=>{ location.reload() };
+			request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+			request.onsuccess = ()=>{
+				createNotif('Erasing ScriviDB...', {icon: 'check', color: 'var(--theme-notifsuccess)'})
+				setTimeout(function(){
+					window.location.reload();
+				  }, 200);
+			};
 
 		}],
 		'Escape'
