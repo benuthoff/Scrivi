@@ -41,7 +41,7 @@ request.onupgradeneeded = function(event) {
 
 	// Create User Metadata Storage
 	var metastore = db.createObjectStore('userdata', { keyPath: 'label'});
-	nstore.createIndex('value', 'value', { unique: false });
+	metastore.createIndex('value', 'value', { unique: false });
 
 	metastore.transaction.oncomplete = (event)=>{
 		var uwrite = db.transaction(['userdata'], 'readwrite').objectStore('userdata');
