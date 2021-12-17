@@ -33,13 +33,14 @@ body.theme_Dark, div[simtheme=dark] {
 	--theme-bodycolor: #c5c5c5;
 	--theme-iconcolor: #737373;
 
-	--theme-blindcolor: #00000047;
-	--theme-dialogborder: #2e3235;
+	--theme-blindcolor: #00000073;
+	--theme-dialogborder: #353739;
 
 	--theme-notiferror: #912f4b;
 	--theme-notifsuccess: #2e642e;
 
 	--theme-settingtab: #191b1db3;
+	--theme-settingtabborder: #222628;
 	--theme-settingtabhov: #ffffff05;
 
 	scrollbar-color: #28292c #141414;
