@@ -8,7 +8,7 @@ var usersettings = {
 
 function toggleSettings() {
 	$('#settings_blind').toggleClass('visible');
-	$('body').toggleClass('blur');
+	$('body').toggleClass('menu_blur');
 };
 
 function openSettingsTab(id) {

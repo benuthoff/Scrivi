@@ -20,7 +20,7 @@ function createDialog(label, buttons) {
 
 	// Function for deleting dialog;
 	let deleteself = (event)=>{
-		$('body').removeClass('blur');
+		$('body').removeClass('ui_blur');
 		$(event.target).parents().eq(2).remove();
 	};
 
@@ -56,7 +56,7 @@ function createDialog(label, buttons) {
 
 	};
 
-	$('body').append( $('<div class="blind"></div>').append(box) ).addClass('blur');
+	$('body').append( $('<div class="blind"></div>').append(box) ).addClass('ui_blur');
 
 };
 

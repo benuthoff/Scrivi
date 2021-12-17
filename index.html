@@ -30,7 +30,7 @@
 	<!-- Side Buttons -->
 	<div id='sidebar'>
 		
-		<div onclick='createDialog("Hello World!")'>
+		<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
 			<i data-feather='plus'></i>
 		</div>
 		<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
@@ -86,10 +86,10 @@
 
 					<h1>Basic</h1>
 
-					<h2><i data-feather='corner-down-right'></i>Sidebar</h2>
+					<h2><i data-feather='corner-down-right'></i> Sidebar</h2>
 					<!--<input type='checkbox'/> Auto-Hide Bar-->
-					<h2><i data-feather='corner-down-right'></i>Reset</h2>
-					<div class='button' onclick='__resetAll()'>RESET</div>
+					<h2><i data-feather='corner-down-right'></i> Reset</h2>
+					<div class='button' onclick='__resetAll()'><i data-feather='trash-2'></i> Erase All</div>
 
 				</div>
 				<div id='settings_appearance' class='settingspage'>
@@ -118,6 +118,10 @@
 				</div>
 				<div id='settings_credits' class='settingspage'>
 					<h1>Credits</h1>
+					<p>
+						Created by <a href='https://github.com/benuthoff' target='_blank'>Ben Uthoff</a>.<br>
+						Icons by <a href='https://feathericons.com/' target='_blank'>Feather Icons</a>.
+					</p>
 				</div>
 			</div>
 		</div>
@@ -125,6 +129,7 @@
 		<script>
 			feather.replace({'stroke-width': 2, 'width': 28, 'height': 28, 'class': 'icon'});
 			openSettingsTab('basic');
+			//toggleSettings();
 		</script>
 
 	</div>

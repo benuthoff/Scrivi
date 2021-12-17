@@ -65,7 +65,6 @@ request.onsuccess = function(event) {
 function __resetAll() {
 
 	createDialog('Are you sure you want to reset everything? All data will be lost.', [
-		'Cancel',
 		['Yes', ()=>{
 
 			var request = indexedDB.deleteDatabase('ScriviDB');
@@ -74,7 +73,8 @@ function __resetAll() {
 				window.location.href = window.location.href;
 			}, 1000);
 
-		}]
+		}],
+		'Cancel'
 	]);
 
 };

@@ -12,7 +12,10 @@ body {
 	grid-template-rows: 50px [main] auto 50px;
 }
 
-body.blur #sidebar, body.blur #editor {
+body.ui_blur #sidebar, body.ui_blur #editor, body.ui_blur #settings {
+	filter: blur(2px);
+}
+body.menu_blur #sidebar, body.menu_blur #editor {
 	filter: blur(2px);
 }
 
@@ -47,6 +50,7 @@ body.blur #sidebar, body.blur #editor {
 
 .icon {
 	color: var(--theme-iconcolor);
+	stroke-width: 1.5px;
 }
 
 #editor {
@@ -109,7 +113,7 @@ body.blur #sidebar, body.blur #editor {
 
 .dialog {
 	min-width: 200px;
-	max-width: 45vw;
+	max-width: 35vw;
 	padding: 24px;
 
 	background-color: var(--theme-bgcolor);
@@ -119,6 +123,7 @@ body.blur #sidebar, body.blur #editor {
 	font-size: 24px;
 	user-select: none;
 	cursor: default;
+	text-align: center;
 }
 .dialog .buttons {
 	display: flex;
@@ -127,7 +132,7 @@ body.blur #sidebar, body.blur #editor {
 }
 .dialog .buttons > div {
 	margin: 24px 12px 0 12px;
-	border: solid 1px var(--theme-bordercolor);
+	border: solid 1px var(--theme-dialogborder);
 	padding: 6px 12px;
 	text-align: center;
 	display: inline-block;
@@ -139,6 +144,7 @@ body.blur #sidebar, body.blur #editor {
 	background-color: var(--theme-hovercolor);
 }
 .dialog .buttons > div:active {
+	border-color: var(--theme-bordercolor);
 	background-color: var(--theme-hovercolor);
 	box-shadow: inset #00000027 0 0 10px;
 }
@@ -200,7 +206,7 @@ body.blur #sidebar, body.blur #editor {
 	grid-column: tabs;
 	border-right: solid 2px var(--theme-dialogborder);
 	background-color: var(--theme-settingtab);
-	padding-top: 4px;
+	padding-top: 12px;
 }
 #settings > #tabs > div {
 	color: var(--theme-bodycolor);
@@ -246,16 +252,55 @@ body.blur #sidebar, body.blur #editor {
 	display: none;
 	animation: fadeIn 0.05s;
 }
-#settings > #main h1 {
+
+.settingspage h1 {
 	margin: 0;
 	color: var(--theme-titlecolor);
 	padding-bottom: 8px;
 	border-bottom: solid 1px var(--theme-dialogborder);
 	margin-bottom: 16px;
+	font-size: 32px;
 }
-#settings > #main h2 {
+.settingspage h2 {
 	margin: 20px 0 20px 0;
+	font-size: 24px;
 	color: var(--theme-titlecolor);
+}
+.settingspage p {
+	font-size: 20px;
+	color: var(--theme-bodycolor);
+	margin: 0 0 0 30px;
+	line-height: 32px;
+}
+.settingspage a {
+	text-decoration: underline;
+	color: inherit;
+}
+
+.settingspage .button {
+	display: inline-block;
+	padding: 14px 24px;
+	margin-left: 44px;
+
+	font-size: 18px;
+	color: var(--theme-bodycolor);
+	border: solid 2px var(--theme-dialogborder);
+	border-radius: 4px;
+
+	cursor: pointer;
+	transition: 0.1s;
+}
+.settingspage .button:hover {
+	background-color: var(--theme-hovercolor);
+}
+.settingspage .button:active {
+	border-color: var(--theme-bordercolor);
+	border-color: var(--theme-bordercolor);
+	box-shadow: inset #00000027 0 0 10px;
+}
+.settingspage .button .icon {
+	width: 16px; height: 16px;
+	color: inherit;
 }
 
 #settings_appearance .gallery {

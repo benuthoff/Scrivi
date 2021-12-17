@@ -10,7 +10,7 @@ body.theme_Light, div[simtheme=light] {
 	--theme-bodycolor: #666;
 	--theme-iconcolor: #888;
 
-	--theme-blindcolor: #00000061;
+	--theme-blindcolor: #07090a85;
 	--theme-dialogborder: #d5d5d5;
 
 	--theme-notiferror: #f48e8e;
@@ -25,21 +25,21 @@ body.theme_Light, div[simtheme=light] {
 /* Dark Theme */
 
 body.theme_Dark, div[simtheme=dark] {
-	--theme-bgcolor: #191a1b;
-	--theme-bordercolor: #454545;
-	--theme-hovercolor: #151517;
+	--theme-bgcolor: #25282a;
+	--theme-bordercolor: #474b4f;
+	--theme-hovercolor: #212426;
 
-	--theme-titlecolor: #b9b9b9;
-	--theme-bodycolor: #848484;
+	--theme-titlecolor: #c5ccd9;
+	--theme-bodycolor: #c5c5c5;
 	--theme-iconcolor: #737373;
 
 	--theme-blindcolor: #00000047;
-	--theme-dialogborder: #242526;
+	--theme-dialogborder: #2e3235;
 
 	--theme-notiferror: #912f4b;
 	--theme-notifsuccess: #2e642e;
 
-	--theme-settingtab: #121213e3;
+	--theme-settingtab: #191b1db3;
 	--theme-settingtabhov: #ffffff05;
 
 	scrollbar-color: #28292c #141414;
