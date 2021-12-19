@@ -17,6 +17,7 @@ body.theme_Light, div[simtheme=light] {
 	--theme-notifsuccess: #6abf6a;
 
 	--theme-settingtab: #c1c1c19e;
+	--theme-settingtabborder: #c1c1c19e;
 	--theme-settingtabhov: #0000000f;
 
 	scrollbar-color: #d2d2d2 #e5e5e5;
@@ -58,12 +59,13 @@ body.theme_Beige, div[simtheme=beige] {
 	--theme-iconcolor: #bf956f;
 
 	--theme-blindcolor: #00000061;
-	--theme-dialogborder: #e6d8b5;
+	--theme-dialogborder: #dbc690;
 
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
 	--theme-settingtab: #fff0ca94;
+	--theme-settingtabborder: #bba87a;
 	--theme-settingtabhov: #ffffff21;
 
 	scrollbar-color: #bf956f #d5bfa9;
@@ -81,12 +83,13 @@ body.theme_Mint, div[simtheme=mint] {
 	--theme-iconcolor: #4faaaa;
 
 	--theme-blindcolor: #00000061;
-	--theme-dialogborder: #c0e7d2;
+	--theme-dialogborder: #70b3a3;
 
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
 	--theme-settingtab: #5a877f9e;
+	--theme-settingtabborder: #8aa597;
 	--theme-settingtabhov: #0000000f;
 
 	scrollbar-color: #4eb0b0 #c0e7d2;
@@ -110,6 +113,7 @@ body.theme_Mocha, div[simtheme=mocha] {
 	--theme-notifsuccess: #6abf6a;
 
 	--theme-settingtab: #171313e3;
+	--theme-settingtabborder: #282222;
 	--theme-settingtabhov: #ffb9b905;
 
 	scrollbar-color: #bf956f #d5bfa9;

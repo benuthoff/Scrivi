@@ -191,7 +191,6 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	top: 60px; left: 12%;
 	right: 12%; bottom: 60px;
 
-	overflow: hidden;
 	border-radius: 8px;
 	font-family: 'Noto Sans', sans-serif;
 
