@@ -48,6 +48,14 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	box-shadow: inset #0000001c 0 0 8px;
 }
 
+#sidebar[autohide='true'] {
+	opacity: 0;
+	transition: 0.15s;
+}
+#sidebar[autohide='true']:hover {
+	opacity: 1;
+}
+
 .icon {
 	color: var(--theme-iconcolor);
 	stroke-width: 1.5px;
@@ -303,12 +311,45 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 }
 .settingspage .button:active {
 	border-color: var(--theme-bordercolor);
-	border-color: var(--theme-bordercolor);
 	box-shadow: inset #00000027 0 0 10px;
 }
 .settingspage .button .icon {
 	width: 16px; height: 16px;
 	color: inherit;
+}
+
+.settingspage .checkform {
+	display: flex;
+	align-items: flex-end;
+	width: fit-content;
+	margin-left: 44px;
+	cursor: pointer;
+}
+.settingspage .checkform .box {
+	display: inline-block;
+	width: 24px; height: 24px;
+	border: solid 2px var(--theme-dialogborder);
+	border-radius: 4px;
+	transition: 0.1s;
+}
+.settingspage .checkform .icon {
+	width: 24px; height: 24px; opacity: 0;
+	color: var(--theme-bodycolor); transition: 0.1s;
+}
+.settingspage .checkform[value='true'] .box {
+	background-color: var(--theme-settingtab) !important;
+}
+.settingspage .checkform[value='true'] .icon {opacity: 1;}
+.settingspage .checkform:hover .box {
+	background-color: var(--theme-hovercolor);
+}
+.settingspage .checkform:active .box {
+	border-color: var(--theme-bordercolor);
+}
+.settingspage .checkform .label {
+	font-size: 20px;
+	color: var(--theme-bodycolor);
+	margin-left: 14px;
 }
 
 #settings_appearance .gallery {

@@ -2,7 +2,7 @@
 // Ben Uthoff
 
 var usersettings = {
-	'theme': 'Light',
+	'theme': 'Dark',
 	'sidebar_autoHide': false
 };
 
@@ -28,18 +28,15 @@ function saveAllSettings() {
 	let scw = db.transaction(['userdata'], 'readwrite')
 		.objectStore('userdata').put({'label': 'settings', 'value': usersettings});
 	scw.onerror = ()=>{ createNotif('Error saving settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
-	scw.onsuccess = ()=>{ createNotif('Settings Saved', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
+	//scw.onsuccess = ()=>{ createNotif('Settings Saved', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
+
+	executeSettings();
 
 };
 
 function executeSettings() {
 
-	setTheme(usersettings.theme);
-	
-}
-
-function setTheme(id) {
-
+	/* Change Theme */
 	// Remove all themes
 	let cl = $('body').attr('class').split(' ');
 	cl.forEach(element => {
@@ -47,9 +44,16 @@ function setTheme(id) {
 			$('body').removeClass(element);
 		};
 	});
-
 	// Apply Theme
-	$('body').addClass('theme_'+id);
-	usersettings.theme = id;
+	$('body').addClass('theme_'+usersettings.theme);
 
+	/* Auto-Hide Sidebar */
+	$('#sidebar_autoHide').attr('value', usersettings.sidebar_autoHide);
+	$('#sidebar').attr('autohide', usersettings.sidebar_autoHide);
+	
+}
+
+function sttng(id, value) {
+	usersettings[id] = value;
+	saveAllSettings();
 };

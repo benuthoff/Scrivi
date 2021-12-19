@@ -93,3 +93,14 @@ function createNotif(text, options) {
 	if (options && options.icon) { feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'}) }
 
 };
+
+function toggleCheckbox(event) {
+	let box = $(this);
+	let val = box.attr('value');
+	if (val === 'true') {
+		box.attr('value', 'false');
+	} else {
+		box.attr('value', 'true');
+	};
+	if (box.hasClass('autoset')) { sttng(box.attr('id'),box.attr('value')) };
+};
