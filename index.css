@@ -219,7 +219,7 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	font-size: 20px;
 	width: 200px;
 	padding: 20px;
-	transition: 0.12s, transform 0, width 0;
+	transition: 0.12s, width 0;
 	margin-left: -2px;
 
 	user-select: none;
@@ -234,15 +234,16 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 #settings > #tabs > div:hover {
 	background-color: var(--theme-settingtabhov);
 }
-#settings > #tabs > div:active {
+#settings > #tabs > div:not(.sel):active {
 	background-color: var(--theme-settingtabhov);
-	transform: scale(0.96,0.96);
 	width: 202px;
 }
 #settings > #tabs > div.sel {
 	background-color: var(--theme-bgcolor);
 	border-color: var(--theme-dialogborder);
 	border-right-color: var(--theme-bgcolor);
+	transform: translateX(-2px);
+	width: 199.5px;
 }
 #settings > #tabs > div .icon {
 	margin-right: 16px;
@@ -363,7 +364,7 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 }
 .settingspage .textin input {
 	border: solid 2px var(--theme-dialogborder);
-	padding: 4px;
+	padding: 4px 6px;
 	border-radius: 4px;
 	background-color: transparent;
 	font-size: 16px;
@@ -402,6 +403,27 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 #settings_appearance .gallery > div:hover {
 	background-color: var(--theme-hovercolor);
 }
+
+#filesmenu {
+	position: fixed;
+	top: 60px; left: 12%;
+	right: 12%; bottom: 60px;
+	z-index: 902;
+
+	border-radius: 8px;
+	font-family: 'Noto Sans', sans-serif;
+	background-color: var(--theme-settingtab);
+	border: solid 2px var(--theme-settingtabborder);
+}
+#filesmenu_blind { display: none; z-index: 900; }
+#filesmenu_blind.visible { display: block; }
+#filesmenu_blind .net {
+	z-index: 901;
+	position: fixed;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
+}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 @keyframes fadeIn {

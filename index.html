@@ -16,6 +16,7 @@
 	<!-- Scripts -->
 	<script src='./base/userinterface.js'></script>
 	<script src='./base/settings.js'></script>
+	<script src='./base/filesmenu.js'></script>
 	<script src='./base/keyboard.js'></script>
 	<script src='./base/database.js'></script>
 
@@ -36,7 +37,7 @@
 		<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
 			<i data-feather='save'></i>
 		</div>
-		<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
+		<div onclick='toggleFilesMenu()'>
 			<i data-feather='folder'></i>
 		</div>
 		<div onclick='toggleSettings()'>
@@ -147,6 +148,15 @@
 			$('.settingspage .textin input').on('blur', settingsTextin);
 		</script>
 
+	</div>
+
+	<!-- Files Menu -->
+	<div id='filesmenu_blind' class='blind'>
+		<div class='net' onclick='toggleFilesMenu()'></div>
+		<div id='filesmenu'>
+
+			
+		</div>
 	</div>
 
 

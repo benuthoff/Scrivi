@@ -12,6 +12,8 @@ document.addEventListener('keydown', function(e) {
 
 		if ($('#settings_blind').hasClass('visible')) {
 			toggleSettings();
+		} else {
+			toggleFilesMenu();
 		};
 
 	}

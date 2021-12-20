@@ -113,6 +113,6 @@ function settingsTextin(event) {
 
 		// Animate
 		inp.css('border-color', 'var(--theme-notifsuccess)');
-		setTimeout( ()=>{ inp.css('border-color', 'var(--theme-dialogborder)') }, 1000 );
+		setTimeout( ()=>{ inp.css('border-color', '') }, 1000 );
 	};
 }
