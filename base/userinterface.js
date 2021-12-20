@@ -104,3 +104,15 @@ function toggleCheckbox(event) {
 	};
 	if (box.hasClass('autoset')) { sttng(box.attr('id'),box.attr('value')) };
 };
+
+function settingsTextin(event) {
+	let inp = $(this);
+	let val = inp.val();
+	if (inp.hasClass('autoset')) {
+		sttng(inp.attr('id'),val);
+
+		// Animate
+		inp.css('border-color', 'var(--theme-notifsuccess)');
+		setTimeout( ()=>{ inp.css('border-color', 'var(--theme-dialogborder)') }, 1000 );
+	};
+}

@@ -45,7 +45,6 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 }
 #sidebar > div:active {
 	background-color: var(--theme-hovercolor);
-	box-shadow: inset #0000001c 0 0 8px;
 }
 
 #sidebar[autohide='true'] {
@@ -154,7 +153,6 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 .dialog .buttons > div:active {
 	border-color: var(--theme-bordercolor);
 	background-color: var(--theme-hovercolor);
-	box-shadow: inset #00000027 0 0 10px;
 }
 
 #notifplane {
@@ -310,7 +308,6 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 }
 .settingspage .button:active {
 	border-color: var(--theme-bordercolor);
-	box-shadow: inset #00000027 0 0 10px;
 }
 .settingspage .button .icon {
 	width: 16px; height: 16px;
@@ -323,6 +320,7 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	width: fit-content;
 	margin-left: 44px;
 	cursor: pointer;
+	margin-bottom: 20px;
 }
 .settingspage .checkform .box {
 	display: inline-block;
@@ -370,6 +368,7 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	background-color: transparent;
 	font-size: 16px;
 	color: var(--theme-bodycolor);
+	transition: 0.1s;
 }
 .settingspage .textin input:focus {
 	outline: none;

@@ -86,10 +86,9 @@
 
 					<h1>Basic</h1>
 					<h2><i data-feather='corner-down-right'></i> Files</h2>
-					<!-- Author Name, Default "Anonymous" -->
-					<div class='textin autoset'>
+					<div class='textin'>
 						<div class='label'>Author Name: </div>
-						<input type='text' value='Anonymous'/>
+						<input type='text' value='Anonymous' class='autoset' id='authorname'/>
 					</div>
 
 					<h2><i data-feather='corner-down-right'></i> Sidebar</h2>
@@ -97,6 +96,8 @@
 						<div class='box'><i data-feather='check'></i></div>
 						<div class='label'>Auto-Hide</div>
 					</div>
+					<div class='button' onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
+						<i data-feather='tool'></i> Configure</div>
 
 					<h2><i data-feather='corner-down-right'></i> Reset</h2>
 					<div class='button' onclick='__resetAll()'><i data-feather='trash-2'></i> Erase All</div>
@@ -143,6 +144,7 @@
 
 			// Apply Event to UI Inputs
 			$('.settingspage .checkform').on('click', toggleCheckbox);
+			$('.settingspage .textin input').on('blur', settingsTextin);
 		</script>
 
 	</div>

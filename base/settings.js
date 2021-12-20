@@ -3,7 +3,8 @@
 
 var usersettings = {
 	'theme': 'Dark',
-	'sidebar_autoHide': false
+	'sidebar_autoHide': false,
+	'authorname': 'Anonymous'
 };
 
 function toggleSettings() {
@@ -50,6 +51,9 @@ function executeSettings() {
 	/* Auto-Hide Sidebar */
 	$('#sidebar_autoHide').attr('value', usersettings.sidebar_autoHide);
 	$('#sidebar').attr('autohide', usersettings.sidebar_autoHide);
+
+	/* Author Name */
+	$('#authorname input').val(usersettings.authorname);
 	
 }
 
