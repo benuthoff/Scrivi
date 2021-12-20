@@ -1,7 +1,7 @@
 
 /* Light Theme*/ 
 
-body.theme_Light, div[simtheme=light] {
+body.theme_Light, [simtheme=light] {
 	--theme-bgcolor: #eee;
 	--theme-bordercolor: #aaa;
 	--theme-hovercolor: #dfdfdf;
@@ -25,7 +25,7 @@ body.theme_Light, div[simtheme=light] {
 
 /* Dark Theme */
 
-body.theme_Dark, div[simtheme=dark] {
+body.theme_Dark, [simtheme=dark] {
 	--theme-bgcolor: #25282a;
 	--theme-bordercolor: #474b4f;
 	--theme-hovercolor: #212426;
@@ -49,7 +49,7 @@ body.theme_Dark, div[simtheme=dark] {
 
 /* Beige Theme */
 
-body.theme_Beige, div[simtheme=beige] {
+body.theme_Beige, [simtheme=beige] {
 	--theme-bgcolor: #f4ecd8;
 	--theme-bordercolor: #ccb29b;
 	--theme-hovercolor: #ece3cc;
@@ -73,7 +73,7 @@ body.theme_Beige, div[simtheme=beige] {
 
 /* Mint Theme */
 
-body.theme_Mint, div[simtheme=mint] {
+body.theme_Mint, [simtheme=mint] {
 	--theme-bgcolor: #def4d8;
 	--theme-bordercolor: #60bfbf;
 	--theme-hovercolor: #cfecc8;
@@ -97,7 +97,7 @@ body.theme_Mint, div[simtheme=mint] {
 
 /* Mocha Theme */
 
-body.theme_Mocha, div[simtheme=mocha] {
+body.theme_Mocha, [simtheme=mocha] {
 	--theme-bgcolor: #352720;
 	--theme-bordercolor: #846951;
 	--theme-hovercolor: #2b1e18;

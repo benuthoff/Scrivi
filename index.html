@@ -111,13 +111,27 @@
 					<h2><i data-feather='corner-down-right'></i> Font and Size</h2>
 
 					<h2><i data-feather='corner-down-right'></i> Color Theme</h2>
-					<div class='gallery'>
+					<div class='themegal'>
 						
-						<div simtheme='dark' onclick='sttng("theme","Dark");'>Dark</div>
-						<div simtheme='light' onclick='sttng("theme","Light");'>Light</div>
-						<div simtheme='beige' onclick='sttng("theme","Beige");'>Beige</div>
-						<div simtheme='mint' onclick='sttng("theme","Mint");'>Mint</div>
-						<div simtheme='mocha' onclick='sttng("theme","Mocha");'>Mocha</div>
+						<div onclick='sttng("theme","Dark");' st='dark'>
+							<div class='label'>Dark</div>
+						</div>
+
+						<div onclick='sttng("theme","Light");' st='light'>
+							<div class='label'>Light</div>
+						</div>
+
+						<div onclick='sttng("theme","Beige");' st='beige'>
+							<div class='label'>Beige</div>
+						</div>
+
+						<div onclick='sttng("theme","Mint");' st='mint'>
+							<div class='label'>Mint</div>
+						</div>
+
+						<div onclick='sttng("theme","Mocha");' st='mocha'>
+							<div class='label'>Mocha</div>
+						</div>
 
 					</div>
 
@@ -138,15 +152,7 @@
 			</div>
 		</div>
 
-		<script>
-			// Apply Icons & Open Default Settings Page
-			feather.replace({'stroke-width': 2, 'width': 28, 'height': 28, 'class': 'icon'});
-			openSettingsTab('basic');
-
-			// Apply Event to UI Inputs
-			$('.settingspage .checkform').on('click', toggleCheckbox);
-			$('.settingspage .textin input').on('blur', settingsTextin);
-		</script>
+		<script>settingsMenuSetup();</script>
 
 	</div>
 

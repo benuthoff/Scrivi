@@ -376,32 +376,50 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	border-color: var(--theme-bordercolor);
 }
 
-#settings_appearance .gallery {
+.themegal {
 	display: flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	margin-left: 30px;
 }
-#settings_appearance .gallery > div {
-	width: 180px;
-	height: 90px;
-	margin: 6px;
-
-	font-size: 26px;
-	text-align: center;
-	line-height: 90px;
+.themegal > div {
+	width: 200px;
+	height: 160px;
+	margin: 14px;
 
 	cursor: pointer;
 	transition: 0.1s;
+	overflow: hidden;
+	
+	display: grid;
+	grid-template-rows: [preview] 120px [main] 40px;
+	grid-template-columns: auto;
 
-	background-color: var(--theme-bgcolor);
+	border-radius: 8px;
 	border: solid 2px var(--theme-bordercolor);
-	border-radius: 4px;
 	color: var(--theme-titlecolor);
 	font-family: 'Courier New', monospace;
 }
-#settings_appearance .gallery > div:hover {
+.themegal > div:hover {
 	background-color: var(--theme-hovercolor);
+}
+.themegal > div .label {
+	font-size: 24px;
+	padding-left: 10px;
+	line-height: 40px;
+	border-top: solid 1px var(--theme-bordercolor);
+}
+
+.themegal .prev {
+	background-color: var(--theme-bgcolor);
+}
+.themegal .rect {
+	fill: transparent;
+	stroke: var(--theme-bordercolor);
+	stroke-width: 3;
+}
+.themegal .circ {
+	fill: var(--theme-bordercolor);
 }
 
 #filesmenu {
