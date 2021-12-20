@@ -351,6 +351,31 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	margin-left: 14px;
 }
 
+.settingspage .textin {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin-left: 44px;
+}
+.settingspage .textin .label {
+	display: inline-block;
+	font-size: 20px;
+	color: var(--theme-bodycolor);
+	margin-right: 14px;
+}
+.settingspage .textin input {
+	border: solid 2px var(--theme-dialogborder);
+	padding: 4px;
+	border-radius: 4px;
+	background-color: transparent;
+	font-size: 16px;
+	color: var(--theme-bodycolor);
+}
+.settingspage .textin input:focus {
+	outline: none;
+	border-color: var(--theme-bordercolor);
+}
+
 #settings_appearance .gallery {
 	display: flex;
 	justify-content: flex-start;

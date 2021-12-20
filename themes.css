@@ -88,8 +88,8 @@ body.theme_Mint, div[simtheme=mint] {
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
-	--theme-settingtab: #5a877f9e;
-	--theme-settingtabborder: #8aa597;
+	--theme-settingtab: #8cbfa985;
+	--theme-settingtabborder: #8cbfa985;
 	--theme-settingtabhov: #0000000f;
 
 	scrollbar-color: #4eb0b0 #c0e7d2;
@@ -98,22 +98,22 @@ body.theme_Mint, div[simtheme=mint] {
 /* Mocha Theme */
 
 body.theme_Mocha, div[simtheme=mocha] {
-	--theme-bgcolor: #221915;
+	--theme-bgcolor: #352720;
 	--theme-bordercolor: #846951;
-	--theme-hovercolor: #191311;
+	--theme-hovercolor: #2b1e18;
 
 	--theme-titlecolor: #bd936d;
 	--theme-bodycolor: #aa947f;
 	--theme-iconcolor: #997a5e;
 
 	--theme-blindcolor: #0000004a;
-	--theme-dialogborder: #372a24;
+	--theme-dialogborder: #423129;
 
 	--theme-notiferror: #f48e8e;
 	--theme-notifsuccess: #6abf6a;
 
-	--theme-settingtab: #171313e3;
-	--theme-settingtabborder: #282222;
+	--theme-settingtab: #1e140fbd;
+	--theme-settingtabborder: #2d2020;
 	--theme-settingtabhov: #ffb9b905;
 
 	scrollbar-color: #bf956f #d5bfa9;
