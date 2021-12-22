@@ -450,6 +450,7 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	border: solid 2px var(--theme-settingtabborder);
 	border-right: none;
 	cursor: default;
+	user-select: none;
 }
 #filesmenu > #side h1 {
 	color: #ebebeb;
