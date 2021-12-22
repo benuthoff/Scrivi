@@ -118,3 +118,27 @@ body.theme_Mocha, [simtheme=mocha] {
 
 	scrollbar-color: #bf956f #d5bfa9;
 }
+
+/* Violet Theme */
+
+body.theme_Lilac, [simtheme=lilac] {
+	--theme-bgcolor: #472861;
+	--theme-bordercolor: #825183;
+	--theme-hovercolor: #3d2155;
+
+	--theme-titlecolor: #e4aaf1;
+	--theme-bodycolor: #d1c0e1;
+	--theme-iconcolor: #9c589d;
+
+	--theme-blindcolor: #0000004a;
+	--theme-dialogborder: #553e6a;
+
+	--theme-notiferror: #f48e8e;
+	--theme-notifsuccess: #6abf6a;
+
+	--theme-settingtab: #251428b0;
+	--theme-settingtabborder: #442651;
+	--theme-settingtabhov: #ffb9b905;
+
+	scrollbar-color: #bf956f #d5bfa9;
+}

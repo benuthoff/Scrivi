@@ -430,8 +430,9 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 
 	border-radius: 8px;
 	font-family: 'Noto Sans', sans-serif;
-	background-color: var(--theme-settingtab);
-	border: solid 2px var(--theme-settingtabborder);
+	display: grid;
+	grid-template-columns: [side] 360px [main] auto;
+
 }
 #filesmenu_blind { display: none; z-index: 900; }
 #filesmenu_blind.visible { display: block; }
@@ -440,6 +441,38 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	position: fixed;
 	top: 0; bottom: 0;
 	left: 0; right: 0;
+}
+
+
+#filesmenu > #side {
+	background-color: var(--theme-settingtab);
+	border-radius: 8px 0 0 8px;
+	border: solid 2px var(--theme-settingtabborder);
+	border-right: none;
+	cursor: default;
+}
+#filesmenu > #side h1 {
+	color: #ebebeb;
+	font-size: 40px;
+	margin: 20px;
+	margin-bottom: 30px;
+	border-bottom: solid 1px var(--theme-settingtabborder);
+	padding: 0 0 8px 8px;
+}
+#filesmenu > #side h2 {
+    color: #ebebeb;
+    margin-left: 30px;
+	font-size: 26px;
+}
+#filesmenu > #side .icon {
+	color: inherit;
+	stroke-width: 2.5;
+}
+
+#filesmenu > #main {
+	background-color: var(--theme-settingtab);
+	border: solid 2px var(--theme-settingtabborder);
+	border-radius: 0 8px 8px 0;
 }
 
 
