@@ -20,7 +20,8 @@ body.theme_Light, [simtheme=light] {
 	--theme-settingtabborder: #c1c1c19e;
 	--theme-settingtabhov: #0000000f;
 
-	--theme-filecolor: #727272;
+	--theme-filecolor: #636262;
+	--theme-fileside: #d5d3d3;
 	--theme-filebg: #cbcbcb;
 	--theme-fileborder: #edeaea;
 

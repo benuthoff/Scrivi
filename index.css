@@ -445,7 +445,7 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 
 
 #filesmenu > #side {
-	background-color: var(--theme-filebg);
+	background-color: var(--theme-fileside);
 	border-radius: 8px 0 0 8px;
 	border: solid 2px var(--theme-fileborder);
 	border-right: none;
