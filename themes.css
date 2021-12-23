@@ -50,7 +50,8 @@ body.theme_Dark, [simtheme=dark] {
 	--theme-settingtabhov: #ffffff05;
 
 	--theme-filecolor: #615e5e;
-	--theme-filebg: #191b1d;
+	--theme-fileside: #191b1d;
+	--theme-filebg: #17191b;
 	--theme-fileborder: #3a3d41;
 
 	scrollbar-color: #2f3031 #222222;

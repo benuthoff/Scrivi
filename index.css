@@ -20,6 +20,10 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	filter: blur(2px);
 }
 
+body.wide_editor {
+	grid-template-columns: auto [sinistra] 160px auto [centro] 800px auto [destra] 160px auto;
+}
+
 #sidebar {
 	grid-row: main; grid-column: sinistra;
 	display: flex;
@@ -503,15 +507,46 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	margin-right: 20px;
 }
 
+/*
 #fileview {
 	
-}
+}*/
+
 #fileview.gallery {
 
 	display: flex;
+	margin: 20px 40px;
 
 }
+#fileview.gallery .file {
+	width: 140px;
+	height: 130px;
+	margin: 20px 10px;
+	padding-top: 30px;
+	border-radius: 4px;
 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	cursor: pointer;
+	transition: 0.1s;
+	border: solid 1px transparent;
+}
+#fileview.gallery .file:hover {
+	border-color: var(--theme-iconcolor);
+}
+#fileview.gallery .file .icon {
+	width: 52px; height: 52px;
+	margin-bottom: 18px;
+}
+#fileview.gallery .file div {
+	display: inline;
+	text-align: center;
+	color: var(--theme-iconcolor);
+	font-size: 20px;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 @keyframes fadeIn {

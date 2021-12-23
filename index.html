@@ -15,6 +15,7 @@
 
 	<!-- Scripts -->
 	<script src='./base/userinterface.js'></script>
+	<script src='./base/openfile.js'></script>
 	<script src='./base/settings.js'></script>
 	<script src='./base/filesmenu.js'></script>
 	<script src='./base/keyboard.js'></script>
@@ -26,7 +27,7 @@
 	<meta property='og:url' content='https://benuthoff.github.io/Scrivi/'/>
 
 </head>
-<body class='theme_Dark'>
+<body class='wide_editor'>
 	
 	<!-- Side Buttons -->
 	<div id='sidebar'>
@@ -59,6 +60,12 @@
 	</div>
 
 	<div id='notifplane'></div>
+
+
+	<!-- Filetype Chooser -->
+	<div id='newfilemenu'>
+
+	</div>
 
 
 	<!-- Settings Menu -->
@@ -167,18 +174,24 @@
 			<div id='side'>
 				<h1>Files</h1>
 				<h2><i data-feather='hard-drive'></i> Root</h2>
-				<h2><i data-feather='star'></i> Starred</h2>
+				<h2><i data-feather='star'></i> Favorites</h2>
 			</div>
 			<div id='main'>
-				<div id='pathbar'><i data-feather='hard-drive'></i> Scrivi//</div>
+				<div id='pathbar'><i data-feather='hard-drive'></i> //</div>
 				<div id='fileview' class='gallery'> <!-- Or .list -->
+
+					<div class='file'>
+						<i data-feather='file-text'></i><div>Reminder</div>
+					</div>
+
+					<div class='file'>
+						<i data-feather='shield'></i><div>Ebi Character Sheet</div>
+					</div>
 
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<script>toggleFilesMenu();</script>
 
 
 </body>
