@@ -447,7 +447,7 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 #filesmenu > #side {
 	background-color: var(--theme-filebg);
 	border-radius: 8px 0 0 8px;
-	border: solid 2px var(--theme-settingtabborder);
+	border: solid 2px var(--theme-fileborder);
 	border-right: none;
 	cursor: default;
 	user-select: none;
@@ -456,17 +456,24 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 	color: var(--theme-filecolor);
 	font-size: 36px;
 	margin: 14px;
-	margin-bottom: 20px;
-	border-bottom: solid 2px var(--theme-settingtabborder);
+	margin-bottom: 4px;
+	border-bottom: solid 2px var(--theme-fileborder);
 	padding: 0 0 8px 8px;
 }
 #filesmenu > #side h2 {
 	color:  var(--theme-filecolor);
-	margin: 14px;
-	margin-left: 24px;
+	margin: 0 24px;
 	font-size: 20px;
+	border-bottom: solid 1px var(--theme-fileborder);
+	padding: 10px 6px;
+
 	display: flex;
 	align-items: center;
+	cursor: pointer;
+	transition: 0.1s;
+}
+#filesmenu > #side h2:hover {
+	padding-left: 14px;
 }
 #filesmenu > #side .icon {
 	color: inherit;
@@ -477,13 +484,13 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 
 #filesmenu > #main {
 	background-color: var(--theme-filebg);
-	border: solid 2px var(--theme-settingtabborder);
+	border: solid 2px var(--theme-fileborder);
 	border-radius: 0 8px 8px 0;
 }
 #filesmenu > #main #pathbar {
 	color: var(--theme-iconcolor);
 	background-color: var(--theme-hovercolor);
-	border: solid 2px var(--theme-dialogborder);
+	border: solid 2px var(--theme-fileborder);
 	margin: 20px 30px;
 	padding: 10px 20px;
 	border-radius: 4px;
@@ -494,6 +501,15 @@ body.menu_blur #sidebar, body.menu_blur #editor {
 }
 #filesmenu > #main #pathbar .icon {
 	margin-right: 20px;
+}
+
+#fileview {
+	
+}
+#fileview.gallery {
+
+	display: flex;
+
 }
 
 

@@ -20,8 +20,9 @@ body.theme_Light, [simtheme=light] {
 	--theme-settingtabborder: #c1c1c19e;
 	--theme-settingtabhov: #0000000f;
 
-	--theme-filecolor: #ebebeb;
-	--theme-filebg: #c1c1c1;
+	--theme-filecolor: #727272;
+	--theme-filebg: #cbcbcb;
+	--theme-fileborder: #edeaea;
 
 	scrollbar-color: #d2d2d2 #e5e5e5;
 }
@@ -47,8 +48,9 @@ body.theme_Dark, [simtheme=dark] {
 	--theme-settingtabborder: #222628;
 	--theme-settingtabhov: #ffffff05;
 
-	--theme-filecolor: #9b9b9b;
+	--theme-filecolor: #615e5e;
 	--theme-filebg: #191b1d;
+	--theme-fileborder: #3a3d41;
 
 	scrollbar-color: #2f3031 #222222;
 }
@@ -73,6 +75,9 @@ body.theme_Beige, [simtheme=beige] {
 	--theme-settingtab: #fff0ca94;
 	--theme-settingtabborder: #bba87a;
 	--theme-settingtabhov: #ffffff21;
+
+	--theme-filecolor: #fffcf2;
+	--theme-filebg: #dccba0;
 
 	scrollbar-color: #bf956f #d5bfa9;
 }
