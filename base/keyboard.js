@@ -5,7 +5,7 @@ document.addEventListener('keydown', function(e) {
 
 	if (e.key === 's' && e.ctrlKey) {
 		e.preventDefault();
-		createNotif('Under Construction', {icon: 'alert-triangle'});
+		saveFile();
 	}
 
 	else if (e.key === 'Escape') {
@@ -41,8 +41,10 @@ document.addEventListener('keydown', function(e) {
 
 	else if (e.key === 'q' && e.ctrlKey) {
 
-		e.preventDefault();
-		toggleSettings();
+		if ($('#filesmenu_blind').css('display') === 'none') {
+			e.preventDefault();
+			toggleSettings();
+		};
 
 	};
 

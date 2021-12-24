@@ -11,18 +11,18 @@ var db;
 var request = window.indexedDB.open('ScriviDB', 1);
 request.onupgradeneeded = function(event) {
 
+	// Create the Database
 	createNotif('Creating ScriviDB...', {icon: 'loader'});
 	
 	db = event.target.result;
 
 	// Create the Note Storage
 	var nstore = db.createObjectStore('notes', { keyPath: 'fileName'});
-	nstore.createIndex('fileType', 'fileType', { unique: false });
 	nstore.createIndex('author', 'author', { unique: false })
 	nstore.createIndex('metadata', 'metadata', { unique: false });
 	nstore.createIndex('template', 'template', { unique: false });
-	//nstore.add(notes[0]);
-	//nstore.add(notes[1]);
+	nstore.createIndex('scipts', 'scripts', { unique: false });
+	nstore.createIndex('tags', 'tags', { unique: false });
 
 	// Create User Metadata Storage
 	var ustore = db.createObjectStore('userdata', { keyPath: 'label'});
@@ -40,7 +40,6 @@ request.onsuccess = function(event) {
 	let req = setstore.get('settings');
 	req.onerror = (event)=>{ createNotif('Error loading settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
 	req.onsuccess = (event)=>{
-
 		// Saved values
 		let savesettings = req.result.value;
 		Object.keys(savesettings).forEach((indx)=>{
@@ -49,8 +48,9 @@ request.onsuccess = function(event) {
 
 		// Run saved settings when page loaded in;
 		executeAllSettings();
-
 	};
+
+	// ...
 
 };
 

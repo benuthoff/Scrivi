@@ -27,15 +27,15 @@
 	<meta property='og:url' content='https://benuthoff.github.io/Scrivi/'/>
 
 </head>
-<body class='wide_editor'>
+<body class='theme_Dark'>
 	
 	<!-- Side Buttons -->
 	<div id='sidebar'>
-		
-		<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
+
+		<div onclick='newFile()'>
 			<i data-feather='plus'></i>
 		</div>
-		<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
+		<div onclick='saveFile()'>
 			<i data-feather='save'></i>
 		</div>
 		<div onclick='toggleFilesMenu()'>
@@ -46,26 +46,21 @@
 		</div>
 
 		<script>feather.replace({'stroke-width': 2, 'width': 44, 'height': 44, 'class': 'icon'});</script>
-	
 	</div>
 
 
 	<!-- Main Editor -->
-	<div id='editor' class='type_PlainText'>
-		<div class='topbound'>
-			<div class='title' contenteditable spellcheck='false'>Title</div>
-			<div class='divider'></div>
-		</div>
-		<div class='body' contenteditable spellcheck='false'>Type some text here...</div>
+	<div id='editor' class='type_PlainText'></div>
+
+	
+	<!-- New File Screen -->
+	<div id='filetemps'>
+		<div class='title'>Create a new file...</div>
 	</div>
 
+
+	<!-- Notification Display -->
 	<div id='notifplane'></div>
-
-
-	<!-- Filetype Chooser -->
-	<div id='newfilemenu'>
-
-	</div>
 
 
 	<!-- Settings Menu -->
@@ -78,6 +73,12 @@
 				</div>
 				<div tabid='appearance' onclick='openSettingsTab("appearance")'>
 					<i data-feather='type'></i> Appearance
+				</div>
+				<div tabid='sidebar' onclick='openSettingsTab("sidebar")'>
+					<i data-feather='sidebar'></i> Sidebar
+				</div>
+				<div tabid='templates' onclick='openSettingsTab("templates")'>
+					<i data-feather='anchor'></i> Templates
 				</div>
 				<div tabid='keyboard' onclick='openSettingsTab("keyboard")'>
 					<i data-feather='command'></i> Keyboard
@@ -98,14 +99,6 @@
 						<div class='label'>Author Name: </div>
 						<input type='text' value='Anonymous' class='autoset' id='authorname'/>
 					</div>
-
-					<h2><i data-feather='corner-down-right'></i> Sidebar</h2>
-					<div class='checkform autoset' value='false' id='sidebar_autoHide'>
-						<div class='box'><i data-feather='check'></i></div>
-						<div class='label'>Auto-Hide</div>
-					</div>
-					<div class='button' onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
-						<i data-feather='tool'></i> Configure</div>
 
 					<h2><i data-feather='corner-down-right'></i> Reset</h2>
 					<div class='button' onclick='__resetAll()'><i data-feather='trash-2'></i> Erase All</div>
@@ -146,6 +139,18 @@
 
 					</div>
 
+				</div>
+				<div id='settings_sidebar' class='settingspage'>
+					<h1>Sidebar</h1>
+
+					<div class='checkform autoset' value='false' id='sidebar_autoHide'>
+						<div class='box'><i data-feather='check'></i></div>
+						<div class='label'>Auto-Hide</div>
+					</div>
+
+				</div>
+				<div id='settings_templates' class='settingspage'>
+					<h1>Templates</h1>
 				</div>
 				<div id='settings_keyboard' class='settingspage'>
 					<h1>Keyboard</h1>
