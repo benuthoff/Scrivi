@@ -110,9 +110,8 @@ function settingsTextin(event) {
 	let val = inp.val();
 	if (inp.hasClass('autoset')) {
 		sttng(inp.attr('id'),val);
-
 		// Animate
 		inp.css('border-color', 'var(--theme-notifsuccess)');
 		setTimeout( ()=>{ inp.css('border-color', '') }, 1000 );
 	};
-}
+};

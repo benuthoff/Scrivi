@@ -5,11 +5,12 @@
 /*var request = indexedDB.deleteDatabase('ScriviDB');
 request.onerror = ()=>{ createNotif('Error Deleting "ScriviDB".', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };*/
 
+createNotif('Loading ScriviDB...', {icon: 'loader'});
 
 /* For Test Purposes - Create Database */
 var db;
-var request = window.indexedDB.open('ScriviDB', 1);
-request.onupgradeneeded = function(event) {
+var dbrequest = window.indexedDB.open('ScriviDB', 1);
+dbrequest.onupgradeneeded = function(event) {
 
 	// Create the Database
 	createNotif('Creating ScriviDB...', {icon: 'loader'});
@@ -30,9 +31,9 @@ request.onupgradeneeded = function(event) {
 	ustore.add({'label': 'settings', 'value': usersettings});
 
 };
-request.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
-request.onsuccess = function(event) {
-	createNotif('Loaded ScriviDB.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
+dbrequest.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
+dbrequest.onsuccess = function(event) {
+	createNotif('ScriviDB Loaded.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
 	db = event.target.result;
 
 	// Get and load Settings;
@@ -48,6 +49,13 @@ request.onsuccess = function(event) {
 
 		// Run saved settings when page loaded in;
 		executeAllSettings();
+
+		// Startup Setting
+		if (usersettings.startup === 'newfile') {
+			newFile('simple');
+		} else if (usersettings.startup === 'templates') {
+			newFile();
+		};
 	};
 
 	// ...

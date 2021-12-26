@@ -72,12 +72,45 @@ body.wide_editor {
 	overflow-y: auto;
 	position: relative;
 	scrollbar-width: thin;
+
 	user-select: none;
-	background-color: #202224;
+	background-color: var(--theme-hovercolor);
+	animation: fadeIn 0.1s;
 }
 #filetemps .title {
-	background-color: transparent;
+	background-color: var(--theme-hovercolor);
 	color: var(--theme-bodycolor);
+}
+#filetemps .divider {
+	background-image: linear-gradient(to bottom,var(--theme-hovercolor),transparent);
+}
+
+#filetemps .list > div {
+	margin: 0 24px 14px 24px;
+	padding: 0 0 10px 10px;
+	display: flex;
+	align-items: center;
+
+	border-bottom: solid 1px var(--theme-dialogborder);
+	cursor: pointer;
+	transition: 0.1s;
+	color: var(--theme-iconcolor);
+}
+#filetemps .list > div:hover {
+	border-color: var(--theme-bordercolor);
+	color: var(--theme-bodycolor);
+}
+#filetemps .list > div:active {
+	transform: scale(0.99);
+}
+#filetemps .list > div .icon {
+	width: 48px; height: 48px;
+	margin-right: 14px;
+}
+#filetemps .list > div .label {
+	display: inline;
+	font-size: 22px;
+	color: inherit;
 }
 
 #editor {
@@ -295,7 +328,7 @@ body.wide_editor {
 	font-size: 32px;
 }
 .settingspage h2 {
-	margin: 20px 0 20px 0;
+	margin: 20px 0 16px 0;
 	font-size: 24px;
 	color: var(--theme-titlecolor);
 }
@@ -374,6 +407,7 @@ body.wide_editor {
 	align-items: center;
 	width: fit-content;
 	margin-left: 44px;
+	margin-bottom: 14px;
 }
 .settingspage .textin .label {
 	display: inline-block;
@@ -389,9 +423,25 @@ body.wide_editor {
 	font-size: 16px;
 	color: var(--theme-bodycolor);
 	transition: 0.1s;
+	width: 180px;
 }
 .settingspage .textin input:focus {
 	outline: none;
+	border-color: var(--theme-bordercolor);
+}
+.settingspage .textin select {
+	border: solid 2px var(--theme-dialogborder);
+	background-color: transparent;
+	color: var(--theme-bodycolor);
+	font-size: 16px;
+	width: 180px;
+	padding: 6px 4px;
+	border-radius: 4px;
+}
+.settingspage .textin select:hover {
+	background-color: var(--theme-hovercolor);
+}
+.settingspage .textin select:active {
 	border-color: var(--theme-bordercolor);
 }
 

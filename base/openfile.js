@@ -40,16 +40,26 @@ var filetemplates = {
 var currentfile;
 var unsavedchanges = false;
 
-function newFile() {
-	
-	openFile({
-		'path': '', // root\test.scv
-		'metadata': filetemplates['simple'].metadata,
-		'template': 'simple',
-		'author': usersettings.authorname,
-		'scripts': [],
-		'tags': []
-	});
+function newFile(templatename) {
+
+	if (!templatename) {
+
+		$('#filetemps').css('display', 'block');
+
+	} else {
+
+		$('#filetemps').css('display', 'none');
+
+		openFile({
+			'path': '', // root\test.scv
+			'metadata': filetemplates[templatename].metadata,
+			'template': templatename,
+			'author': usersettings.authorname,
+			'scripts': [],
+			'tags': []
+		});
+
+	};
 
 };
 

@@ -4,7 +4,8 @@
 var usersettings = {
 	'theme': 'Dark',
 	'sidebar_autoHide': false,
-	'authorname': 'Anonymous'
+	'authorname': 'Anonymous',
+	'startup': 'newfile'
 };
 
 var settingfunctions = {
@@ -27,6 +28,10 @@ var settingfunctions = {
 
 	'authorname': () => {
 		$('#authorname').val(usersettings.authorname);
+	},
+
+	'startup': () => {
+		$('#startup').attr('value', usersettings.startup);
 	}
 }
 
@@ -88,7 +93,7 @@ function settingsMenuSetup() {
 	// Apply Event to UI Inputs
 	$('.settingspage .checkform').on('click', toggleCheckbox);
 	$('.settingspage .textin input').on('blur', settingsTextin);
-
+	$('.settingspage .textin select').on('change', settingsTextin);
 }
 
 function sttng(id, value) {

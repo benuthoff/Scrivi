@@ -10,16 +10,15 @@
 	<!-- Themes -->
 	<link rel='stylesheet' href='./themes.css'/>
 
-	<!-- Icons -->
-	<script src='./feather.min.js'></script>
-
 	<!-- Scripts -->
 	<script src='./base/userinterface.js'></script>
 	<script src='./base/openfile.js'></script>
 	<script src='./base/settings.js'></script>
 	<script src='./base/filesmenu.js'></script>
 	<script src='./base/keyboard.js'></script>
-	<script src='./base/database.js'></script>
+
+	<!-- Icons -->
+	<script src='./feather.min.js'></script>
 
 	<!-- Meta Properties -->
 	<meta property='og:title' content='Scrivi'/>
@@ -54,8 +53,21 @@
 
 	
 	<!-- New File Screen -->
-	<div id='filetemps'>
-		<div class='title'>Create a new file...</div>
+	<div id='filetemps' style='display: none;'>
+		<div class='topbound'>
+			<div class='title'>Create a new file...</div>
+			<div class='divider'></div>
+		</div>
+		<div class='list'>
+			<div onclick='newFile("simple");'>
+				<i data-feather='file-text'></i>
+				<div class='label'>Simple</div>
+			</div>
+			<div onclick='createNotif("Under Construction", {icon: "alert-triangle"})'>
+				<i data-feather='book'></i>
+				<div class='label'>Notebook</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -94,10 +106,17 @@
 				<div id='settings_basic' class='settingspage'>
 
 					<h1>Basic</h1>
-					<h2><i data-feather='corner-down-right'></i> Files</h2>
+					<h2><i data-feather='corner-down-right'></i> Application</h2>
 					<div class='textin'>
 						<div class='label'>Author Name: </div>
 						<input type='text' value='Anonymous' class='autoset' id='authorname'/>
+					</div>
+					<div class='textin'>
+						<div class='label'>Start-up Action: </div>
+						<select id='startup' value='newfile' class='autoset'>
+							<option value='newfile'>New File</option>
+							<option value='templates'>Select Template</option>
+						</select>
 					</div>
 
 					<h2><i data-feather='corner-down-right'></i> Reset</h2>
@@ -197,6 +216,9 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Scrivi DB Management -->
+	<script src='./base/database.js'></script>
 
 
 </body>
