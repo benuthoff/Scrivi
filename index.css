@@ -102,10 +102,12 @@ body.wide_editor {
 }
 #filetemps .list > div:active {
 	transform: scale(0.99);
+	border-color: var(--theme-bordercolor);
+	color: var(--theme-bodycolor);
 }
 #filetemps .list > div .icon {
 	width: 48px; height: 48px;
-	margin-right: 14px;
+	margin-right: 24px;
 }
 #filetemps .list > div .label {
 	display: inline;
@@ -313,6 +315,7 @@ body.wide_editor {
 	border: solid 2px var(--theme-dialogborder);
 	border-left-width: 0;
 	border-radius: 0 8px 8px 0;
+	scrollbar-width: thin;
 }
 #settings > #main .settingspage {
 	display: none;

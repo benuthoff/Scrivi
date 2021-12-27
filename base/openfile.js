@@ -17,7 +17,8 @@ var filetemplates = {
 			'load': function(mtdt) {
 				$('#editor .title').html(mtdt.title);
 				$('#editor .body').html(mtdt.body);
-			}
+			},
+			'close': function(mtdt) {}
 		},
 		'metadata': {
 			'title': 'Title',
@@ -44,11 +45,18 @@ function newFile(templatename) {
 
 	if (!templatename) {
 
+		// Close current file.
+		if (currentfile) {
+			filetemplates[currentfile.template].scripts.close(currentfile.metadata);
+			$('#editor').html('');
+			$('#templatecss').text('');
+			currentfile = undefined;
+		};
+
+		// Open Template View
 		$('#filetemps').css('display', 'block');
 
 	} else {
-
-		$('#filetemps').css('display', 'none');
 
 		openFile({
 			'path': '', // root\test.scv
@@ -67,18 +75,24 @@ function openFile(data) {
 
 	if (Object.keys(filetemplates).includes(data.template)) {
 
+		// Hide the Template menu.
+		$('#filetemps').css('display', 'none');
+
 		// Set the current file.
 		currentfile = data;
 
 		// Wrap the template.
 		let t = filetemplates[data.template];
 		$('#editor').html(t.html);
+		$('#templatecss').text(t.css);
 		t.scripts.load(data.metadata);
 
 	} else {
+
 		createNotif('Unable to load file, template not found.', {
 			icon: 'alert-triangle', color: 'var(--theme-notiferror)'
 		});
+
 	};
 
 };

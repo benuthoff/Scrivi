@@ -9,6 +9,7 @@
 
 	<!-- Themes -->
 	<link rel='stylesheet' href='./themes.css'/>
+	<style id='templatecss'></style>
 
 	<!-- Scripts -->
 	<script src='./base/userinterface.js'></script>
@@ -67,6 +68,10 @@
 				<i data-feather='book'></i>
 				<div class='label'>Notebook</div>
 			</div>
+			<div onclick='openSettingsTab("templates");toggleSettings();'>
+				<i data-feather='more-horizontal'></i>
+				<div class='label'>Manage</div>
+			</div>
 		</div>
 	</div>
 
@@ -84,7 +89,7 @@
 					<i data-feather='settings'></i> Basic
 				</div>
 				<div tabid='appearance' onclick='openSettingsTab("appearance")'>
-					<i data-feather='type'></i> Appearance
+					<i data-feather='droplet'></i> Appearance
 				</div>
 				<div tabid='sidebar' onclick='openSettingsTab("sidebar")'>
 					<i data-feather='sidebar'></i> Sidebar
