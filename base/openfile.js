@@ -133,8 +133,8 @@ function saveFile() {
 
 		// Clear changes.
 		unsavedchanges = false;
-		
-	} else if (!unsavedchanges) {
+
+	} else if (currentfile && !unsavedchanges) {
 		createNotif('There are no changes.')
 	};
 

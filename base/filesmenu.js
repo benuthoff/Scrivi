@@ -24,6 +24,10 @@ function toggleFilesMenu() {
 	$('body').toggleClass('menu_blur');
 };
 
+function openPath(path) {
+	
+};
+
 function isValidFileName(str) {
 	let rg = /^[A-Za-z0-9()!@#^&()_+;.,]+$/g;
 	return rg.test(str);

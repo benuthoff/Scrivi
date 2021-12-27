@@ -568,15 +568,21 @@ body.wide_editor {
 	background-color: var(--theme-hovercolor);
 	border: solid 2px var(--theme-fileborder);
 	margin: 20px 30px;
-	padding: 10px 20px;
+	padding: 10px 14px;
 	border-radius: 4px;
-	font-size: 24px;
+	font-size: 20px;
+	transition: 0.1s;
 	
-	display: flex;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 36px auto;
+	grid-template-rows: 24px;
 }
-#filesmenu > #main #pathbar .icon {
-	margin-right: 20px;
+#filesmenu > #main #pathbar:focus-within {
+	border-color: var(--theme-bordercolor);
+}
+#filesmenu > #main #pathbar [contenteditable] {
+	outline: none;
+	margin-top: 1px;
 }
 
 /*
