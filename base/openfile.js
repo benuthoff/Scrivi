@@ -28,11 +28,18 @@ var filetemplates = {
 	'notebook': {
 		'displayname': 'Notebook',
 		'icon': 'book', 
-		'html': '',
-		'css': '',
+		'html': '<div class="title">Under Construction...</div>',
+		'css': '#editor { display: flex; align-items: center; user-select: none; }',
 		'scripts': {
-			'save': function(mtdt) {},
-			'load': function(mtdt) {}
+			'save': function(mtdt) {
+
+			},
+			'load': function(mtdt) {
+				$('body').addClass('wide_editor');
+			},
+			'close': function(mtdt) {
+				$('body').removeClass('wide_editor');
+			}
 		},
 		'metadata': {}
 	}
@@ -43,10 +50,23 @@ var unsavedchanges = false;
 
 function newFile(templatename) {
 
-	if (!templatename) {
+	if (unsavedchanges) {
+
+		createDialog('You have unsaved changes. Continue?', [
+			['Save and Exit', ()=>{
+				saveFile(); newFile();
+			}],
+			['Forget Changes', ()=>{
+				unsavedchanges=false; newFile();
+			}],
+			['Cancel']
+		]);
+
+	} else if (!templatename) {
 
 		// Close current file.
 		if (currentfile) {
+			console.log('Overwriting file...');
 			filetemplates[currentfile.template].scripts.close(currentfile.metadata);
 			$('#editor').html('');
 			$('#templatecss').text('');
@@ -60,11 +80,10 @@ function newFile(templatename) {
 
 		openFile({
 			'path': '', // root\test.scv
-			'metadata': filetemplates[templatename].metadata,
+			'metadata': Object.assign({}, filetemplates[templatename].metadata),
 			'template': templatename,
 			'author': usersettings.authorname,
-			'scripts': [],
-			'tags': []
+			'scripts': []
 		});
 
 	};
@@ -76,7 +95,7 @@ function openFile(data) {
 	if (Object.keys(filetemplates).includes(data.template)) {
 
 		// Hide the Template menu.
-		$('#filetemps').css('display', 'none');
+		$('#filetemps').fadeOut(100);
 
 		// Set the current file.
 		currentfile = data;
@@ -86,6 +105,11 @@ function openFile(data) {
 		$('#editor').html(t.html);
 		$('#templatecss').text(t.css);
 		t.scripts.load(data.metadata);
+
+		// Detect Changes
+		$('#editor [contenteditable]').on('input', (e)=>{
+			unsavedchanges = true;
+		});
 
 	} else {
 
@@ -97,14 +121,21 @@ function openFile(data) {
 
 };
 
+var savereq = false;
+
 function saveFile() {
 
-	//if (unsavedchanges) {
+	if (currentfile && unsavedchanges) {
 
-	currentfile.metadata = filetemplates[currentfile.template].scripts.save(currentfile.metadata);
+		// Update the file's metadata.
+		currentfile.metadata = filetemplates[currentfile.template].scripts.save(currentfile.metadata);
+		console.log(currentfile.metadata);
 
-	console.log(currentfile.metadata)
+		// Clear changes.
+		unsavedchanges = false;
 		
-	//};
+	} else if (!unsavedchanges) {
+		createNotif('There are no changes.')
+	};
 
 };

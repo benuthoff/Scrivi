@@ -49,3 +49,9 @@ document.addEventListener('keydown', function(e) {
 	};
 
 });
+
+document.addEventListener('contextmenu', function(e) {
+
+	e.preventDefault();
+
+});

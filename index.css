@@ -197,17 +197,21 @@ body.wide_editor {
 	border: solid 1px var(--theme-dialogborder);
 	padding: 6px 12px;
 	text-align: center;
-	display: inline-block;
 	cursor: pointer;
-	border-radius: 2px;
+	border-radius: 4px;
 	transition: 0.1s;
+	display: flex;
+	align-items: center;
+	color: var(--theme-iconcolor);
 }
 .dialog .buttons > div:hover {
 	background-color: var(--theme-hovercolor);
+	color: inherit;
 }
 .dialog .buttons > div:active {
 	border-color: var(--theme-bordercolor);
 	background-color: var(--theme-hovercolor);
+	color: inherit;
 }
 
 #notifplane {

@@ -18,12 +18,11 @@ dbrequest.onupgradeneeded = function(event) {
 	db = event.target.result;
 
 	// Create the Note Storage
-	var nstore = db.createObjectStore('notes', { keyPath: 'fileName'});
+	var nstore = db.createObjectStore('notes', { keyPath: 'path'});
 	nstore.createIndex('author', 'author', { unique: false })
 	nstore.createIndex('metadata', 'metadata', { unique: false });
 	nstore.createIndex('template', 'template', { unique: false });
 	nstore.createIndex('scipts', 'scripts', { unique: false });
-	nstore.createIndex('tags', 'tags', { unique: false });
 
 	// Create User Metadata Storage
 	var ustore = db.createObjectStore('userdata', { keyPath: 'label'});
@@ -46,10 +45,8 @@ dbrequest.onsuccess = function(event) {
 		Object.keys(savesettings).forEach((indx)=>{
 			usersettings[indx] = savesettings[indx];
 		});
-
 		// Run saved settings when page loaded in;
 		executeAllSettings();
-
 		// Startup Setting
 		if (usersettings.startup === 'newfile') {
 			newFile('simple');
