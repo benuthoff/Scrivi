@@ -40,15 +40,15 @@ var settingfunctions = {
 		// Set the value.
 		$('#devtools_userdata').attr('value', usersettings.devtools_userdata);
 		// If set to true, add to the drive list.
-		if (usersettings.devtools_userdata === 'true') {
-			if ($('#dvsel').length == 0) {
-				$('#rtsel').after(
+		if (usersettings.devtools_userdata) {
+			if ($('#dvsel').length == 0) { // If the drive isnt listed yet...
+				$('#rtsel').after( // Add after the ROOT drive.
 					$('<h2 id="dvsel"><i data-feather="database"></i> User Data</h2>').click(()=>{
 						drives['userdata'].render();
 					})
 				);
 				feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'});
-			}
+			};
 		} else {
 			$('#dvsel').remove();
 		};

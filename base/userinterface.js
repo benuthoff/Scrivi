@@ -96,12 +96,8 @@ function createNotif(text, options) {
 
 function toggleCheckbox(event) {
 	let box = $(this);
-	let val = box.attr('value');
-	if (val === 'true') {
-		box.attr('value', 'false');
-	} else {
-		box.attr('value', 'true');
-	};
+	let val = !(box.attr('value') === 'true'); // Get value as boolean.
+	box.attr('value', val); // Swap state.
 	if (box.hasClass('autoset')) { sttng(box.attr('id'),box.attr('value')) };
 };
 

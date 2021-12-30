@@ -56,10 +56,10 @@ dbrequest.onsuccess = function(event) {
 	};
 
 	// Load User Data to variables.
-	loadDataPoint('rootpath', (value)=>{ rootpath=value; }, dflt=rootpath);
-
-	// Execute datapoints where applicable.
-	drives["root"].render(); // (Uses `rootpath`)
+	loadDataPoint('rootpath', (value)=>{
+		rootpath=value;
+		drives["root"].render();
+	}, dflt=rootpath);
 
 };
 

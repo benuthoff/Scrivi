@@ -6,7 +6,6 @@ var rootpath = {
 	'files': {
 		'reminder.scv': {
 			'path': 'root\\reminder.scv',
-			'name': 'reminder.scv',
 			'template': 'simple',
 			'author': 'testuser',
 			'scripts': [],
@@ -18,7 +17,6 @@ var rootpath = {
 			'files': [
 				{
 					'path': 'root\\Examples\\Test.scv',
-					'name': 'Test.scv',
 					'template': 'simple',
 					'scripts': [],
 					'tags': []
@@ -41,7 +39,7 @@ function parsePath(path) { // Algorithm used for rendering under the root direct
 	// Test: parsePath('root\\Examples\\Test.scv');
 
 	// Trim end of menupath(?)
-	//if (menupath.endsWith('\\')) { menupath.slice(0,-2)	};
+	if (path.endsWith('\\')) { path.slice(0,-2)	};
 
 	let ccc = rootpath; // REMINDER: parsePath returns a POINTER to rootpath.
 	let split = path.split('\\');
