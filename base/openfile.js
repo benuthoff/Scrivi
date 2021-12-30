@@ -29,7 +29,7 @@ var filetemplates = {
 		'displayname': 'Notebook',
 		'icon': 'book', 
 		'html': '<div class="title">Under Construction...</div>',
-		'css': '#editor { display: flex; align-items: center; user-select: none; }',
+		'css': '#editor { display: flex; user-select: none; }',
 		'scripts': {
 			'save': function(mtdt) {
 
@@ -42,6 +42,24 @@ var filetemplates = {
 			}
 		},
 		'metadata': {}
+	},
+	'userdata': {
+		'displayname': false,
+		'icon': 'archive',
+		'html': '<div class="body" contenteditable spellcheck="false"></div>',
+		'css': '',
+		'scripts': {
+			'save': function(mtdt) {
+				mtdt.value = $('#editor .body').text();
+			},
+			'load': function(mtdt) {
+				$('#editor .body').text(mtdt.value);
+			},
+			'close': function(mtdt) {
+				
+			}
+		},
+		'metadata': {}
 	}
 };
 
@@ -50,6 +68,7 @@ var unsavedchanges = false;
 
 function newFile(templatename) {
 
+	// Warn about unsaved changes.
 	if (unsavedchanges) {
 
 		createDialog('You have unsaved changes. Continue?', [
@@ -62,11 +81,11 @@ function newFile(templatename) {
 			['Cancel']
 		]);
 
+	// Opens the template view if peramteter not specified.
 	} else if (!templatename) {
 
 		// Close current file.
 		if (currentfile) {
-			console.log('Overwriting file...');
 			filetemplates[currentfile.template].scripts.close(currentfile.metadata);
 			$('#editor').html('');
 			$('#templatecss').text('');
@@ -76,10 +95,11 @@ function newFile(templatename) {
 		// Open Template View
 		$('#filetemps').css('display', 'block');
 
+	// Open a new file with the provided template name.
 	} else {
 
 		openFile({
-			'path': '', // root\test.scv
+			'path': 'root\\default.scv', //false,
 			'metadata': Object.assign({}, filetemplates[templatename].metadata),
 			'template': templatename,
 			'author': usersettings.authorname,
@@ -90,12 +110,19 @@ function newFile(templatename) {
 
 };
 
+function loadFile(path) {
+	let d = path.split('\\')[0];
+	drives[d].load(path);
+};
+
 function openFile(data) {
 
 	if (Object.keys(filetemplates).includes(data.template)) {
 
-		// Hide the Template menu.
+		// Hide the Template and Files menus.
 		$('#filetemps').fadeOut(100);
+		$('#filesmenu_blind').removeClass('visible');
+		$('body').removeClass('menu_blur');
 
 		// Set the current file.
 		currentfile = data;
@@ -103,6 +130,7 @@ function openFile(data) {
 		// Wrap the template.
 		let t = filetemplates[data.template];
 		$('#editor').html(t.html);
+		$('#editor').attr('template', data.template);
 		$('#templatecss').text(t.css);
 		t.scripts.load(data.metadata);
 
@@ -121,8 +149,6 @@ function openFile(data) {
 
 };
 
-var savereq = false;
-
 function saveFile() {
 
 	if (currentfile && unsavedchanges) {
@@ -134,8 +160,21 @@ function saveFile() {
 		// Clear changes.
 		unsavedchanges = false;
 
+		// If the current file has a path to save to
+		if (currentfile.path) {
+
+
+		// If the current file has DOESNT have a path yet.
+		} else {
+
+		};
+
 	} else if (currentfile && !unsavedchanges) {
-		createNotif('There are no changes.')
+		createNotif('There are no changes.');
 	};
+
+};
+
+function saveFileAs() {
 
 };

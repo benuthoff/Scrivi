@@ -159,6 +159,13 @@ body.wide_editor {
 	outline: none;
 }
 
+#editor[template=userdata] .body {
+	padding-top: 30px;
+	min-height: calc(100vh - 165px);
+	white-space: pre;
+	tab-size: 4;
+}
+
 .blind {
 	background-color: var(--theme-blindcolor);
 	position: fixed;
@@ -503,6 +510,7 @@ body.wide_editor {
 	top: 60px; left: 8%;
 	right: 8%; bottom: 60px;
 	z-index: 902;
+	user-select: none;
 
 	border-radius: 8px;
 	font-family: 'Noto Sans', sans-serif;
@@ -526,7 +534,6 @@ body.wide_editor {
 	border: solid 2px var(--theme-fileborder);
 	border-right: none;
 	cursor: default;
-	user-select: none;
 }
 #filesmenu > #side h1 {
 	color: var(--theme-filecolor);
@@ -583,6 +590,7 @@ body.wide_editor {
 #filesmenu > #main #pathbar [contenteditable] {
 	outline: none;
 	margin-top: 1px;
+	cursor: text;
 }
 
 /*

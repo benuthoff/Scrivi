@@ -11,12 +11,15 @@
 	<link rel='stylesheet' href='./themes.css'/>
 	<style id='templatecss'></style>
 
-	<!-- Scripts -->
+	<!-- UI Scripts -->
 	<script src='./base/userinterface.js'></script>
-	<script src='./base/openfile.js'></script>
 	<script src='./base/settings.js'></script>
-	<script src='./base/filesmenu.js'></script>
 	<script src='./base/keyboard.js'></script>
+
+	<!-- DB Scripts -->
+	<script src='./base/drives.js'></script>
+	<script src='./base/openfile.js'></script>
+	<script src='./base/filesmenu.js'></script>
 
 	<!-- Icons -->
 	<script src='./feather.min.js'></script>
@@ -124,6 +127,12 @@
 						</select>
 					</div>
 
+					<h2><i data-feather='corner-down-right'></i> Developer Tools</h2>
+					<div class='checkform autoset' value='false' id='devtools_userdata'>
+						<div class='box'><i data-feather='check'></i></div>
+						<div class='label'>Show Userdata Drive</div>
+					</div>
+
 					<h2><i data-feather='corner-down-right'></i> Reset</h2>
 					<div class='button' onclick='__resetAll()'><i data-feather='trash-2'></i> Erase All</div>
 
@@ -202,12 +211,12 @@
 		<div id='filesmenu'>
 			<div id='side'>
 				<h1>Files</h1>
-				<h2><i data-feather='hard-drive'></i> Root</h2>
-				<h2><i data-feather='star'></i> Favorites</h2>
+				<h2 id='rtsel' onclick='drives["root"].render();'><i data-feather='hard-drive'></i> Root</h2>
+				<h2 id='fvsel' onclick='//drives["favorites"].render();'><i data-feather='star'></i> Favorites</h2>
 			</div>
 			<div id='main'>
 				<div id='pathbar'>
-					<i data-feather='hard-drive'></i><div contenteditable spellcheck='false'>// </div>
+					<i data-feather='hard-drive'></i><div contenteditable spellcheck='false'>//</div>
 				</div>
 				<div id='fileview' class='gallery'> <!-- Or .list -->
 

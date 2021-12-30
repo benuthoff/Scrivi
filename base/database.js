@@ -55,8 +55,32 @@ dbrequest.onsuccess = function(event) {
 		};
 	};
 
-	// ...
+	// Load User Data to variables.
+	loadDataPoint(rootpath, 'rootpath');
 
+	// Execute datapoints where applicable.
+	drives["root"].render(); // (Uses `rootpath`)
+
+};
+
+function loadDataPoint(variable, label, defaultset=true) {
+	let setstore = db.transaction(['userdata']).objectStore('userdata');
+	let req = setstore.get(label);
+	req.onerror = (event)=>{ createNotif('Error loading '+label+'.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+	req.onsuccess = (event)=>{
+		if (req.result) {
+			variable = req.result.value;
+		} else { // If there is no result, save the default value.
+			saveDataPoint(label, variable);
+		};
+	};
+};
+
+function saveDataPoint(label, value) {
+	let req = db.transaction(['userdata'], 'readwrite')
+		.objectStore('userdata').put({'label': label, 'value': value});
+	req.onerror = ()=>{ createNotif('Error saving '+label+'.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+	//req.onsuccess = ()=>{ createNotif('Settings Saved', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
 };
 
 function __resetAll() {

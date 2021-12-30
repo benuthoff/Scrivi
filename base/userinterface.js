@@ -90,7 +90,7 @@ function createNotif(text, options) {
 	}, 2000);
 
 	// Initializes Icon
-	if (options && options.icon) { feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'}) }
+	if (options && options.icon) { feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'}) };
 
 };
 

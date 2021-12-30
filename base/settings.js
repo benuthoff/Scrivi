@@ -5,7 +5,8 @@ var usersettings = {
 	'theme': 'Dark',
 	'sidebar_autoHide': false,
 	'authorname': 'Anonymous',
-	'startup': 'newfile'
+	'startup': 'newfile',
+	'devtools_userdata': false
 };
 
 var settingfunctions = {
@@ -22,6 +23,7 @@ var settingfunctions = {
 	},
 
 	'sidebar_autoHide': () => {
+		// Change the value and add the hiding css class.
 		$('#sidebar_autoHide').attr('value', usersettings.sidebar_autoHide);
 		$('#sidebar').attr('autohide', usersettings.sidebar_autoHide);
 	},
@@ -32,8 +34,26 @@ var settingfunctions = {
 
 	'startup': () => {
 		$('#startup').attr('value', usersettings.startup);
+	},
+
+	'devtools_userdata': ()=>{
+		// Set the value.
+		$('#devtools_userdata').attr('value', usersettings.devtools_userdata);
+		// If set to true, add to the drive list.
+		if (usersettings.devtools_userdata === 'true') {
+			$('#rtsel').after(
+				$('<h2 id="dvsel"><i data-feather="database"></i> User Data</h2>').click(()=>{
+					drives['userdata'].render();
+				})
+			);
+			feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'});
+		} else {
+			$('#dvsel').remove();
+		};
 	}
-}
+
+
+};
 
 function toggleSettings() {
 	$('#settings_blind').toggleClass('visible');
@@ -52,24 +72,11 @@ function openSettingsTab(id) {
 
 };
 
-function saveAllSettings() {
-
-	let scw = db.transaction(['userdata'], 'readwrite')
-		.objectStore('userdata').put({'label': 'settings', 'value': usersettings});
-	scw.onerror = ()=>{ createNotif('Error saving settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
-	//scw.onsuccess = ()=>{ createNotif('Settings Saved', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
-
-};
-
 function executeAllSettings() {
-
 	let all = Object.keys(settingfunctions);
 	for (let i=0; i<all.length; i++) {
-
 		settingfunctions[ all[i] ]();
-
 	};
-	
 };
 
 function settingsMenuSetup() {
@@ -94,7 +101,8 @@ function settingsMenuSetup() {
 	$('.settingspage .checkform').on('click', toggleCheckbox);
 	$('.settingspage .textin input').on('blur', settingsTextin);
 	$('.settingspage .textin select').on('change', settingsTextin);
-}
+	
+};
 
 function sttng(id, value) {
 	// Set the Value
@@ -102,5 +110,5 @@ function sttng(id, value) {
 	// Execute Function
 	settingfunctions[id]();
 	// Save to DB
-	saveAllSettings();
+	saveDataPoint('settings', usersettings);
 };
