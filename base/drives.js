@@ -8,15 +8,37 @@ drives['root'] = {
 	'render': ()=>{ // Runs when the drive is changed in the files menu.
 
 		// Update the pathbar.
-		$('#pathbar').html('<i data-feather="hard-drive"></i><div contenteditable spellcheck="false">//</div>');
+		$('#pathbar').html('<i data-feather="hard-drive"></i><div contenteditable spellcheck="false">\\\\</div>');
 		feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'});
+
+		// Write to the pathbar.
+		$('#pathbar div').text('\\' + menupath.slice(4));
 
 		// Empty the fileview.
 		$('#fileview').empty();
 
+		// Begin rendering.
+		let c = parsePath(menupath);
+		if (c) { // If path exists.
+			let ak = Object.keys(c.folders);
+			ak.forEach((i)=>{ // Add folders...
+				addFileIcon({ 'name': i	}, fldr=true);
+			});
+			let bk = Object.keys(c.files);
+			bk.forEach((i)=>{ // Add files...
+				addFileIcon(c.files[i]);
+			});
+		} else { // If path doesnt exist.
+
+		};
+
 	},
 
 	'load': (path)=>{ // Runs when a file is loaded from this drive.
+		createNotif('Under Construction', {icon: 'alert-triangle'})
+	},
+
+	'save': ()=>{
 
 	}
 
@@ -30,7 +52,7 @@ drives['userdata'] = {
 	'render': ()=>{ // Runs when the drive is changed in the files menu.
 
 		// Update the pathbar.
-		$('#pathbar').html('<i data-feather="database"></i><div>//</div>');
+		$('#pathbar').html('<i data-feather="database"></i><div>\\\\</div>');
 		feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'});
 
 		// Send a request for all datapoints.
@@ -78,6 +100,10 @@ drives['userdata'] = {
 				createNotif('File not found.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'})
 			};
 		};
+
+	},
+
+	'save': ()=>{
 
 	}
 

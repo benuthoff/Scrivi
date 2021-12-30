@@ -72,10 +72,10 @@ function newFile(templatename) {
 	if (unsavedchanges) {
 
 		createDialog('You have unsaved changes. Continue?', [
-			['Save and Exit', ()=>{
+			['Save and Continue', ()=>{
 				saveFile(); newFile();
 			}],
-			['Forget Changes', ()=>{
+			['Ignore', ()=>{
 				unsavedchanges=false; newFile();
 			}],
 			['Cancel']
@@ -111,8 +111,23 @@ function newFile(templatename) {
 };
 
 function loadFile(path) {
-	let d = path.split('\\')[0];
-	drives[d].load(path);
+
+	let d = path.split('\\')[0]; // Get the drive name.
+
+	if (unsavedchanges) {
+		createDialog('You have unsaved changes. Continue?', [
+			['Save and Continue', ()=>{
+				saveFile(); drives[d].load(path);
+			}],
+			['Ignore', ()=>{
+				unsavedchanges=false; drives[d].load(path);
+			}],
+			['Cancel']
+		]);
+	} else {
+		drives[d].load(path);
+	};
+
 };
 
 function openFile(data) {
