@@ -83,7 +83,9 @@ drives['userdata'] = {
 		// Request the file
 		let setstore = db.transaction(['userdata']).objectStore('userdata');
 		let req = setstore.get(f);
-		req.onerror = (event)=>{ createNotif('Error loading '+f+'.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+		req.onerror = (event)=>{ 
+			createNotif('Error loading '+f+'.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'});
+		};
 		req.onsuccess = (event)=>{
 			if (req.result) {
 				
@@ -96,14 +98,24 @@ drives['userdata'] = {
 					'scripts': []
 				});
 
-			} else { // If there is no result, save the default value.
+			} else { // If there is no result, error.
 				createNotif('File not found.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'})
 			};
 		};
 
 	},
 
-	'save': ()=>{
+	'save': (file)=>{
+
+		let label = file.path.split('\\')[1];
+		let value = JSON.parse(file.metadata.value);
+
+		saveDataPoint(label, value);
+
+		if (label === 'settings') { loadDataPoint('settings', (value)=>{
+			usersettings = value;
+			executeAllSettings();
+		})};
 
 	}
 

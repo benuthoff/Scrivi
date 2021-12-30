@@ -159,11 +159,16 @@ body.wide_editor {
 	outline: none;
 }
 
+#editor[template=userdata] {
+	overflow-x: auto;
+}
 #editor[template=userdata] .body {
-	padding-top: 30px;
-	min-height: calc(100vh - 165px);
+	padding: 30px;
 	white-space: pre;
 	tab-size: 4;
+	overflow: unset;
+	width: max-content;
+	height: unset;
 }
 
 .blind {

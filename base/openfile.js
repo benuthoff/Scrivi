@@ -51,6 +51,7 @@ var filetemplates = {
 		'scripts': {
 			'save': function(mtdt) {
 				mtdt.value = $('#editor .body').text();
+				return mtdt;
 			},
 			'load': function(mtdt) {
 				$('#editor .body').text(mtdt.value);
@@ -59,7 +60,9 @@ var filetemplates = {
 				
 			}
 		},
-		'metadata': {}
+		'metadata': {
+			'value': ''
+		}
 	}
 };
 
@@ -170,7 +173,6 @@ function saveFile() {
 
 		// Update the file's metadata.
 		currentfile.metadata = filetemplates[currentfile.template].scripts.save(currentfile.metadata);
-		console.log(currentfile.metadata);
 
 		// Clear changes.
 		unsavedchanges = false;
@@ -178,6 +180,7 @@ function saveFile() {
 		// If the current file has a path to save to
 		if (currentfile.path) {
 
+			drives[currentfile.path.split('\\')[0]].save(currentfile);
 
 		// If the current file has DOESNT have a path yet.
 		} else {
