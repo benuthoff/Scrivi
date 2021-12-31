@@ -39,7 +39,7 @@ drives['root'] = {
 		createNotif('Under Construction', {icon: 'alert-triangle'})
 	},
 
-	'save': ()=>{
+	'save': ()=>{ // Runs when a file needs to be saved to this drive.
 
 	}
 
@@ -83,9 +83,7 @@ drives['userdata'] = {
 		// Request the file
 		let setstore = db.transaction(['userdata']).objectStore('userdata');
 		let req = setstore.get(f);
-		req.onerror = (event)=>{ 
-			createNotif('Error loading '+f+'.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'});
-		};
+		req.onerror = (event)=>{ error('Error loading '+f+'!') };
 		req.onsuccess = (event)=>{
 			if (req.result) {
 				
@@ -99,13 +97,13 @@ drives['userdata'] = {
 				});
 
 			} else { // If there is no result, error.
-				createNotif('File not found.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'})
+				error('File not found.');
 			};
 		};
 
 	},
 
-	'save': (file)=>{
+	'save': (file)=>{ // Runs when a file needs to be saved to this drive.
 
 		let label = file.path.split('\\')[1];
 		let value = JSON.parse(file.metadata.value);
@@ -120,3 +118,28 @@ drives['userdata'] = {
 	}
 
 };
+
+
+
+// FAVORITES DRIVE, HOLDS DATA FOR "STARRED" FILES
+drives['favorites'] = {
+
+	'render': ()=>{ // Runs when the drive is changed in the files menu.
+
+		// Update the pathbar.
+		$('#pathbar').html('<i data-feather="star"></i><div>\\\\</div>');
+		feather.replace({'stroke-width': 2, 'width': 24, 'height': 24, 'class': 'icon'});
+
+		$('#fileview').empty();
+
+	},
+
+	'load': (path)=>{ // Runs when a file is loaded from this drive.
+
+	},
+
+	'save': ()=>{ // Runs when a file needs to be saved to this drive.
+
+	}
+
+}

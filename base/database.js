@@ -32,18 +32,15 @@ dbrequest.onupgradeneeded = function(event) {
 };
 dbrequest.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
 dbrequest.onsuccess = function(event) {
+
 	createNotif('ScriviDB Loaded.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
 	db = event.target.result;
 
-	// Get and load Settings;
-	let setstore = db.transaction(['userdata']).objectStore('userdata');
-	let req = setstore.get('settings');
-	req.onerror = (event)=>{ createNotif('Error loading settings.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
-	req.onsuccess = (event)=>{
+	// Load Settings.
+	loadDataPoint('settings', (value)=>{
 		// Saved values
-		let savesettings = req.result.value;
-		Object.keys(savesettings).forEach((indx)=>{
-			usersettings[indx] = savesettings[indx];
+		Object.keys(value).forEach((indx)=>{
+			usersettings[indx] = value[indx];
 		});
 		// Run saved settings when page loaded in;
 		executeAllSettings();
@@ -53,9 +50,9 @@ dbrequest.onsuccess = function(event) {
 		} else if (usersettings.startup === 'templates') {
 			newFile();
 		};
-	};
+	}, dflt=usersettings);
 
-	// Load User Data to variables.
+	// Load Path for ROOT drive.
 	loadDataPoint('rootpath', (value)=>{
 		rootpath=value;
 		drives["root"].render();
@@ -66,7 +63,7 @@ dbrequest.onsuccess = function(event) {
 function loadDataPoint(label, onsuccess, dflt=undefined) {
 	let setstore = db.transaction(['userdata']).objectStore('userdata');
 	let req = setstore.get(label);
-	req.onerror = (event)=>{ createNotif('Error loading '+label+'.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+	req.onerror = (event)=>{ error('Error loading '+label+'.') };
 	req.onsuccess = (event)=>{
 		if (req.result) {
 			onsuccess(req.result.value);
@@ -79,7 +76,7 @@ function loadDataPoint(label, onsuccess, dflt=undefined) {
 function saveDataPoint(label, value) {
 	let req = db.transaction(['userdata'], 'readwrite')
 		.objectStore('userdata').put({'label': label, 'value': value});
-	req.onerror = ()=>{ createNotif('Error saving '+label+'.', {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+	req.onerror = ()=>{ error('Error saving '+label+'.') };
 	//req.onsuccess = ()=>{ createNotif('Datapoint Saved', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
 };
 

@@ -206,41 +206,30 @@ body {
 		margin-right: 14px;
 	}
 
-	input {
+	input, select {
 
-		padding: 4px 6px;
 		width: 180px;
 
 		background-color: transparent;
+		color: var(--theme-bodycolor);
 		border: solid 2px var(--theme-dialogborder);
 		border-radius: 4px;
 
-		font-size: 16px;
-		color: var(--theme-bodycolor);
 		transition: 0.1s;
-
 		font-family: inherit;
-
-		&:focus { outline: none; border-color: var(--theme-bordercolor) }
+		font-size: 16px;
 
 	}
 
+	input {
+		padding: 4px 6px;
+		&:focus { outline: none; border-color: var(--theme-bordercolor) }
+	}
+
 	select {
-
-		width: 180px;
 		padding: 6px 4px;
-
-		border: solid 2px var(--theme-dialogborder);
-		border-radius: 4px;
-		background-color: transparent;
-		color: var(--theme-bodycolor);
-		font-size: 16px;
-
-		font-family: inherit;
-
 		&:hover { background-color: var(--theme-hovercolor)	}
 		&:active { border-color: var(--theme-bordercolor) }
-
 	}
 
 }
@@ -365,8 +354,13 @@ body {
 		white-space: pre;
 		tab-size: 4;
 		overflow: unset;
+
 		width: max-content;
+		min-width: 580px;
+
 		height: unset;
+		min-height: calc(100vh - 170px);
+		
 	}
 
 }
@@ -382,8 +376,8 @@ body {
 	.notif {
 
 		margin: 24px 42px 0 0;
-		width: 360px;
-		padding: 14px 0;
+		min-width: 320px;
+		padding: 14px 24px;
 	
 		font-size: 20px;
 		color: var(--theme-bodycolor);
@@ -645,72 +639,74 @@ body {
 	}
 
 	#main {
-
 		background-color: var(--theme-filebg);
 		border: solid 2px var(--theme-fileborder);
 		border-radius: 0 8px 8px 0;
+	}
 
-		#pathbar {
+	#pathbar {
 
-			color: var(--theme-iconcolor);
-			background-color: var(--theme-hovercolor);
-			border: solid 2px var(--theme-fileborder);
-			margin: 20px 30px;
-			padding: 10px 14px;
+		color: var(--theme-iconcolor);
+		background-color: var(--theme-hovercolor);
+		border: solid 2px var(--theme-fileborder);
+		margin: 20px 30px;
+		padding: 10px 14px;
+		border-radius: 4px;
+		font-size: 20px;
+		transition: 0.1s;
+		
+		display: grid;
+		grid-template-columns: 36px auto;
+		grid-template-rows: 24px;
+
+		> div { margin-top: -1px }
+		> [contenteditable] { cursor: text }
+
+		&:focus-within { border-color: var(--theme-bordercolor) }
+
+	}
+
+	#fileview.gallery {
+
+		display: flex;
+		margin: 20px 40px;
+
+		.file {
+
+			width: 140px;
+			height: 130px;
+			margin: 20px 10px;
+			padding-top: 30px;
 			border-radius: 4px;
-			font-size: 20px;
-			transition: 0.1s;
-			
-			display: grid;
-			grid-template-columns: 36px auto;
-			grid-template-rows: 24px;
-
-			> div { margin-top: 1px }
-			> [contenteditable] { cursor: text }
-
-			&:focus-within { border-color: var(--theme-bordercolor) }
-
-		}
-
-		#fileview.gallery {
-
+		
 			display: flex;
-			margin: 20px 40px;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+		
+			cursor: pointer;
+			transition: 0.1s;
+			border: solid 1px transparent;
 
-			.file {
-
-				width: 140px;
-				height: 130px;
-				margin: 20px 10px;
-				padding-top: 30px;
-				border-radius: 4px;
-			
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-start;
-				align-items: center;
-			
-				cursor: pointer;
-				transition: 0.1s;
-				border: solid 1px transparent;
-
-				.icon {
-					width: 52px; height: 52px;
-					margin-bottom: 18px;
-				}
-
-				> div {
-					display: inline;
-					text-align: center;
-					color: var(--theme-iconcolor);
-					font-size: 20px;
-				}
-
-				&:hover { border-color: var(--theme-iconcolor) }
-
+			.icon {
+				width: 52px; height: 52px;
+				margin-bottom: 18px;
 			}
 
+			> div {
+				display: inline;
+				text-align: center;
+				color: var(--theme-iconcolor);
+				font-size: 20px;
+			}
+
+			&:hover { border-color: var(--theme-iconcolor) }
+
 		}
+
+	}
+
+	#fileview.list {
 
 	}
 

@@ -94,6 +94,10 @@ function createNotif(text, options) {
 
 };
 
+function error(msg) {
+	createNotif(msg, {icon: 'alert-triangle', color: 'var(--theme-notiferror)'})
+};
+
 function toggleCheckbox(event) {
 	let box = $(this);
 	let val = !(box.attr('value') === 'true'); // Get value as boolean.

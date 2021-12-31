@@ -56,12 +56,15 @@ var filetemplates = {
 			'load': function(mtdt) {
 				$('#editor .body').text(mtdt.value);
 			},
+			'edit': function (mtdt, evnt) {
+
+			},
 			'close': function(mtdt) {
 				
 			}
 		},
 		'metadata': {
-			'value': ''
+			'value': '',
 		}
 	}
 };
@@ -79,7 +82,8 @@ function newFile(templatename) {
 				saveFile(); newFile();
 			}],
 			['Ignore', ()=>{
-				unsavedchanges=false; newFile();
+				unsavedchanges=false;
+				newFile();
 			}],
 			['Cancel']
 		]);
@@ -155,6 +159,9 @@ function openFile(data) {
 		// Detect Changes
 		$('#editor [contenteditable]').on('input', (e)=>{
 			unsavedchanges = true;
+			if (filetemplates[currentfile.template].scripts.edit) {
+				filetemplates[currentfile.template].scripts.edit(currentfile.metadata,e);
+			};
 		});
 
 	} else {

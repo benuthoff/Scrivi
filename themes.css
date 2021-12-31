@@ -56,6 +56,8 @@ body.theme_Dark, [simtheme=dark] {
 	--theme-fileborder: #3a3d41;
 
 	scrollbar-color: #2f3031 #222222;
+	--syntax-theme: atom-one-dark;
+	/* $('[simtheme=dark]').css('--syntax-theme') */
 }
 
 /* Beige Theme */
