@@ -19,11 +19,15 @@ var filetemplates = {
 				$('#editor .title').html(mtdt.title);
 				$('#editor .body').html(mtdt.body);
 			},
+			'edit': function (mtdt, evnt) {
+				if ($('#editor .title').text() === '') { $('#editor .title').empty() };
+				if ($('#editor .body').text() === '') { $('#editor .body').empty() };
+			},
 			'close': function(mtdt) {}
 		},
 		'metadata': {
-			'title': 'Title',
-			'body': 'Type some text here...'
+			'title': '',
+			'body': ''
 		}
 	},
 

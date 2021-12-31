@@ -70,6 +70,12 @@ body {
 	padding: 18px 14px 12px 20px;
 	background-color: var(--theme-bgcolor);
 
+	&:empty::after {
+		content: 'Title';
+		color: var(--theme-iconcolor);
+		cursor: text;
+	}
+
 }
 
 .divider {
@@ -87,6 +93,13 @@ body {
 	min-height: calc(100vh - 230px);
 	overflow: hidden;
 	overflow-wrap: break-word;
+
+	&:empty::after {
+		content: 'Type some text here...';
+		color: var(--theme-iconcolor);
+		cursor: text;
+	}
+
 }
 
 [contenteditable] {	outline: none }
