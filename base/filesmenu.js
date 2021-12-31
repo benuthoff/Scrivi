@@ -14,14 +14,14 @@ var rootpath = {
 	},
 	'folders': {
 		'Examples': {
-			'files': [
-				{
+			'files': {
+				'Test.scv': {
 					'path': 'root\\Examples\\Test.scv',
 					'template': 'simple',
 					'scripts': [],
 					'tags': []
 				}
-			],
+			},
 			'folders': {
 
 			}
@@ -77,22 +77,22 @@ function isValidFileName(str) {
 	return rg.test(str);
 };
 
-function addFileIcon(filedata, fldr=false) {
+function addFileIcon(name, filedata) {
 
 	// If file, use template icon.
 	let icn = 'folder';
-	if (!fldr) { icn = filetemplates[filedata.template].icon };
+	if (!filedata.folder) { icn = filetemplates[filedata.template].icon };
 
 	// Create element.
 	let i = $('<div class="file"></div>');
 	i.append( $('<i data-feather="'+ icn +'"></i>') );
-	i.append( $('<div></div>').text(filedata.name) );
+	i.append( $('<div></div>').text(name) );
 
 	// Event on double click.
-	if (fldr) { // FOLDER Event
+	if (filedata.folder) { // FOLDER Event
 		i.on('dblclick', ()=>{
 			if (!menupath.endsWith('\\')) { menupath+='\\' };
-			menupath += filedata.name;
+			menupath += name;
 			drives[menupath.split('\\')[0]].render();
 		});
 

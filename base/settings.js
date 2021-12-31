@@ -25,7 +25,7 @@ var settingfunctions = {
 	'sidebar_autoHide': () => {
 		// Change the value and add the hiding css class.
 		$('#sidebar_autoHide').attr('value', usersettings.sidebar_autoHide);
-		$('#sidebar').attr('autohide', usersettings.sidebar_autoHide);
+		$('#sideleft').attr('autohide', usersettings.sidebar_autoHide);
 	},
 
 	'authorname': () => {
@@ -101,8 +101,8 @@ function settingsMenuSetup() {
 
 	// Apply Event to UI Inputs
 	$('.settingspage .checkform').on('click', toggleCheckbox);
-	$('.settingspage .textin input').on('blur', settingsTextin);
-	$('.settingspage .textin select').on('change', settingsTextin);
+	$('.settingspage .xinput input').on('blur', settingsXInput);
+	$('.settingspage .xinput select').on('change', settingsXInput);
 	
 };
 
