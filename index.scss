@@ -631,14 +631,15 @@ body {
 	border-radius: 8px;
 	font-family: 'Nunito', sans-serif;
 	display: grid;
-	grid-template-columns: [side] 280px [main] auto;
+	grid-template-columns: [side] 260px [main] auto;
+
+	column-gap: 14px;
 
 	#side { // Drive List
 
 		background-color: var(--theme-fileside);
-		border-radius: 8px 0 0 8px;
+		border-radius: 8px;
 		border: solid 2px var(--theme-fileborder);
-		border-right: none;
 		cursor: default;
 
 		h1 {
@@ -679,7 +680,7 @@ body {
 	#main {
 		background-color: var(--theme-filebg);
 		border: solid 2px var(--theme-fileborder);
-		border-radius: 0 8px 8px 0;
+		border-radius: 8px;
 	}
 
 	#pathbar {
@@ -744,9 +745,7 @@ body {
 
 	}
 
-	#fileview.list {
-
-	}
+	//#fileview.list {}
 
 }
 
