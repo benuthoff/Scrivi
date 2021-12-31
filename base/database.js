@@ -33,7 +33,9 @@ dbrequest.onupgradeneeded = function(event) {
 dbrequest.onerror = ()=>{ createNotif('Error Creating ScriviDB.', {icon: 'alert-triangle', color: 'var(--theme-notiferror'}) };
 dbrequest.onsuccess = function(event) {
 
-	createNotif('ScriviDB Loaded.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
+	setTimeout(()=>{
+		createNotif('ScriviDB Loaded.', {icon: 'check', color: 'var(--theme-notifsuccess)'});
+	}, 150);
 	db = event.target.result;
 
 	// Load Settings.

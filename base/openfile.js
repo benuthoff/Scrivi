@@ -2,6 +2,7 @@
 // Ben Uthoff
 
 var filetemplates = {
+
 	'simple': {
 		'displayname': 'Simple', // Display Name
 		'icon': 'file-text', // Icon used for the template and file.
@@ -25,6 +26,7 @@ var filetemplates = {
 			'body': 'Type some text here...'
 		}
 	},
+
 	'notebook': {
 		'displayname': 'Notebook',
 		'icon': 'book', 
@@ -43,6 +45,7 @@ var filetemplates = {
 		},
 		'metadata': {}
 	},
+	
 	'userdata': {
 		'displayname': false,
 		'icon': 'archive',

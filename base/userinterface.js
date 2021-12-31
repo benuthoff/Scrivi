@@ -68,13 +68,15 @@ function createNotif(text, options) {
 		icon = '<i data-feather="' + options.icon + '"></i>'
 	};
 
-	// Function for dissapearing
-	var blip = (elmnt)=>{
-		$(elmnt).addClass('dying').animate({ opacity: 0, height: '0px', marginTop: 0 }, 200, ()=>{ $(elmnt).remove(); })
+	// Blip for fading out...
+	let blip = (elmnt)=>{
+		$(elmnt).addClass('dying').fadeOut(200,()=>{
+			$('#notifplane .notif').last().remove();
+		});
 	}
 
 	// Create the html element
-	let notif = $('<div class="notif">'+icon+text+'</div>').on('click', (event)=>blip(event.currentTarget));
+	let notif = $('<div class="notif">'+icon+text+'</div>').on('click', (event)=>{blip(event.currentTarget)});
 
 	// Adds the custom color property
 	if (options && options.color) {
@@ -82,11 +84,11 @@ function createNotif(text, options) {
 	};
 
 	// Adds the element to the DOM
-	$('#notifplane').append(notif);
+	$('#notifplane').prepend(notif);
 
 	// Auto-delete after set time
 	setTimeout(function(){
-		blip($('#notifplane .notif:not(.dying)').first())
+		blip($('#notifplane .notif:not(.dying)').last());
 	}, 2000);
 
 	// Initializes Icon
@@ -94,9 +96,8 @@ function createNotif(text, options) {
 
 };
 
-function error(msg) {
-	createNotif(msg, {icon: 'alert-triangle', color: 'var(--theme-notiferror)'})
-};
+function error(msg) { createNotif(msg, {icon: 'alert-triangle', color: 'var(--theme-notiferror)'}) };
+function undercons() { createNotif('Under Construction', {icon: 'alert-triangle'}) };
 
 function toggleCheckbox(event) {
 	let box = $(this);

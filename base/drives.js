@@ -36,7 +36,7 @@ drives['root'] = {
 	},
 
 	'load': (path)=>{ // Runs when a file is loaded from this drive.
-		createNotif('Under Construction', {icon: 'alert-triangle'})
+		undercons();
 	},
 
 	'save': ()=>{ // Runs when a file needs to be saved to this drive.
