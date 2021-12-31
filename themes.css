@@ -48,6 +48,7 @@ body.theme_Dark, [simtheme=dark] {
 	--theme-settingtab: #191b1db3;
 	--theme-settingtabborder: #222628;
 	--theme-settingtabhov: #ffffff05;
+	--theme-settingbody: #9f9f9f;
 
 	--theme-filecolor: #615e5e;
 	--theme-fileside: #191b1d;

@@ -101,7 +101,7 @@ function toggleCheckbox(event) {
 	if (box.hasClass('autoset')) { sttng(box.attr('id'),box.attr('value')) };
 };
 
-function settingsTextin(event) {
+function settingsXInput(event) {
 	let inp = $(this);
 	let val = inp.val();
 	if (inp.hasClass('autoset')) {

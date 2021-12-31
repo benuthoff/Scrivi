@@ -4,7 +4,7 @@
 
 	<title>Scrivi</title>
 	<meta charset='utf-8'>
-	<link rel='stylesheet' href='./index.css'/>
+	<link rel='stylesheet' href='./index.min.css'/>
 	<script src='./external/jquery-3.6.0.min.js'></script>
 
 	<!-- Themes -->
@@ -32,9 +32,8 @@
 </head>
 <body class='theme_Dark'>
 	
-	<!-- Side Buttons -->
-	<div id='sidebar'>
-
+	<!-- Side Bar -->
+	<div class='sidebar' id='sideleft'>
 		<div onclick='newFile()'>
 			<i data-feather='plus'></i>
 		</div>
@@ -47,9 +46,10 @@
 		<div onclick='toggleSettings()'>
 			<i data-feather='sliders'></i>
 		</div>
-
 		<script>feather.replace({'stroke-width': 2, 'width': 44, 'height': 44, 'class': 'icon'});</script>
 	</div>
+	
+	<div class='sidebar' id='sideright'></div>
 
 
 	<!-- Main Editor -->
@@ -94,12 +94,6 @@
 				<div tabid='appearance' onclick='openSettingsTab("appearance")'>
 					<i data-feather='droplet'></i> Appearance
 				</div>
-				<div tabid='sidebar' onclick='openSettingsTab("sidebar")'>
-					<i data-feather='sidebar'></i> Sidebar
-				</div>
-				<div tabid='templates' onclick='openSettingsTab("templates")'>
-					<i data-feather='anchor'></i> Templates
-				</div>
 				<div tabid='keyboard' onclick='openSettingsTab("keyboard")'>
 					<i data-feather='command'></i> Keyboard
 				</div>
@@ -114,18 +108,26 @@
 				<div id='settings_basic' class='settingspage'>
 
 					<h1>Basic</h1>
+
 					<h2><i data-feather='corner-down-right'></i> Application</h2>
-					<div class='textin'>
+					<div class='xinput'>
 						<div class='label'>Author Name: </div>
 						<input type='text' value='Anonymous' class='autoset' id='authorname'/>
 					</div>
-					<div class='textin'>
+					<div class='xinput'>
 						<div class='label'>Start-up Action: </div>
 						<select id='startup' value='newfile' class='autoset'>
 							<option value='newfile'>New File</option>
 							<option value='templates'>Select Template</option>
 						</select>
 					</div>
+
+					<h2><i data-feather='corner-down-right'></i> Sidebar</h2>
+					<div class='checkform autoset' value='false' id='sidebar_autoHide'>
+						<div class='box'><i data-feather='check'></i></div>
+						<div class='label'>Auto-Hide</div>
+					</div>
+					<div class='button'><i data-feather='tool'></i> Configure</div>
 
 					<h2><i data-feather='corner-down-right'></i> Developer Tools</h2>
 					<div class='checkform autoset' value='false' id='devtools_userdata'>
@@ -172,18 +174,6 @@
 
 					</div>
 
-				</div>
-				<div id='settings_sidebar' class='settingspage'>
-					<h1>Sidebar</h1>
-
-					<div class='checkform autoset' value='false' id='sidebar_autoHide'>
-						<div class='box'><i data-feather='check'></i></div>
-						<div class='label'>Auto-Hide</div>
-					</div>
-
-				</div>
-				<div id='settings_templates' class='settingspage'>
-					<h1>Templates</h1>
 				</div>
 				<div id='settings_keyboard' class='settingspage'>
 					<h1>Keyboard</h1>

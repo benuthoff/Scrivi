@@ -21,12 +21,13 @@ drives['root'] = {
 		let c = parsePath(menupath);
 		if (c) { // If path exists.
 			let ak = Object.keys(c.folders);
+			
 			ak.forEach((i)=>{ // Add folders...
-				addFileIcon({ 'name': i	}, fldr=true);
+				addFileIcon(i, {'folder': true});
 			});
 			let bk = Object.keys(c.files);
 			bk.forEach((i)=>{ // Add files...
-				addFileIcon(c.files[i]);
+				addFileIcon(i, c.files[i]);
 			});
 		} else { // If path doesnt exist.
 
@@ -62,9 +63,8 @@ drives['userdata'] = {
 			// For every userdata file, add an icon.
 			$('#fileview').empty();
 			req.result.forEach((datapoint)=>{
-				addFileIcon({
+				addFileIcon(datapoint, {
 					'path': 'userdata\\'+datapoint,
-					'name': datapoint,
 					'template': 'userdata',
 					'author': 'Scrivi',
 					'scripts': [],
