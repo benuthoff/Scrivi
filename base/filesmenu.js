@@ -4,29 +4,15 @@
 var menupath = 'root\\';
 var rootpath = {
 	'files': {
-		'reminder.scv': {
-			'path': 'root\\reminder.scv',
+		'default.scv': {
+			'path': 'root\\default.scv',
 			'template': 'simple',
 			'author': 'testuser',
 			'scripts': [],
 			'tags': []
 		}
 	},
-	'folders': {
-		'Examples': {
-			'files': {
-				'Test.scv': {
-					'path': 'root\\Examples\\Test.scv',
-					'template': 'simple',
-					'scripts': [],
-					'tags': []
-				}
-			},
-			'folders': {
-
-			}
-		}
-	}
+	'folders': {}
 };
 
 function toggleFilesMenu() {

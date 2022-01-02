@@ -18,7 +18,7 @@ dbrequest.onupgradeneeded = function(event) {
 	db = event.target.result;
 
 	// Create the Note Storage
-	var nstore = db.createObjectStore('notes', { keyPath: 'path'});
+	var nstore = db.createObjectStore('root', { keyPath: 'path'});
 	nstore.createIndex('author', 'author', { unique: false })
 	nstore.createIndex('metadata', 'metadata', { unique: false });
 	nstore.createIndex('template', 'template', { unique: false });

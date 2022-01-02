@@ -16,8 +16,19 @@ var filetemplates = {
 				return mtdt;
 			},
 			'load': function(mtdt) {
+				// Set values.
 				$('#editor .title').html(mtdt.title);
 				$('#editor .body').html(mtdt.body);
+				// Set TAB event.
+				$('#editor .body').keydown((evnt)=>{ 
+					if (evnt.key === 'Tab' && !evnt.shiftKey) {
+						evnt.preventDefault();
+						insertNode(
+							$('#editor .body')[0], // Inserts in the body element.
+							$('<wtab contenteditable="false">&nbsp;</wtab>')[0] // Adds an indentation
+						);
+					};
+				});
 			},
 			'edit': function (mtdt, evnt) {
 				if ($('#editor .title').text() === '') { $('#editor .title').empty() };
@@ -63,12 +74,8 @@ var filetemplates = {
 			'load': function(mtdt) {
 				$('#editor .body').text(mtdt.value);
 			},
-			'edit': function (mtdt, evnt) {
-
-			},
-			'close': function(mtdt) {
-				
-			}
+			'edit': function (mtdt, evnt) {},
+			'close': function(mtdt) {}
 		},
 		'metadata': {
 			'value': '',
@@ -208,5 +215,32 @@ function saveFile() {
 };
 
 function saveFileAs() {
+
+	
+
+};
+
+// Inserts text at the cursor/caret.
+function insertNode(element, node) {
+
+	// Gets the selection.
+	let sel = window.getSelection().getRangeAt(0);
+	/* console.log(sel); */
+
+	// Format the node into text node if required.
+	if (typeof node === 'string') {
+		document.createTextNode('<b>'+text+'</b>');
+	};
+
+	// Erases selection and adds node.
+	sel.deleteContents();
+	sel.insertNode(node);
+
+	// Gets the selection again and moves to the end of the inserted text.
+	sel = window.getSelection().getRangeAt(0);
+	sel.setStart( sel.endContainer, sel.endOffset );
+
+	// Merges the text nodes together.
+	element.normalize();
 
 };

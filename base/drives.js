@@ -36,10 +36,30 @@ drives['root'] = {
 	},
 
 	'load': (path)=>{ // Runs when a file is loaded from this drive.
-		undercons();
+
+		// Request the file
+		let setstore = db.transaction(['root']).objectStore('root');
+		let req = setstore.get(path);
+		req.onerror = (event)=>{ error('Error loading '+f+'!') };
+		req.onsuccess = (event)=>{
+			if (req.result) { // Open the file.
+				openFile(req.result);
+				if ($('#filesmenu_blind').hasClass('visible')) {
+					toggleFilesMenu();
+				};
+			} else { // If there is no result, error.
+				error('File not found.');
+			};
+		};
+
 	},
 
-	'save': ()=>{ // Runs when a file needs to be saved to this drive.
+	'save': (file)=>{ // Runs when a file needs to be saved to this drive.
+
+		let req = db.transaction(['root'], 'readwrite')
+		.objectStore('root').put(file);
+		req.onerror = ()=>{ error('Error saving '+label+'.') };
+		req.onsuccess = ()=>{ createNotif('File Saved!', {icon: 'check', color: 'var(--theme-notifsuccess)'}) };
 
 	}
 

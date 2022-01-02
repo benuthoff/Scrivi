@@ -28,7 +28,7 @@ body {
 	}
 
 	// Wider Centro used by Editor.
-	&.wide_editor { grid-template-columns: auto [sinistra] 160px auto [centro] 800px auto [destra] 160px auto }
+	&.wide_editor { grid-template-columns: auto [sinistra] 160px auto [centro] 860px auto [destra] 160px auto }
 
 }
 
@@ -109,6 +109,12 @@ body {
 .icon {
 	color: var(--theme-iconcolor);
 	stroke-width: 1.5px;
+}
+
+wtab {
+	display: inline-block;
+	width: 40px;
+	text-align: right;
 }
 
 .blind {
@@ -336,8 +342,8 @@ body {
 		}
 
 		.icon {
-			width: 48px; height: 48px;
-			margin-right: 24px;
+			width: 36px; height: 36px;
+			margin-right: 16px;
 		}
 
 		&:hover, &:active {
@@ -645,8 +651,7 @@ body {
 	font-family: 'Nunito', sans-serif;
 	display: grid;
 	grid-template-columns: [side] 260px [main] auto;
-
-	column-gap: 14px;
+	gap: 14px;
 
 	#side { // Drive List
 
@@ -759,6 +764,66 @@ body {
 	}
 
 	//#fileview.list {}
+
+	&.saving {
+		grid-template-rows: auto min-content;
+		#side {
+			grid-row-start: 1;
+			grid-row-end: 3;
+		}
+		#saveform { display: grid }
+		#dvsel, #fvsel { display: none }
+	}
+
+	#saveform {
+
+		display: none;
+		background-color: var(--theme-fileside);
+		border: solid 2px var(--theme-fileborder);
+		border-radius: 8px;
+		grid-column: 2; grid-row: 2;
+		padding: 24px;
+
+		grid-template-columns: auto auto;
+		grid-template-rows: auto auto;
+		gap: 14px;
+
+		.namein {
+
+			grid-row: 1;
+			grid-column-start: 1;
+			grid-column-end: 3;
+
+			display: grid;
+			grid-template-columns: [input] auto [ext] 52px;
+			border: solid 2px var(--theme-dialogborder);
+			border-radius: 8px;
+
+		}
+
+		input {
+			padding: 12px 24px;
+			background-color: transparent;
+			border: none; outline: none;
+			color: var(--theme-bodycolor);
+			font-family: inherit;
+			font-size: 20px;
+		}
+
+		.ext {
+			display: inline-block;
+			font-size: 20px;
+			color: var(--theme-iconcolor);
+			line-height: 48px;
+			margin-top: 1px;
+		}
+
+		.b {
+			@extend %button;
+			font-size: 16px;
+		}
+
+	}
 
 }
 

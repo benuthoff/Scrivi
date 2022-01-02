@@ -133,7 +133,7 @@
 						<div class='box'><i data-feather='check'></i></div>
 						<div class='label'>Auto-Hide</div>
 					</div>
-					<div class='button'><i data-feather='tool'></i> Configure</div>
+					<div class='button' onclick='undercons();'><i data-feather='tool'></i> Configure</div>
 
 					<h2><i data-feather='corner-down-right'></i> Developer Tools</h2>
 					<div class='checkform autoset' value='false' id='devtools_userdata'>
@@ -235,6 +235,10 @@
 					<i data-feather='hard-drive'></i><div contenteditable spellcheck='false'>//</div>
 				</div>
 
+				<div id='funcbar'>
+
+				</div>
+
 				<div id='fileview' class='gallery'> <!-- Or .list -->
 
 					<div class='file'>
@@ -247,11 +251,20 @@
 
 				</div>
 
-				<div id='saveform'>
-
-				</div>
-
 			</div>
+
+
+
+			<div id='saveform'>
+				<div class='namein'>
+					<input type='text' placeholder='filename'/>
+					<div class='ext'>.scv</div>
+				</div>
+				<div class='b'>Save</div>
+				<div class='b'>Cancel</div>
+			</div>
+
+
 		</div>
 	</div>
 
