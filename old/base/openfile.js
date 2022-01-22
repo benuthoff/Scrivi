@@ -120,7 +120,7 @@ function newFile(templatename) {
 	} else {
 
 		openFile({
-			'path': 'root\\default.scv', //false,
+			'path': false,
 			'metadata': Object.assign({}, filetemplates[templatename].metadata),
 			'template': templatename,
 			'author': usersettings.authorname,
@@ -195,17 +195,17 @@ function saveFile() {
 		// Update the file's metadata.
 		currentfile.metadata = filetemplates[currentfile.template].scripts.save(currentfile.metadata);
 
-		// Clear changes.
-		unsavedchanges = false;
-
 		// If the current file has a path to save to
 		if (currentfile.path) {
 
+			// Clear changes.
+			unsavedchanges = false;
+			// Save to corresponding drive.
 			drives[currentfile.path.split('\\')[0]].save(currentfile);
 
 		// If the current file has DOESNT have a path yet.
 		} else {
-
+			saveFileAs();
 		};
 
 	} else if (currentfile && !unsavedchanges) {
@@ -215,6 +215,10 @@ function saveFile() {
 };
 
 function saveFileAs() {
+
+	toggleFilesMenu();
+	$('#savefilenamein').val('');
+	$('#filesmenu').addClass('saving');
 
 	
 

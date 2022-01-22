@@ -15,7 +15,7 @@ drives['root'] = {
 		$('#pathbar div').text('\\' + menupath.slice(4));
 
 		// Empty the fileview.
-		$('#fileview').empty();
+		$('#fileview').empty().css('opacity', 0);
 
 		// Begin rendering.
 		let c = parsePath(menupath);
@@ -33,6 +33,9 @@ drives['root'] = {
 
 		};
 
+		// Animate in fileview.
+		$('#fileview').animate({ opacity: 1 }, 200);
+
 	},
 
 	'load': (path)=>{ // Runs when a file is loaded from this drive.
@@ -44,9 +47,7 @@ drives['root'] = {
 		req.onsuccess = (event)=>{
 			if (req.result) { // Open the file.
 				openFile(req.result);
-				if ($('#filesmenu_blind').hasClass('visible')) {
-					toggleFilesMenu();
-				};
+				$('#filesmenu_blind').removeClass('visible');
 			} else { // If there is no result, error.
 				error('File not found.');
 			};
@@ -81,7 +82,7 @@ drives['userdata'] = {
 		req.onsuccess = (event)=>{
 
 			// For every userdata file, add an icon.
-			$('#fileview').empty();
+			$('#fileview').empty().css('opacity', 0);
 			req.result.forEach((datapoint)=>{
 				addFileIcon(datapoint, {
 					'path': 'userdata\\'+datapoint,
@@ -90,7 +91,10 @@ drives['userdata'] = {
 					'scripts': [],
 					'tags': []
 				});
-			})
+			});
+
+			// Animate in fileview.
+			$('#fileview').animate({ opacity: 1 }, 240, 'linear');
 
 		};
 	},

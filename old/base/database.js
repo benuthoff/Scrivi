@@ -57,7 +57,7 @@ dbrequest.onsuccess = function(event) {
 	// Load Path for ROOT drive.
 	loadDataPoint('rootpath', (value)=>{
 		rootpath=value;
-		drives["root"].render();
+		drives['root'].render();
 	}, dflt=rootpath);
 
 };

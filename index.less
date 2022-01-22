@@ -1,0 +1,156 @@
+/* SCRIVI STYLING */
+/* by Ben Uthoff */
+
+body {
+
+	--bg-color: #25282a;
+	--border-color: #474b4f;
+	--hover-color: #212426;
+	
+	--dialog-border: #353739;
+	--blind-color: #00000073;
+
+	--title-color: #c5ccd9;
+	--body-color: #c5c5c5;
+	--icon-color: #737373;
+
+	--setting-tabs: #191b1db3;
+	--setting-tabs-border: #222628;
+	--setting-tabs-hover: #ffffff05;
+	--setting-text-color: #9f9f9f;
+
+	background-color: var(--bg-color);
+	font-family: 'Courier New', monospace;
+
+	overflow: hidden;
+
+	width: 100vw; height: 100vh;
+	margin: 0;
+
+}
+
+#scriviapp {
+
+	display: grid;
+	grid-template-columns: auto [sinistra] 160px auto [centro] 650px auto [destra] 160px auto;
+	grid-template-rows: 50px [main] auto 50px;
+
+	width: 100vw; height: 100vh;
+	margin: 0;
+
+	// Used by the User Interface like Dialogs, blurs menus.
+	&.ui_blur {
+		.sidebar, #editor, #settings, #filesmenu { filter: blur(2px) }
+	}
+
+	// Used by menus.
+	&.menu_blur {
+		.sidebar, #editor { filter: blur(2px) }
+	}
+
+}
+
+.icon {
+	stroke-width: 1.5px;
+	user-select: none;
+	color: var(--icon-color);
+}
+
+.topbound { // Sticks this to the top of the editor.
+	position: sticky;
+	top: 0;
+}
+
+.divider { // Creates a line to divide content.
+	height: 20px;
+	border-top: solid 1px var(--border-color);
+	margin: 0 14px;
+	background-image: linear-gradient( to bottom, var(--bg-color), transparent);
+}
+
+.sidebar {
+
+	grid-row: main;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	div { // Sidebar Button
+		width: 72px;
+		height: 72px;
+		border: solid 2px var(--border-color);
+		margin: 10px;
+		border-radius: 2px;
+	
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	
+		cursor: pointer;
+
+		&:hover, &:active {
+			background-color: var(--hover-color);
+		}
+
+	}
+
+	&[autohide='true'] {
+		opacity: 0;
+		transition: 0.15s;
+		&:hover { opacity: 1 }
+	}
+
+	&[side=left]  { grid-column: sinistra }
+	&[side=right] {  grid-column: destra  }
+
+}
+
+#editor {
+
+	grid-row: main; grid-column: centro;
+	border: solid 2px var(--border-color);
+	border-radius: 4px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: relative;
+	scrollbar-width: thin;
+
+}
+
+.blind { // Used as the back to menus
+
+	background-color: var(--blind-color);
+	position: fixed;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
+	z-index: 990;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	animation: fadeIn .1s;
+
+	.net { // Catches input between the blind and menu.
+		z-index: 901;
+		position: fixed;
+		top: 0; bottom: 0;
+		left: 0; right: 0;
+	}
+
+}
+
+@import './style/userinterface.less';
+@import './style/settings.less';
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

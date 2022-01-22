@@ -18,6 +18,9 @@ var rootpath = {
 function toggleFilesMenu() {
 	$('#filesmenu_blind').toggleClass('visible');
 	$('body').toggleClass('menu_blur');
+	if (!$('#filesmenu_blind').hasClass('visible')) {
+		$('#filesmenu').removeClass('saving');
+	};
 };
 
 function parsePath(path) { // Algorithm used for rendering under the root directory.
@@ -84,7 +87,11 @@ function addFileIcon(name, filedata) {
 
 	} else { // FILE Event
 		i.on('dblclick', ()=>{
-			loadFile(filedata.path);
+			if ($('#filesmenu').hasClass('saving')) {
+
+			} else {
+				loadFile(filedata.path);
+			};
 		});
 	};
 

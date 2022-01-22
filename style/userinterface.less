@@ -1,0 +1,49 @@
+#notifs {
+
+	position: fixed;
+	top: 0; right: 0;
+	z-index: 999;
+	margin: 24px 42px 0 0;
+
+	.notif {
+
+		min-width: 320px;
+		height: 24px;
+		margin-bottom: 24px;
+		padding: 14px 24px;
+	
+		font-size: 20px;
+		color: var(--body-color);
+		background-color: var(--bg-color);
+		border: solid 2px var(--dialog-border);
+		border-radius: 8px;
+		user-select: none;
+	
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	
+		box-shadow: #00000042 0 4px 6px;
+		animation: notifPopin 0.3s;
+
+		.icon { margin-right: 14px }
+
+	}
+
+}
+
+@keyframes notifPopin {
+	from {
+		height: 0;
+		padding: 0;
+		opacity: 0;
+		font-size: 12px;
+		margin-bottom: 0;
+	}
+	to {
+		height: 24px;
+		opacity: 1;
+		padding: 14px 24px;
+		margin-bottom: 24px;
+	}
+}
