@@ -11,39 +11,67 @@ var Scrivi = new Vue({
 
 	data: {
 
-		client: 'web',
+		client: 'web', // The Current Client, Web or Desktop
 
-		settings: {
-			autohide: false
+		currentfile: {},
+
+		dialog: {
+			visible: false,
 		},
 
-		authorname: 'Anonymous',
+		settings: { // Attributes saved to usersettings
+			sidebar_autohide: false,
+			authorname: 'Anonymous'
+		},
 
-		settingspage: 'Basic',
-		settingstabs: false,
+		filetemplates: [],
 
-		ui: {
+		settingspage: 'Basic', // The current settings page open
+		settingstabs: [ // Outlines Tabs in Settings menu
+			{
+				name: 'Basic',
+				icon: 'settings'
+			},
+			{
+				name: 'Appearance',
+				icon: 'droplet'
+			},
+			{
+				name: 'Keyboard',
+				icon: 'command'
+			},
+			{
+				name: 'Addons',
+				icon: 'package'
+			},
+			{
+				name: 'Credits',
+				icon: 'info'
+			}
+		],
+
+		ui: { // Holds which UI menus + features are active
 			menublur: false,
 			uiblur: false,
 			settingsmenu: false,
 		},
 
-		sidebar: {
+		sidebar: { // Used to render the app's sidebar(s)
 			left: [
 				{
 					'icon': 'plus',
 					'name': 'New File',
-					'action': ()=>{ Scrivi.notif('New File') }
+					'action': ()=>{ Scrivi.notif('New File', {icon: 'plus'}) }
 				},
 				{
 					'icon': 'save',
 					'name': 'Save File',
-					'action': ()=>{ Scrivi.notif('Save File') }
+					'action': ()=>{ Scrivi.notif('Save File', {icon: 'save'}) }
 				},
 				{
 					'icon': 'folder',
 					'name': 'Files',
-					'action': ()=>{ Scrivi.notif('Files') }
+					'action': ()=>{ Scrivi.notif('Files', {icon: 'folder'}) }
 				},
 				{
 					'icon': 'sliders',
@@ -67,15 +95,28 @@ var Scrivi = new Vue({
 		toggleSettings() {
 			Scrivi.ui.menublur = !Scrivi.ui.menublur;
 			Scrivi.ui.settingsmenu = !Scrivi.ui.settingsmenu;
-			if (Scrivi.ui.settingsmenu) { this.renderSettings() };
-		},
-
-		renderSettings() {
-			
 		},
 
 		openSettingsTab(tab) {
 			Scrivi.settingspage = tab.name;
+		},
+
+		createFileTemplate(options) {
+
+			// Options: {}
+			// .name = String
+			// .html = String (HTML)
+			// .icon = String
+
+			/*Scrivi.component(options.name, {
+				template: options.html
+			});*/
+
+			/*Scrivi.filetemplates.append({
+				name: options.name,
+				icon: options.icon
+			});*/
+
 		},
 
 		notif(text, options) { // NOTIFICATIONS
@@ -116,10 +157,38 @@ var Scrivi = new Vue({
 	},
 
 	components: {
+
 		'subheader': {
 			template: `<h2><i data-feather='corner-down-right' width='28px' height='28px'></i> {{ text }}</h2>`,
 			props: ['text']
-		}
-	}
+		},
 
+		'xinput': {
+			template: `<div class='xinput'>
+				<div class='label'>{{ label }} </div>
+				<input :type='type' :value='value' @input='update'/>
+			</div>`,
+			props: ['label', 'value', 'type'],
+			methods: {
+				update(event) {
+					this.$emit('input', event.target.value)
+				}
+			}
+		},
+
+		'check-form': {
+			template: `<div class='xinput' @click='toggle'>
+				<div class='box' :value='value'><i data-feather='check'></i></div>
+				<div class='label'>{{ label }} </div>
+			</div>`,
+			props: ['label', 'value'],
+			methods: {
+				toggle(event) {
+					this.value = !this.value;
+					this.$emit('input', this.value);
+				}
+			}
+		}
+
+	}
 });

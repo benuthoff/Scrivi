@@ -19,7 +19,7 @@
 
 
 	<!-- Sidebars -->
-	<div class='sidebar' side='left' :autohide='settings.autohide'>
+	<div class='sidebar' side='left' :autohide='settings.sidebar_autohide'>
 		<div v-for='box in sidebar.left' @click='box.action'>
 			<i :data-feather='box.icon' width='44px' height='44px'></i>
 		</div>
@@ -39,7 +39,14 @@
 
 
 	<!-- UI: Notifications -->
-	<div id='notifs'></div>
+	<div id='notifs'>
+		<!-- <transition v-for='n in notifs' name='nope'>
+			<div class='notif' :style='{ borderColor: n.color }'>
+				<i v-if='n.icon' :data-feather='n.icon' width='24px' height='24px'></i> {{ n.text }}
+			</div>
+		</transition> -->
+	</div>
+
 
 	<!-- Settings Menu -->
 	<div id='settings_blind' class='blind' v-if='ui.settingsmenu'>
@@ -64,10 +71,17 @@
 						<h1>Basic</h1>
 						<div class='divider'></div>
 					</div>
+
 					<subheader text='Application'></subheader>
+					<xinput label='Author Name' v-model='settings.authorname' type='text'></xinput>
+
 					<subheader text='Sidebar'></subheader>
+					<check-form label='Auto-Hide' v-model='settings.sidebar_autohide'></check-form>
+
 					<subheader text='Developer Tools'></subheader>
+
 					<subheader text='Reset'></subheader>
+
 				</div>
 
 				<div id='setpage_Appearance' v-show='settingspage === "Appearance"'>
@@ -75,8 +89,11 @@
 						<h1>Appearance</h1>
 						<div class='divider'></div>
 					</div>
+
 					<subheader text='Fonts and Size'></subheader>
+
 					<subheader text='Themes'></subheader>
+
 				</div>
 
 			</div>
@@ -89,13 +106,16 @@
 
 <!-- Base Javascript-->
 <script src='./index.js'></script>
-<script src='./scripts/settings.js'></script>
 <script>
 
 $('.TEMPLATE').remove();
 feather.replace({'class': 'icon'});
 
 </script>
+
+
+<!-- Base File Types -->
+<script src='./filetemplates/Simple.js'></script>
 
 
 </body>

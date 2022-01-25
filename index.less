@@ -141,6 +141,74 @@ body {
 
 }
 
+.xinput {
+
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin: 0 0 14px 44px;
+
+	.label {
+		display: inline-block;
+		font-size: 20px;
+		color: var(--body-color);
+		margin-right: 14px;
+	}
+
+	input, select {
+
+		width: 180px;
+
+		background-color: transparent;
+		color: var(--body-color);
+		border: solid 2px var(--dialog-border);
+		border-radius: 4px;
+
+		transition: 0.1s;
+		font-family: inherit;
+		font-size: 16px;
+
+	}
+
+	input {
+		padding: 4px 6px;
+		&:focus { outline: none; border-color: var(--border-color) }
+	}
+
+	select {
+		padding: 6px 4px;
+		&:hover { background-color: var(--hover-color)	}
+		&:active { border-color: var(--hover-color) }
+	}
+
+	.box {
+
+		display: inline-block;
+		width: 24px; height: 24px;
+		border: solid 2px var(--dialog-border);
+		border-radius: 4px;
+		transition: 0.1s;
+		margin-right: 14px;
+
+		.icon {
+			width: 24px; height: 24px; opacity: 0;
+			color: var(--body-color); transition: 0.1s;
+		}
+
+		&[value='true'] {
+			background-color: var(--setting-tabs) !important;
+			.icon { opacity: 1 }
+		}
+		&:active { border-color: var(--border-color) }
+
+	}
+
+	&:active {
+		.box { border-color: var(--border-color) }
+	}
+
+}
+
 @import './style/userinterface.less';
 @import './style/settings.less';
 
