@@ -18,23 +18,23 @@
 <div id='scriviapp' :class="[{ menu_blur: ui.menublur },{ ui_blur: ui.ui_blur }]">
 
 
-	<!-- Sidebars -->
+	<!-- Sidebar Left -->
 	<div class='sidebar' side='left' :autohide='settings.sidebar_autohide'>
 		<div v-for='box in sidebar.left' @click='box.action'>
 			<i :data-feather='box.icon' width='44px' height='44px'></i>
 		</div>
 	</div>
 
+
+	<!-- Main Content/ Editor -->
+	<div id='editor'></div>
+
+
+	<!-- Sidebar Right -->
 	<div class='sidebar' side='right'>
 		<div v-for='box in sidebar.right' @click='box.action'>
 			<i :data-feather='box.icon' width='44px' height='44px'></i>
 		</div>
-	</div>
-
-
-	<!-- Main Content/ Editor -->
-	<div id='editor'>
-		
 	</div>
 
 

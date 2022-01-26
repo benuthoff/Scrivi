@@ -13,10 +13,8 @@ var Scrivi = new Vue({
 
 		client: 'web', // The Current Client, Web or Desktop
 
-		currentfile: {},
-
-		dialog: {
-			visible: false,
+		currentfile: {
+			editorcomponent: false
 		},
 
 		settings: { // Attributes saved to usersettings
@@ -24,7 +22,8 @@ var Scrivi = new Vue({
 			authorname: 'Anonymous'
 		},
 
-		filetemplates: [],
+		templatelist: [], // List of all templates by order.
+		filetemplates: {}, // Template components by name.
 
 		settingspage: 'Basic', // The current settings page open
 		settingstabs: [ // Outlines Tabs in Settings menu
@@ -61,7 +60,10 @@ var Scrivi = new Vue({
 				{
 					'icon': 'plus',
 					'name': 'New File',
-					'action': ()=>{ Scrivi.notif('New File', {icon: 'plus'}) }
+					'action': ()=>{
+						Scrivi.newFile('Simple');
+						Scrivi.notif('File Created', {icon: 'check', color: 'var(--notif-success)'});
+					}
 				},
 				{
 					'icon': 'save',
@@ -101,21 +103,23 @@ var Scrivi = new Vue({
 			Scrivi.settingspage = tab.name;
 		},
 
-		createFileTemplate(options) {
+		createFileTemplate(input) {
 
-			// Options: {}
+			// Input: {}
 			// .name = String
 			// .html = String (HTML)
 			// .icon = String
 
-			/*Scrivi.component(options.name, {
-				template: options.html
-			});*/
+			Scrivi.templatelist.push({ 'name': input.name, 'icon': input.icon });
+			Scrivi.filetemplates[input.name] = input.component;
 
-			/*Scrivi.filetemplates.append({
-				name: options.name,
-				icon: options.icon
-			});*/
+		},
+
+		newFile(templatename) {
+
+			$('#editor').empty().append( $(`<div id='costruire'></div>`) );
+			Scrivi.currentfile.editorcomponent = new Scrivi.filetemplates[templatename];
+			Scrivi.currentfile.editorcomponent.$mount('#costruire');
 
 		},
 

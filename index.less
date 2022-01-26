@@ -19,6 +19,9 @@ body {
 	--setting-tabs-hover: #ffffff05;
 	--setting-text-color: #9f9f9f;
 
+	--notif-success: #2e642e;
+	--notif-error: #912f4b;
+
 	background-color: var(--bg-color);
 	font-family: 'Courier New', monospace;
 
@@ -115,6 +118,43 @@ body {
 	overflow-y: auto;
 	position: relative;
 	scrollbar-width: thin;
+	
+	.title {
+
+		color: var(--title-color);
+		font-size: 36px;
+		overflow-wrap: break-word;
+		padding: 18px 14px 12px 20px;
+		background-color: var(--bg-color);
+	
+		&:empty::after {
+			content: 'Title';
+			color: var(--icon-color);
+			cursor: text;
+		}
+	
+	}
+	
+	.body {
+		color: var(--body-color);
+		padding: 0 25px 30px 30px;
+		font-size: 20px;
+		text-align: justify;
+		min-height: calc(100vh - 230px);
+		overflow: hidden;
+		overflow-wrap: break-word;
+	
+		&:empty::after {
+			content: 'Type some text here...';
+			color: var(--icon-color);
+			cursor: text;
+		}
+	
+	}
+
+	[contenteditable] {
+		outline: none;
+	}
 
 }
 

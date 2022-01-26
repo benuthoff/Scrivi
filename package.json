@@ -1,10 +1,11 @@
 {
   "name": "scrivi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Writing software.",
   "main": "server.js",
   "scripts": {
-    "server": "npm i && node server.js"
+    "server": "npm i && node server.js",
+    "tauri": "tauri"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/benuthoff/Scrivi#readme",
   "dependencies": {
     "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^0.0.0"
   }
 }
