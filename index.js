@@ -1,5 +1,5 @@
-// Scrivi App
-// Written by Ben Uthoff
+// Scrivi App Index //
+// by Ben Uthoff
 
 var Scrivi = new Vue({
 
@@ -12,18 +12,30 @@ var Scrivi = new Vue({
 	data: {
 
 		client: 'web', // The Current Client, Web or Desktop
+		idbenabled: false, // Checked if IDB is supported.
+		idb: false, // References the IDB.
 
-		currentfile: {
-			editorcomponent: false
+		currentfile: { // The file present in the editor.
+			filepath: false, // Path to the open file.
+			template: false, // Name of the template the file is built from.
+			filedata: {}, // Internal file data.
+			author: false, // Author of the file.
+			metadata: {}, // Holds data like scripts and dates.
+			tags: [] // Used to organize files.
+		},
+		editorcomponent: false, // Component used by the editor.
+
+		rootpath: {}, // 
+
+		filetemplates: {
+			templist: [], // List of all templates by order.
+			components: {} // Template components by name.
 		},
 
 		settings: { // Attributes saved to usersettings
 			sidebar_autohide: false,
 			authorname: 'Anonymous'
 		},
-
-		templatelist: [], // List of all templates by order.
-		filetemplates: {}, // Template components by name.
 
 		settingspage: 'Basic', // The current settings page open
 		settingstabs: [ // Outlines Tabs in Settings menu
@@ -95,8 +107,9 @@ var Scrivi = new Vue({
 		},
 
 		toggleSettings() {
-			Scrivi.ui.menublur = !Scrivi.ui.menublur;
-			Scrivi.ui.settingsmenu = !Scrivi.ui.settingsmenu;
+			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
+			Scrivi.ui.settingsmenu = !Scrivi.ui.settingsmenu; // Toggle menu.
+			Scrivi.saveData('settings');
 		},
 
 		openSettingsTab(tab) {
@@ -105,21 +118,28 @@ var Scrivi = new Vue({
 
 		createFileTemplate(input) {
 
-			// Input: {}
-			// .name = String
-			// .html = String (HTML)
-			// .icon = String
-
-			Scrivi.templatelist.push({ 'name': input.name, 'icon': input.icon });
-			Scrivi.filetemplates[input.name] = input.component;
+			Scrivi.filetemplates.templist.push({
+				'name': input.name, 'icon': input.icon, 'author': input.author
+			});
+			Scrivi.filetemplates.components[input.name] = input.component;
 
 		},
 
 		newFile(templatename) {
 
 			$('#editor').empty().append( $(`<div id='costruire'></div>`) );
-			Scrivi.currentfile.editorcomponent = new Scrivi.filetemplates[templatename];
-			Scrivi.currentfile.editorcomponent.$mount('#costruire');
+
+			Scrivi.currentfile = {
+				filepath: false,
+				template: templatename,
+				filedata: {},
+				author: false,
+				metadata: {},
+				tags: []
+			};
+
+			Scrivi.editorcomponent = new Scrivi.filetemplates.components[templatename];
+			Scrivi.editorcomponent.$mount('#costruire');
 
 		},
 
@@ -156,6 +176,34 @@ var Scrivi = new Vue({
 			// Render Icon
 			feather.replace({'class': 'icon'});
 
+		},
+
+		saveData(label, value, onsuccess) {
+			if (!value) { value = Scrivi[label] };
+			let req = Scrivi.idb.transaction(['appdata'], 'readwrite')
+				.objectStore('appdata').put({'label': label, 'value': value});
+			req.onerror = ()=>{ Scrivi.notif('Error saving '+ label +'.', {'color': 'var(---notif-error)'}) };
+			req.onsuccess = ()=>{
+				if (onsuccess) { onsuccess() };
+				//\/\/\Scrivi.notif('Datapoint Saved', {'icon': 'check', 'color': 'var(--notif-success)'});
+			};
+		},
+
+		loadData(label, onsuccess, defaultset=true) {
+			let setstore = Scrivi.idb.transaction(['appdata']).objectStore('appdata');
+			let req = setstore.get(label);
+			req.onerror = ()=>{ Scrivi.notif('Error loading '+ label +'.', {'color': 'var(---notif-error)'}) };
+			req.onsuccess = ()=>{
+				if (!req.result) { // If no value.
+					Scrivi.notif('No '+ label +' found.', {'color': 'var(---notif-error)'});
+				} else {
+					//\/\/\Scrivi.notif('Datapoint Loaded', {'icon': 'check', 'color': 'var(--notif-success)'});
+					if (onsuccess) { onsuccess(req.result.value) }; // Custom success event.
+					if (defaultset) { // Sets Scrivi property of the same name to the value.
+						Scrivi[label] = req.result.value;
+					};
+				};
+			};
 		}
 
 	},
@@ -196,3 +244,7 @@ var Scrivi = new Vue({
 
 	}
 });
+
+
+// Initialize Icons.
+feather.replace({'class': 'icon'});

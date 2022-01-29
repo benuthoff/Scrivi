@@ -28,7 +28,7 @@
 
 		color: var(--body-color);
 		font-size: 20px;
-		width: 200px;
+		width: 194px;
 		padding: 20px;
 		margin-left: -2px;
 	
@@ -54,7 +54,8 @@
 			border-color: var(--dialog-border);
 			border-right-color: var(--bg-color);
 			transform: translateX(-2px);
-			width: 199.5px;
+			width: 198px;
+			padding-left: 22px;
 		}
 
 		.icon {
@@ -68,13 +69,8 @@
 	#main {
 
 		grid-column: main;
-		padding: 14px 32px;
-		padding-bottom: 48px;
-
 		user-select: none;
-		overflow-x: hidden;
-		overflow-y: auto;
-		scrollbar-width: thin;
+		overflow: hidden;
 
 		background-color: var(--bg-color);
 		border: solid 2px var(--dialog-border);
@@ -82,7 +78,17 @@
 		border-radius: 0 8px 8px 0;
 
 		& > div {
+
 			animation: fadeIn 0.2s;
+			padding: 0 32px;
+			padding-bottom: 40px;
+			height: calc(100vh - 160px);
+
+			overflow-x: hidden;
+			overflow-y: auto;
+			scrollbar-width: thin;
+			scrollbar-color: #1b1c1d #25282a;
+
 		}
 		
 	}
@@ -90,7 +96,8 @@
 	h1 {
 
 		margin: 0;
-		padding-bottom: 8px;
+		padding-top: 14px;
+		padding-bottom: 12px;
 
 		color: var(--title-color);
 		background-color: var(--bg-color);

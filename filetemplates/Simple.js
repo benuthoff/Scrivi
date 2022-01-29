@@ -5,6 +5,7 @@ Scrivi.createFileTemplate({
 
 	name: 'Simple',
 	icon: 'file-text',
+	author: 'Scrivi',
 
 	component: Vue.extend({
 		template: `<div>
@@ -14,6 +15,20 @@ Scrivi.createFileTemplate({
 			</div>
 			<div class='body' contenteditable spellcheck='false'></div>
 		</div>`
-	})
+	}),
+
+	filedata: { // Work In Progress
+		title: '',
+		body: ''
+	},
+
+	events: { // Work In Progress
+
+		onopened: ()=>{},
+		onclosed: ()=>{},
+		onedited: ()=>{},
+		onsaved: ()=>{}
+
+	}
 
 });

@@ -4,7 +4,6 @@
   "description": "Writing software.",
   "main": "server.js",
   "scripts": {
-    "server": "npm i && node server.js",
     "tauri": "tauri"
   },
   "repository": {
@@ -21,6 +20,6 @@
     "express": "^4.17.2"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^0.0.0"
+    "@tauri-apps/cli": "^1.0.0-beta.10"
   }
 }
