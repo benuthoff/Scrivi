@@ -8,7 +8,22 @@
 	<script src='./external/less_4.1.1.js'></script>
 	<script src='./external/jquery-3.6.0.min.js'></script>
 	<script src='./external/vue.min.js'></script>
-	<script src='./external/feather.min.js'></script>	
+	<script src='./external/feather.min.js'></script>
+
+	<meta property="og:title" content="Site Title" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://my.site.com" />
+	<meta property="og:image" content="http://my.site.com/images/thumb.png" />
+	<meta property="og:description" content="Site description" />
+	<meta name="theme-color" content="#FF0000">
+
+	<meta property='og:title' content='Scrivi'/>
+	<meta property='og:type' content='website'/>
+	<meta property='og:url' content='https://benuthoff.github.io/Scrivi/'/>
+	<meta property='og:description' content='Customizable Writing Application'/>
+	<meta name='theme-color' content='#474b4f'/>
+	<meta property='og:image' 
+	content='https://user-images.githubusercontent.com/81537940/151081933-24722e78-9985-4d07-8add-e884c9bb34e2.png'/>
 
 </head>
 <body>
@@ -49,10 +64,10 @@
 
 			<div id='filenav'>
 				<h1>Files</h1>
-				<div @click='filesmenu.page = "home"'>
+				<div @click='filesmenu.page = "home"' :class='{sel: filesmenu.page === "home"}'>
 					<i data-feather='home' width='52px' height='52px'></i>
 				</div>
-				<div @click='filesmenu.page = "lib"'>
+				<div @click='filesmenu.page = "lib"' :class='{sel: filesmenu.page === "lib"}'>
 					<i data-feather='grid' width='52px' height='52px'></i>
 				</div>
 			</div>
@@ -112,6 +127,8 @@
 					<subheader text='Fonts and Size'></subheader>
 
 					<subheader text='Themes'></subheader>
+
+					<subheader text='Custom CSS'></subheader>
 
 				</div>
 

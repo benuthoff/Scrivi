@@ -40,6 +40,7 @@ request.onupgradeneeded = (event) => {
 	// Store for app metadata such as settings, path variable, templates, etc.
 	var appdata = Scrivi.idb.createObjectStore('appdata', { keyPath: 'label' });
 	appdata.createIndex('value', 'value', { unique: false });
+
 	appdata.add({ label: 'settings', value: Scrivi.settings }); // User Settings
 	appdata.add({ label: 'rootpath', value: Scrivi.rootpath }); // Root Drive Path
 	// appdata.add({ label: 'filetemplates', value: Scrivi.filetemplates }); // Saved file templates

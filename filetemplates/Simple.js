@@ -7,28 +7,28 @@ Scrivi.createFileTemplate({
 	icon: 'file-text',
 	author: 'Scrivi',
 
+	filenamedefault: 'title',
+
 	component: Vue.extend({
 		template: `<div>
 			<div class='topbound'>
-				<div class='title' contenteditable spellcheck='false'></div>
+				<div class='title' contenteditable spellcheck='false' fd_bind='title'></div>
 				<div class='divider'></div>
 			</div>
-			<div class='body' contenteditable spellcheck='false'></div>
+			<div class='body' contenteditable spellcheck='false' fd_bind='body'></div>
 		</div>`
 	}),
 
-	filedata: { // Work In Progress
+	filedata: {
 		title: '',
 		body: ''
 	},
 
-	events: { // Work In Progress
-
-		onopened: ()=>{},
-		onclosed: ()=>{},
-		onedited: ()=>{},
-		onsaved: ()=>{}
-
+	events: {
+		onopened: (file)=>{}, // done
+		onclosed: (file)=>{},
+		onedited: (file)=>{}, // done
+		onsaved: (file)=>{}
 	}
 
 });

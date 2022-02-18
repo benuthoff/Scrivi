@@ -16,7 +16,7 @@ var Scrivi = new Vue({
 		idb: false, // References the IDB.
 
 		currentfile: { // The file present in the editor.
-			filepath: false, // Path to the open file.
+			filepath: false, // Path to the open file. For IDB, is the file's name.
 			template: false, // Name of the template the file is built from.
 			filedata: {}, // Internal file data.
 			author: false, // Author of the file.
@@ -24,14 +24,24 @@ var Scrivi = new Vue({
 			tags: [] // Used to organize files.
 		},
 		editorcomponent: false, // Component used by the editor.
+		unsavedchanges: false, // Whether the current file has unsaved changes.
 
-		rootpath: {}, // 
-
-		filetemplates: {
-			templist: [], // List of all templates by order.
-			components: {}, // Template components by name.
-			startup: 'New File' // Action at program startup.
+		rootpath: { // Used for IDB File Management
+			pinned: [],
+			master: [
+				{ // Sample file pointer for IDB file.
+					// This pointer should be updated every time a file is saved.
+					filepath: 'Testfile',
+					template: 'Simple',
+					author: 'Ben Uthoff',
+					metastats: {}, // Data about file metadata. (i.e. no scripts but # of them)
+					tags: []
+				}
+			]
 		},
+
+		filetemplates: {}, // Data of file templates.
+		templatelist: [], // List of template names in order.
 
 		ui: { // Holds which UI menus + features are active
 			menublur: false,
@@ -86,7 +96,7 @@ var Scrivi = new Vue({
 				{
 					'icon': 'save',
 					'name': 'Save File',
-					'action': ()=>{ Scrivi.notif('Save File', {icon: 'save'}) }
+					'action': ()=>{ Scrivi.saveFile() }
 				},
 				{
 					'icon': 'folder',
@@ -129,30 +139,74 @@ var Scrivi = new Vue({
 		openSettingsTab(tab) { Scrivi.settingspage = tab.name },
 
 		createFileTemplate(input) {
-
-			Scrivi.filetemplates.templist.push({
-				'name': input.name, 'icon': input.icon, 'author': input.author
-			});
-			Scrivi.filetemplates.components[input.name] = input.component;
-
+			Scrivi.filetemplates[input.name] = input;
+			Scrivi.templatelist.push(input.name);
 		},
 
 		newFile(templatename) {
 
 			$('#editor').empty().append( $(`<div id='costruire'></div>`) );
 
+			let t = Scrivi.filetemplates[templatename];
+			let date = new Date().toDateString();
+
 			Scrivi.currentfile = {
 				filepath: false,
 				template: templatename,
-				filedata: {},
-				author: false,
-				metadata: {},
+				filedata: t.filedata,
+				author: Scrivi.settings.authorname,
+				metadata: {
+					scripts: [],
+					dateCreated: date,
+					dateModified: date
+				},
 				tags: []
 			};
+			Scrivi.unsavedchanges = false;
 
-			Scrivi.editorcomponent = new Scrivi.filetemplates.components[templatename];
+			Scrivi.editorcomponent = new t.component;
 			Scrivi.editorcomponent.$mount('#costruire');
 
+			t.events.onopened(Scrivi.currentfile); // Runs opening function.
+			Scrivi.fileDataBind(); // Binds data from the DOM to the file data.
+
+		},
+
+		saveFile() {
+			if (Scrivi.currentfile.filepath) {
+
+			} else {
+				Scrivi.saveFileAs();
+			}
+		},
+
+		saveFileAs() {
+			alert('Save As');
+		},
+
+		openFile() {
+
+		},
+
+		fileDataBind() { // Causes the `filedata` to update when element values are changed.
+			$('#editor [fd_bind]').each((i,e)=>{
+				e.addEventListener('input', ()=>{
+
+					// Update Variables
+					let p = $(e).attr('fd_bind'); // Gets the binded variable.
+					if ($(e).prop('contenteditable')) { // For contenteditable.
+						Scrivi.currentfile.filedata[p] = $(e).html();
+						if ($(e).text() === '') { $(e).html('') };
+					} else { // For input elements.
+						Scrivi.currentfile.filedata[p] = e.value;
+					};
+
+					// Updated app & run event.
+					Scrivi.unsavedchanges = true;
+					Scrivi.filetemplates[Scrivi.currentfile.template].events.onedited(Scrivi.currentfile);
+
+				});
+			});
 		},
 
 		notif(text, options) { // NOTIFICATIONS
@@ -170,7 +224,8 @@ var Scrivi = new Vue({
 			// Blip for fading out...
 
 			// Create the html element
-			let notif = $('<div class="notif">'+icon+text+'</div>').on('click', (event)=>{Scrivi.blip(event.currentTarget)});
+			let notif = $('<div class="notif">'+icon+text+'</div>')
+				.on('click', (event)=>{Scrivi.blip(event.currentTarget)});
 
 			// Adds the custom color property
 			if (options && options.color) {
