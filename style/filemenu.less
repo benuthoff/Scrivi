@@ -20,6 +20,42 @@
 		background-color: var(--files-main);
 		border: solid 2px var(--files-border);
 		border-radius: 8px;
+		padding: 12px 20px 20px 20px;
+
+		display: grid;
+		grid-template-rows: max-content auto;
+		row-gap: 20px;
+
+		h1 {
+			margin: 0;
+			color: var(--files-title);
+			font-size: 42px;
+			border-bottom: solid 1px var(--files-border);
+			padding-bottom: 4px;
+		}
+
+		div {
+
+			color: var(--files-tab);
+			border: solid 2px var(--files-border);
+			border-radius: 8px;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			cursor: pointer;
+			transition: 0.1s;
+
+			.icon {	color: inherit }
+			&:hover {
+				color: var(--files-tab-hov);
+			}
+			&:active {
+				transform: scale(0.96);
+			}
+
+		}
 
 	}
 

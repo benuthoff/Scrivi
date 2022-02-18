@@ -45,6 +45,10 @@ var Scrivi = new Vue({
 			authorname: 'Anonymous'
 		},
 
+		filesmenu: {
+			page: 'home'
+		},
+
 		settingspage: 'Basic', // The current settings page open
 		settingstabs: [ // Outlines Tabs in Settings menu
 			{

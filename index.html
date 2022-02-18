@@ -48,10 +48,24 @@
 		<div id='files'>
 
 			<div id='filenav'>
-
+				<h1>Files</h1>
+				<div @click='filesmenu.page = "home"'>
+					<i data-feather='home' width='52px' height='52px'></i>
+				</div>
+				<div @click='filesmenu.page = "lib"'>
+					<i data-feather='grid' width='52px' height='52px'></i>
+				</div>
 			</div>
+
 			<div id='filemain'>
-	
+
+				<div v-show='filesmenu.page === "home"' id='files_home'>
+					<h1>Home</h1>
+				</div>
+				<div v-show='filesmenu.page === "lib"' id='files_lib'>
+					<h1>Library</h1>
+				</div>
+
 			</div>
 
 		</div>
