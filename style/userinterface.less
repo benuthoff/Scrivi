@@ -32,6 +32,27 @@
 
 }
 
+.button {
+
+	display: inline-flex;
+	align-items: center;
+	padding: 12px 24px;
+
+	font-size: 20px;
+	color: var(--body-color);
+	border: solid 2px var(--dialog-border);
+	border-radius: 6px;
+
+	cursor: pointer;
+	transition: 0.1s;
+
+	.icon { margin: 0 8px 2px -6px }
+
+	&:hover, &:active { background-color: var(--hover-color)	}
+	&:active { border-color: var(--border-color) }
+
+}
+
 @keyframes notifPopin {
 	from {
 		height: 0;

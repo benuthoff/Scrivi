@@ -15,7 +15,7 @@
 
 
 
-<div id='scriviapp' :class="[{ menu_blur: ui.menublur },{ ui_blur: ui.ui_blur }]">
+<div id='scriviapp' :class="[{ menu_blur: ui.menublur },{ ui_blur: ui.uiblur }]">
 
 
 	<!-- Sidebar Left -->
@@ -39,17 +39,27 @@
 
 
 	<!-- UI: Notifications -->
-	<div id='notifs'>
-		<!-- <transition v-for='n in notifs' name='nope'>
-			<div class='notif' :style='{ borderColor: n.color }'>
-				<i v-if='n.icon' :data-feather='n.icon' width='24px' height='24px'></i> {{ n.text }}
+	<div id='notifs'></div>
+
+
+	<!-- Files Menu -->
+	<div class='blind' v-show='ui.filesmenu'>
+		<div class='net' @click='toggleFileMenu'></div>
+		<div id='files'>
+
+			<div id='filenav'>
+
 			</div>
-		</transition> -->
+			<div id='filemain'>
+	
+			</div>
+
+		</div>
 	</div>
 
 
 	<!-- Settings Menu -->
-	<div id='settings_blind' class='blind' v-if='ui.settingsmenu'>
+	<div class='blind' v-if='ui.settingsmenu'>
 		<div class='net' @click='toggleSettings'></div>
 		<div id='settings' class='TEMPLATE'>
 
@@ -59,12 +69,6 @@
 				</div>
 			</div>
 			<div id='main'>
-
-				<!-- <div :id='"setpage_"+tab.name' v-for='tab in settingstabs' v-show='settingspage === tab.name'>
-					<h1>{{ tab.name }}</h1>
-					<div class='divider'></div>
-					<div class='settingscategory' v-for='cat in tab.cats'></div>
-				</div> -->
 
 				<div id='setpage_Basic' v-show='settingspage === "Basic"'>
 					<div class='topbound'>
@@ -81,6 +85,7 @@
 					<subheader text='Developer Tools'></subheader>
 
 					<subheader text='Reset'></subheader>
+					<div class='button' onclick='Scrivi.__resetAll()'><i data-feather='trash-2'></i> Erase All</div>
 
 				</div>
 

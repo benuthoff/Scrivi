@@ -23,7 +23,7 @@ request.onsuccess = (event) => {
 	Scrivi.idb.onerror = (e)=>{ console.error('DB Error: '+ e.target.errorCode) };
 
 	// Load Data!
-	Scrivi.loadData('settings');
+	Scrivi.loadData('settings', ()=>{}, updater=true);
 
 };
 request.onupgradeneeded = (event) => {

@@ -29,7 +29,15 @@ var Scrivi = new Vue({
 
 		filetemplates: {
 			templist: [], // List of all templates by order.
-			components: {} // Template components by name.
+			components: {}, // Template components by name.
+			startup: 'New File' // Action at program startup.
+		},
+
+		ui: { // Holds which UI menus + features are active
+			menublur: false,
+			uiblur: false,
+			settingsmenu: false,
+			filesmenu: false
 		},
 
 		settings: { // Attributes saved to usersettings
@@ -61,12 +69,6 @@ var Scrivi = new Vue({
 			}
 		],
 
-		ui: { // Holds which UI menus + features are active
-			menublur: false,
-			uiblur: false,
-			settingsmenu: false,
-		},
-
 		sidebar: { // Used to render the app's sidebar(s)
 			left: [
 				{
@@ -85,7 +87,7 @@ var Scrivi = new Vue({
 				{
 					'icon': 'folder',
 					'name': 'Files',
-					'action': ()=>{ Scrivi.notif('Files', {icon: 'folder'}) }
+					'action': ()=>{ Scrivi.toggleFileMenu() }
 				},
 				{
 					'icon': 'sliders',
@@ -109,12 +111,18 @@ var Scrivi = new Vue({
 		toggleSettings() {
 			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
 			Scrivi.ui.settingsmenu = !Scrivi.ui.settingsmenu; // Toggle menu.
-			Scrivi.saveData('settings');
+			if (!Scrivi.ui.settingsmenu) {
+				Scrivi.saveData('settings');
+				Scrivi.notif('Settings saved.', {icon: 'check', color: 'var(--notif-success)'});
+			};
 		},
 
-		openSettingsTab(tab) {
-			Scrivi.settingspage = tab.name;
+		toggleFileMenu() {
+			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
+			Scrivi.ui.filesmenu = !Scrivi.ui.filesmenu; // Toggle menu.
 		},
+
+		openSettingsTab(tab) { Scrivi.settingspage = tab.name },
 
 		createFileTemplate(input) {
 
@@ -189,21 +197,39 @@ var Scrivi = new Vue({
 			};
 		},
 
-		loadData(label, onsuccess, defaultset=true) {
+		loadData(label, onsuccess, defaultset=true, updater=false) {
 			let setstore = Scrivi.idb.transaction(['appdata']).objectStore('appdata');
 			let req = setstore.get(label);
 			req.onerror = ()=>{ Scrivi.notif('Error loading '+ label +'.', {'color': 'var(---notif-error)'}) };
 			req.onsuccess = ()=>{
 				if (!req.result) { // If no value.
 					Scrivi.notif('No '+ label +' found.', {'color': 'var(---notif-error)'});
-				} else {
+				} else { // If value exists
+
 					//\/\/\Scrivi.notif('Datapoint Loaded', {'icon': 'check', 'color': 'var(--notif-success)'});
 					if (onsuccess) { onsuccess(req.result.value) }; // Custom success event.
 					if (defaultset) { // Sets Scrivi property of the same name to the value.
-						Scrivi[label] = req.result.value;
+						if (updater && typeof req.result.value === 'object') {
+							// This if adds each property to the existent object to account for possibly added values.
+							// Only occurs if the updater peram is true.
+							Object.assign(Scrivi[label], req.result.value);
+						} else {
+							Scrivi[label] = req.result.value;
+						};
 					};
+
+					return req.result.value;
+
 				};
 			};
+		},
+
+		__resetAll() {
+			let request = indexedDB.deleteDatabase('scriviapp');
+			Scrivi.notif('Erasing All Data...', {icon: 'check', color: 'var(--notif-success)'})
+			setTimeout(function(){
+				window.location.href = window.location.href;
+			}, 1000);
 		}
 
 	},
