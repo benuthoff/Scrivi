@@ -26,9 +26,9 @@ var Scrivi = new Vue({
 		editorcomponent: false, // Component used by the editor.
 		unsavedchanges: false, // Whether the current file has unsaved changes.
 
-		rootpath: { // Used for IDB File Management
+		/*rootpath: { // Used for IDB File Management
 			pinned: [],
-			master: [
+			main: [
 				{ // Sample file pointer for IDB file.
 					// This pointer should be updated every time a file is saved.
 					filepath: 'Testfile',
@@ -36,9 +36,47 @@ var Scrivi = new Vue({
 					author: 'Ben Uthoff',
 					metastats: {}, // Data about file metadata. (i.e. no scripts but # of them)
 					tags: []
+				},
+				{
+					filepath: 'Theres an issue with this file...',
+					template: 'error',
+					author: 'Ben Uthoff',
+					metastats: {},
+					tags: []
 				}
 			]
+		},*/
+
+		file: {
+			dbpath: { // Object for IDB file pointers by filepath/ name
+				'%\\Testfile': {
+					name: 'Testfile',
+					template: 'Simple',
+					author: 'Ben Uthoff',
+					metastats: {}, // Data about file metadata. (i.e. no scripts but # of them)
+					tags: []
+				}
+			},
+			dblist: { // List of IDB filepath/ names as well as folders in order.
+				path: '%',
+				folders: {
+					'New Folder': {
+						path: '%\\New Folder',
+						folders: [],
+						files: []
+					}
+				},
+				files: [
+					'%\\Testfile', '%\\Testfile', '%\\Testfile'
+				]
+			},
+			dbstar: [ // Ordered list of filepath/ names of starred/ pinned files
+	
+			]
 		},
+		path: '%', // The location of the user in the file explorer
+		// other examples are %\newfolder , %\otherfolder\furtherfolder
+
 
 		filetemplates: {}, // Data of file templates.
 		templatelist: [], // List of template names in order.
@@ -134,6 +172,21 @@ var Scrivi = new Vue({
 		toggleFileMenu() {
 			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
 			Scrivi.ui.filesmenu = !Scrivi.ui.filesmenu; // Toggle menu.
+		},
+
+		getFileList(pth) { // Gets the file/folder list for a specified directory.
+
+			let x = Scrivi.file.dblist; // Full list of files.
+			let i = pth || Scrivi.path; // Path to specified folder.
+
+			i = i.split('\\') // Splits the path into a list of directories.
+			i.shift(); // Removes the first folder, which is root.
+
+			i.forEach((elm,ind)=>{ // Gets deeper into the directory for each dir.
+				x = x.folders[elm];
+			});
+			return x;
+
 		},
 
 		openSettingsTab(tab) { Scrivi.settingspage = tab.name },
@@ -285,7 +338,7 @@ var Scrivi = new Vue({
 
 		__resetAll() {
 			let request = indexedDB.deleteDatabase('scriviapp');
-			Scrivi.notif('Erasing All Data...', {icon: 'check', color: 'var(--notif-success)'})
+			Scrivi.notif('Erasing All Data...', {icon: 'loader'})
 			setTimeout(function(){
 				window.location.href = window.location.href;
 			}, 1000);

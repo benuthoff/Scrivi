@@ -67,11 +67,26 @@
 
 			<div id='filemain'>
 
-				<div v-show='filesmenu.page === "home"' id='files_home'>
+				<div v-if='filesmenu.page === "home"' id='files_home'>
 					<h1>Home</h1>
 				</div>
-				<div v-show='filesmenu.page === "lib"' id='files_lib'>
+				<div v-if='filesmenu.page === "lib"' id='files_lib'>
 					<h1>Library</h1>
+					<div class='filelist'>
+
+						<!-- <div v-for='fl in rootpath.main'>
+							<i :data-feather='filetemplates[fl.template] ? filetemplates[fl.template].icon : "alert-octagon"' width='32px' height='32px'></i>{{ fl.filepath }}
+						</div> -->
+
+						<div v-for='(fl, fln) in getFileList().folders' class='fold'>
+							<i data-feather='folder' width='32px' height='32px'></i>{{ fln }} <!-- >> {{ fl }} --> 
+						</div>
+
+						<div v-for='fl in getFileList().files' class='file'>
+							<i :data-feather='filetemplates[file.dbpath[fl].template] ? filetemplates[file.dbpath[fl].template].icon : "alert-octagon"' width='32px' height='32px'></i>{{ file.dbpath[fl].name }}
+						</div>
+
+					</div>
 				</div>
 
 			</div>

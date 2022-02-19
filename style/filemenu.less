@@ -8,7 +8,7 @@
 	font-family: 'Nunito', sans-serif;
 
 	display: grid;
-	grid-template-columns: 18vw auto;
+	grid-template-columns: 200px auto;
 	grid-template-rows: auto;
 	gap: 10px;
 	z-index: 902;
@@ -56,7 +56,8 @@
 			}
 
 			&.sel {
-				background-color: var(--files-tab-sel);
+				border-color: var(--files-tab-hov);
+				color: var(--files-title);
 			}
 
 		}
@@ -68,6 +69,29 @@
 		background-color: var(--files-main);
 		border: solid 2px var(--files-border);
 		border-radius: 8px;
+
+		& > div {
+			animation: fadeIn 0.2s;
+		}
+
+		h1 {
+			margin: 12px 30px;
+			border-bottom: solid 1px var(--files-border);
+			padding-bottom: 5px;
+			color: var(--files-title);
+			font-size: 30px;
+			position: sticky;
+		}
+
+		.filelist > div {
+			color: var(--files-tab);
+			display: flex;
+			margin: 6px 30px 12px 42px;
+			font-size: 22px;
+			border-bottom: solid 1px var(--files-border);
+			padding-bottom: 10px;
+			.icon {	margin-right: 14px; margin-top: -2px; }
+		}
 
 	}
 
