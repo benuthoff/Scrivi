@@ -17,8 +17,8 @@
 
 	#filenav {
 		
-		background-color: var(--files-main);
-		border: solid 2px var(--files-border);
+		background-color: var(--bg-color);
+		border: solid 2px var(--dialog-border);
 		border-radius: 8px;
 		padding: 12px 20px 20px 20px;
 
@@ -28,16 +28,16 @@
 
 		h1 {
 			margin: 0;
-			color: var(--files-title);
+			color: var(--body-color);
 			font-size: 42px;
-			border-bottom: solid 1px var(--files-border);
+			border-bottom: solid 1px var(--dialog-border);
 			padding-bottom: 4px;
 		}
 
 		div {
 
-			color: var(--files-tab);
-			border: solid 2px var(--files-border);
+			color: var(--icon-color);
+			border: solid 2px var(--dialog-border);
 			border-radius: 8px;
 
 			display: flex;
@@ -49,15 +49,15 @@
 
 			.icon {	color: inherit }
 			&:hover {
-				color: var(--files-tab-hov);
+				color: var(--files-navhov);
 			}
 			&:active {
 				transform: scale(0.96);
 			}
 
 			&.sel {
-				border-color: var(--files-tab-hov);
-				color: var(--files-title);
+				border-color: var(--files-navhov);
+				color: var(--body-color);
 			}
 
 		}
@@ -66,8 +66,8 @@
 
 	#filemain {
 
-		background-color: var(--files-main);
-		border: solid 2px var(--files-border);
+		background-color: var(--bg-color);
+		border: solid 2px var(--dialog-border);
 		border-radius: 8px;
 
 		& > div {
@@ -76,23 +76,87 @@
 
 		h1 {
 			margin: 12px 30px;
-			border-bottom: solid 1px var(--files-border);
+			border-bottom: solid 1px var(--dialog-border);
 			padding-bottom: 5px;
-			color: var(--files-title);
+			color: var(--body-color);
 			font-size: 30px;
 			position: sticky;
 		}
 
 		.filelist > div {
-			color: var(--files-tab);
+			color: var(--icon-color);
 			display: flex;
 			margin: 6px 30px 12px 42px;
 			font-size: 22px;
-			border-bottom: solid 1px var(--files-border);
+			border-bottom: solid 1px var(--dialog-border);
 			padding-bottom: 10px;
+			cursor: pointer;
+			transition: 0.1s;
+
+			&:hover {
+				color: var(--body-color);
+				.icon.more { opacity: 1 }
+			}
+
 			.icon {	margin-right: 14px; margin-top: -2px; }
+			.icon.more {
+				margin-left: auto;
+				opacity: 0;
+				transition: 0.1s;
+			}
+
 		}
 
+	}
+
+}
+
+#saveas {
+
+	width: 60vw;
+	background-color: var(--bg-color);
+	border: 2px solid var(--border-color);
+	border-radius: 4px;
+	font-family: 'Nunito', sans-serif;
+
+	display: grid;
+	grid-template-rows: 320px min-content;
+	grid-template-columns: auto;
+	row-gap: 14px;
+	padding: 14px;
+
+	#saveas-files {
+
+		background-color: var(--files-inset);
+		border: solid 2px var(--dialog-border);
+		border-radius: 8px;
+
+	}
+	
+	#saveas-name {
+
+		display: grid;
+		grid-template-columns: auto 64px;
+		grid-template-rows: auto;
+		column-gap: 14px;
+		padding: 0 2px;
+	
+		input {
+			border: none; outline: none;
+			background-color: transparent;
+			color: var(--body-color);
+			font-size: 32px;
+			border: solid 2px var(--border-color);
+			border-radius: 6px;
+			padding: 8px 14px;
+			font-family: inherit;
+		}
+	
+		.icon {
+			cursor: pointer;
+			align-self: center;
+			justify-self: center;
+		}
 	}
 
 }

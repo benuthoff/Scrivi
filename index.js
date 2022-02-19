@@ -15,6 +15,14 @@ var Scrivi = new Vue({
 		idbenabled: false, // Checked if IDB is supported.
 		idb: false, // References the IDB.
 
+		ui: { // Holds which UI menus + features are active
+			menublur: false,
+			uiblur: false,
+			settingsmenu: false,
+			filesmenu: false,
+			saveas: false
+		},
+
 		currentfile: { // The file present in the editor.
 			filepath: false, // Path to the open file. For IDB, is the file's name.
 			template: false, // Name of the template the file is built from.
@@ -26,27 +34,7 @@ var Scrivi = new Vue({
 		editorcomponent: false, // Component used by the editor.
 		unsavedchanges: false, // Whether the current file has unsaved changes.
 
-		/*rootpath: { // Used for IDB File Management
-			pinned: [],
-			main: [
-				{ // Sample file pointer for IDB file.
-					// This pointer should be updated every time a file is saved.
-					filepath: 'Testfile',
-					template: 'Simple',
-					author: 'Ben Uthoff',
-					metastats: {}, // Data about file metadata. (i.e. no scripts but # of them)
-					tags: []
-				},
-				{
-					filepath: 'Theres an issue with this file...',
-					template: 'error',
-					author: 'Ben Uthoff',
-					metastats: {},
-					tags: []
-				}
-			]
-		},*/
-
+		// Data on the files menu, including pointers and folder structure, backed up in the IDB.
 		file: {
 			dbpath: { // Object for IDB file pointers by filepath/ name
 				'%\\Testfile': {
@@ -74,27 +62,23 @@ var Scrivi = new Vue({
 	
 			]
 		},
-		path: '%', // The location of the user in the file explorer
-		// other examples are %\newfolder , %\otherfolder\furtherfolder
+
+		
+		filesmenu: { // The UI file menu and properties.
+			page: 'home', // The open page.
+			path: '%', // The location of the user in the file explorer
+			// other examples are %\newfolder , %\otherfolder\furtherfolder
+			saveaspath: '%', // Location of the user in the saveas menu.
+			saveasname: ''
+		},
 
 
 		filetemplates: {}, // Data of file templates.
 		templatelist: [], // List of template names in order.
 
-		ui: { // Holds which UI menus + features are active
-			menublur: false,
-			uiblur: false,
-			settingsmenu: false,
-			filesmenu: false
-		},
-
 		settings: { // Attributes saved to usersettings
 			sidebar_autohide: false,
 			authorname: 'Anonymous'
-		},
-
-		filesmenu: {
-			page: 'home'
 		},
 
 		settingspage: 'Basic', // The current settings page open
@@ -177,7 +161,7 @@ var Scrivi = new Vue({
 		getFileList(pth) { // Gets the file/folder list for a specified directory.
 
 			let x = Scrivi.file.dblist; // Full list of files.
-			let i = pth || Scrivi.path; // Path to specified folder.
+			let i = pth || Scrivi.filesmenu.path; // Path to specified folder.
 
 			i = i.split('\\') // Splits the path into a list of directories.
 			i.shift(); // Removes the first folder, which is root.
@@ -229,12 +213,16 @@ var Scrivi = new Vue({
 			if (Scrivi.currentfile.filepath) {
 
 			} else {
-				Scrivi.saveFileAs();
+				Scrivi.ui.saveas = true; // Show the save-as window.
+				Scrivi.ui.menublur = true;
+				Scrivi.filesmenu.saveaspath = '%'; // Set the save-as explorer path to root.
+				Scrivi.filesmenu.saveasname = ''; // Empty the save-as name input.
 			}
 		},
 
 		saveFileAs() {
-			alert('Save As');
+
+			//Scrivi.ui.saveas = false;
 		},
 
 		openFile() {

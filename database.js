@@ -25,6 +25,9 @@ request.onsuccess = (event) => {
 	// Load Data!
 	Scrivi.loadData('settings', ()=>{}, updater=true);
 
+	// Open empty file.
+	Scrivi.newFile('Simple');
+
 };
 request.onupgradeneeded = (event) => {
 

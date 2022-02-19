@@ -50,6 +50,30 @@
 	<div id='notifs'></div>
 
 
+	<!-- Save-as Naming Prompt -->
+	<div class='blind' v-if='ui.saveas'>
+		<div class='net' @click='ui.saveas = false; ui.menublur = false;'></div>
+		<div id='saveas'>
+
+			<div id='saveas-files'>
+
+				<div id='saveas-pathbar'>
+					<h1>WORK IN PROGRESS -- {{ filesmenu.path }}</h1>
+				</div>
+				<div id='saveas-folders'>
+					<div v-for='(fl, fln) in getFileList().folders'>{{ fln }}</div>
+				</div>
+
+			</div>
+			<div id='saveas-name'>
+				<input type='text' placeholder='File name...' v-model='filesmenu.saveasname'/>
+				<i data-feather='save' @click='saveFileAs' width='52px' height='52px'></i>
+			</div>
+
+		</div>
+	</div>
+
+
 	<!-- Files Menu -->
 	<div class='blind' v-show='ui.filesmenu'>
 		<div class='net' @click='toggleFileMenu'></div>
@@ -84,6 +108,7 @@
 
 						<div v-for='fl in getFileList().files' class='file'>
 							<i :data-feather='filetemplates[file.dbpath[fl].template] ? filetemplates[file.dbpath[fl].template].icon : "alert-octagon"' width='32px' height='32px'></i>{{ file.dbpath[fl].name }}
+							<i data-feather='more-horizontal' class='more' width='32px' height='32px'></i>
 						</div>
 
 					</div>
@@ -114,7 +139,7 @@
 					</div>
 
 					<subheader text='Application'></subheader>
-					<xinput label='Author Name' v-model='settings.authorname' type='text'></xinput>
+					<xinput label='Author Name:' v-model='settings.authorname' type='text'></xinput>
 
 					<subheader text='Sidebar'></subheader>
 					<check-form label='Auto-Hide' v-model='settings.sidebar_autohide'></check-form>
@@ -144,7 +169,6 @@
 
 		</div>
 	</div>
-
 
 </div>
 
