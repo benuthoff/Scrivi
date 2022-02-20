@@ -16,8 +16,8 @@ var Scrivi = new Vue({
 		idb: false, // References the IDB.
 
 		ui: { // Holds which UI menus + features are active
-			menublur: false,
-			uiblur: false,
+			menublur: false, // Blur used by menus like settings + files.
+			uiblur: false, // Blur used by UI like dialog boxes.
 			settingsmenu: false,
 			filesmenu: false,
 			saveas: false
@@ -55,7 +55,7 @@ var Scrivi = new Vue({
 					}
 				},
 				files: [
-					'%\\Testfile', '%\\Testfile', '%\\Testfile'
+					'%\\Testfile'
 				]
 			},
 			dbstar: [ // Ordered list of filepath/ names of starred/ pinned files
@@ -69,7 +69,7 @@ var Scrivi = new Vue({
 			path: '%', // The location of the user in the file explorer
 			// other examples are %\newfolder , %\otherfolder\furtherfolder
 			saveaspath: '%', // Location of the user in the saveas menu.
-			saveasname: ''
+			saveasname: '' // The value of the filename input in the saveas menu. 
 		},
 
 
@@ -83,26 +83,11 @@ var Scrivi = new Vue({
 
 		settingspage: 'Basic', // The current settings page open
 		settingstabs: [ // Outlines Tabs in Settings menu
-			{
-				name: 'Basic',
-				icon: 'settings'
-			},
-			{
-				name: 'Appearance',
-				icon: 'droplet'
-			},
-			{
-				name: 'Keyboard',
-				icon: 'command'
-			},
-			{
-				name: 'Addons',
-				icon: 'package'
-			},
-			{
-				name: 'Credits',
-				icon: 'info'
-			}
+			{ name: 'Basic', icon: 'settings' },
+			{ name: 'Appearance', icon: 'droplet' },
+			{ name: 'Keyboard', icon: 'command' },
+			{ name: 'Addons', icon: 'package' },
+			{ name: 'Credits', icon: 'info' }
 		],
 
 		sidebar: { // Used to render the app's sidebar(s)
@@ -134,7 +119,20 @@ var Scrivi = new Vue({
 			right: [
 				
 			]
+		},
+
+		keyboard: { // ["keycode", Ctrl?, Shift?]
+			cancel: ['Escape', false, false], 
+			filesmenu: ['Escape', false, false],
+			nav_fwrd: ['Tab', false, false],
+			nav_back: ['Tab', false, true],
+			settings: ['`', true, false],
+
+			save: ['s', true, false],
+			saveas: ['s', true, true],
+			newfile: ['n', true, false]
 		}
+
 	},
 	methods: {
 
@@ -156,6 +154,19 @@ var Scrivi = new Vue({
 		toggleFileMenu() {
 			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
 			Scrivi.ui.filesmenu = !Scrivi.ui.filesmenu; // Toggle menu.
+		},
+
+		toggleSaveAsDialog() {
+			if (!Scrivi.ui.saveas) {
+				Scrivi.ui.saveas = true; // Show the save-as window.
+				Scrivi.ui.menublur = true;
+				Scrivi.filesmenu.saveaspath = '%'; // Set the save-as explorer path to root.
+				Scrivi.filesmenu.saveasname = ''; // Empty the save-as name input.
+				setTimeout(()=>{ $('#saveas-name input').focus() }, 10);
+			} else {
+				Scrivi.ui.saveas = false;
+				Scrivi.ui.menublur = false;
+			};
 		},
 
 		getFileList(pth) { // Gets the file/folder list for a specified directory.
@@ -213,23 +224,37 @@ var Scrivi = new Vue({
 			if (Scrivi.currentfile.filepath) {
 
 			} else {
-				Scrivi.ui.saveas = true; // Show the save-as window.
-				Scrivi.ui.menublur = true;
-				Scrivi.filesmenu.saveaspath = '%'; // Set the save-as explorer path to root.
-				Scrivi.filesmenu.saveasname = ''; // Empty the save-as name input.
+				Scrivi.toggleSaveAsDialog();
 			}
 		},
 
 		saveFileAs() {
-
-			//Scrivi.ui.saveas = false;
+			let valid = false; // Check filename validity.
+			
+			if (valid) {
+				Scrivi.toggleSaveAsDialog();
+			} else {
+				
+			};
 		},
 
 		openFile() {
 
 		},
 
-		fileDataBind() { // Causes the `filedata` to update when element values are changed.
+		validFileName(name) {
+			if (name.length > 64) {
+				return [false, 'length'];
+			};
+			// Regular expression used to check whether the filename
+			// contains forbidden characters...
+			if (name.match( /^[\w. \-&()\[\]!]+$/g ) === null) {
+				return [false, 'forbidden'];
+			};
+			return [true, 'valid'];
+		},
+
+		fileDataBind() { // Causes the `filedata` to update when contenteditable text is changed.
 			$('#editor [fd_bind]').each((i,e)=>{
 				e.addEventListener('input', ()=>{
 

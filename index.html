@@ -52,7 +52,7 @@
 
 	<!-- Save-as Naming Prompt -->
 	<div class='blind' v-if='ui.saveas'>
-		<div class='net' @click='ui.saveas = false; ui.menublur = false;'></div>
+		<div class='net' @click='toggleSaveAsDialog'></div>
 		<div id='saveas'>
 
 			<div id='saveas-files'>
@@ -165,6 +165,27 @@
 
 				</div>
 
+				<div id='setpage_Keyboard' v-show='settingspage === "Keyboard"'>
+					<div class='topbound'>
+						<h1>Keyboard</h1>
+						<div class='divider'></div>
+					</div>
+				</div>
+
+				<div id='setpage_Addons' v-show='settingspage === "Addons"'>
+					<div class='topbound'>
+						<h1>Addons</h1>
+						<div class='divider'></div>
+					</div>
+				</div>
+
+				<div id='setpage_Credits' v-show='settingspage === "Credits"'>
+					<div class='topbound'>
+						<h1>Credits</h1>
+						<div class='divider'></div>
+					</div>
+				</div>
+
 			</div>
 
 		</div>
@@ -175,6 +196,7 @@
 <!-- Base Javascript-->
 <script src='./index.js'></script>
 <script src='./database.js'></script>
+<script src='./keyboard.js'></script>
 
 
 <!-- Base File Types -->
