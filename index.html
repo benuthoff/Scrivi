@@ -67,7 +67,9 @@
 			</div>
 			<div id='saveas-name'>
 				<input type='text' placeholder='File name...' v-model='filesmenu.saveasname'/>
-				<i data-feather='save' @click='saveFileAs' width='52px' height='52px'></i>
+				<div @click='saveFileAs'>
+					<i data-feather='save' width='52px' height='52px'></i>
+				</div>
 			</div>
 
 		</div>
@@ -98,15 +100,11 @@
 					<h1>Library</h1>
 					<div class='filelist'>
 
-						<!-- <div v-for='fl in rootpath.main'>
-							<i :data-feather='filetemplates[fl.template] ? filetemplates[fl.template].icon : "alert-octagon"' width='32px' height='32px'></i>{{ fl.filepath }}
-						</div> -->
-
 						<div v-for='(fl, fln) in getFileList().folders' class='fold'>
 							<i data-feather='folder' width='32px' height='32px'></i>{{ fln }} <!-- >> {{ fl }} --> 
 						</div>
 
-						<div v-for='fl in getFileList().files' class='file'>
+						<div v-for='fl in getFileList().files' class='file' v-on:dblclick='openFile(fl)'>
 							<i :data-feather='filetemplates[file.dbpath[fl].template] ? filetemplates[file.dbpath[fl].template].icon : "alert-octagon"' width='32px' height='32px'></i>{{ file.dbpath[fl].name }}
 							<i data-feather='more-horizontal' class='more' width='32px' height='32px'></i>
 						</div>

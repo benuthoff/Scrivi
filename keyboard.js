@@ -11,6 +11,19 @@ document.addEventListener('keydown', function(e) {
 		} else { return false };
 	};
 
+	// Save File
+	if (mapmatch(map.save) && !Scrivi.ui.menublur && !Scrivi.ui.uiblur) {
+		e.preventDefault();
+		Scrivi.saveFile();
+	};
+
+	// Enter
+	if (mapmatch(map.enter)) {
+
+		if (Scrivi.ui.saveas) { Scrivi.saveFileAs() };
+
+	};
+
 	// Cancel/ Exit out of UI
 	if (mapmatch(map.cancel)) {
 
