@@ -97,7 +97,7 @@ var Scrivi = new Vue({
 					'name': 'New File',
 					'action': ()=>{
 						Scrivi.newFile('Simple');
-						Scrivi.notif('File Created', {icon: 'check', color: 'var(--notif-success)'});
+						//Scrivi.notif('File Created', {icon: 'check', color: 'var(--notif-success)'});
 					}
 				},
 				{
@@ -132,9 +132,16 @@ var Scrivi = new Vue({
 
 			save: ['s', true, false],
 			saveas: ['s', true, true],
-			newfile: ['n', true, false],
-		}
+			newfile: ['d', true, false],
+		},
 
+		dialogs: []
+
+	},
+	watch: {
+		dialogs: (next, prev) => {
+			Scrivi.ui.uiblur = (Scrivi.dialogs.length > 0);
+		}
 	},
 	methods: {
 
@@ -193,6 +200,11 @@ var Scrivi = new Vue({
 
 		newFile(templatename) {
 
+			if (Scrivi.unsavedchanges) {
+				Scrivi.saveWarning(Scrivi.newFile, templatename);
+				return;
+			};
+
 			$('#editor').empty().append( $(`<div id='costruire'></div>`) );
 
 			let t = Scrivi.filetemplates[templatename];
@@ -221,7 +233,7 @@ var Scrivi = new Vue({
 
 		},
 
-		saveFile() {
+		saveFile(aftersave = ()=>{}) {
 			if (Scrivi.currentfile.filepath) {
 
 				// Set 'Date Modified'.
@@ -235,6 +247,7 @@ var Scrivi = new Vue({
 				req.onerror = ()=>{ Scrivi.notif('Error saving '+ Scrivi.currentfile.filepath +'.', {'color': 'var(--notif-error)'}) };
 				req.onsuccess = ()=>{
 					Scrivi.notif('File Saved', {'icon': 'check', 'color': 'var(--notif-success)'});
+					aftersave(); // Specific function to run after saving.
 				};
 				
 			} else { Scrivi.toggleSaveAsDialog() }; // If no path, save file as...
@@ -281,6 +294,12 @@ var Scrivi = new Vue({
 		},
 
 		openFile(path) {
+
+			if (Scrivi.unsavedchanges) {
+				Scrivi.saveWarning(Scrivi.openFile, path);
+				return;
+			};
+
 			let setstore = Scrivi.idb.transaction(['rootdrive']).objectStore('rootdrive');
 			let req = setstore.get(path);
 			req.onerror = ()=>{ Scrivi.notif('Unable to load '+ path +'.', {'color': 'var(--notif-error)'}) };
@@ -350,6 +369,27 @@ var Scrivi = new Vue({
 					Scrivi.filetemplates[Scrivi.currentfile.template].events.onedited(Scrivi.currentfile);
 
 				});
+			});
+		},
+
+		saveWarning(func, peram) {
+			Scrivi.dialogs.push({
+				text: 'You have unsaved changes. Continue?',
+				buttons: [
+					['Save and Exit', ()=>{
+						if (Scrivi.currentfile.filepath) {
+							Scrivi.unsavedchanges = false;
+							Scrivi.saveFile(aftersave=()=>{ func(peram) });
+						} else {
+							Scrivi.saveFile();
+						};
+					}, false],
+					['Exit Without Saving', ()=>{
+						Scrivi.unsavedchanges = false;
+						func(peram);
+					}, false],
+					['Cancel', ()=>{}, 'cancel']
+				]
 			});
 		},
 
@@ -469,6 +509,15 @@ var Scrivi = new Vue({
 					this.$emit('input', this.value);
 				}
 			}
+		},
+
+		'theme-svg': {
+			template: `<svg class='prev' width='200px' height='120px' :simtheme='themeid'>\
+				<rect class='rect' x='50' y='20' rx='4' ry='4' width='100' height='80'></rect>\
+				<circle class='circ' cx='30' cy='60' r='4'></circle>\
+				<circle class='circ' cx='30' cy='40' r='4'></circle>\
+				\<circle class='circ' cx='30' cy='80' r='4'></circle></svg>`,
+			props: ['themeid']
 		}
 
 	}

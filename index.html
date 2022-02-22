@@ -26,26 +26,47 @@
 <div id='scriviapp' :class="[{ menu_blur: ui.menublur },{ ui_blur: ui.uiblur }]">
 
 
-	<!-- Sidebar Left -->
-	<div class='sidebar' side='left' :autohide='settings.sidebar_autohide'>
-		<div v-for='box in sidebar.left' @click='box.action'>
-			<i :data-feather='box.icon' width='44px' height='44px'></i>
+	<!-- Fixed Sidebars -->
+	<div id='sidebar_holder'>
+
+		<!-- Sidebar Left -->
+		<div class='sidebar' side='left' :autohide='settings.sidebar_autohide'>
+			<div v-for='box in sidebar.left' @click='box.action'>
+				<i :data-feather='box.icon' width='44px' height='44px'></i>
+			</div>
 		</div>
+
+		
+		<!-- Sidebar Right -->
+		<div class='sidebar' side='right'>
+			<div v-for='box in sidebar.right' @click='box.action'>
+				<i :data-feather='box.icon' width='44px' height='44px'></i>
+			</div>
+		</div>
+
 	</div>
+
 
 
 	<!-- Main Content/ Editor -->
 	<div id='editor'></div>
 
 
-	<!-- Sidebar Right -->
-	<div class='sidebar' side='right'>
-		<div v-for='box in sidebar.right' @click='box.action'>
-			<i :data-feather='box.icon' width='44px' height='44px'></i>
+	<!-- UI: Dialog Boxes -->
+	<div class='blind' v-if='dialogs.length > 0' style='z-index: 999;'>
+		<div id='dialogbox'>
+			<h1>{{ dialogs[0].text }}</h1>
+			<div class='dialogbuttons'>
+
+				<div v-for='btn in dialogs[0].buttons' @click='btn[1](); dialogs.shift();'>
+					{{ btn[0] }}
+				</div>
+
+			</div>
 		</div>
 	</div>
 
-
+	
 	<!-- UI: Notifications -->
 	<div id='notifs'></div>
 
@@ -158,6 +179,7 @@
 					<subheader text='Fonts and Size'></subheader>
 
 					<subheader text='Themes'></subheader>
+
 
 					<subheader text='Custom CSS'></subheader>
 

@@ -28,7 +28,8 @@ body {
 	background-color: var(--bg-color);
 	font-family: 'Courier New', monospace;
 
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: scroll;
 
 	width: 100vw; height: 100vh;
 	margin: 0;
@@ -38,10 +39,10 @@ body {
 #scriviapp {
 
 	display: grid;
-	grid-template-columns: auto [sinistra] 160px auto [centro] 650px auto [destra] 160px auto;
+	grid-template-columns: auto [sinistra] 160px auto [centro] 50vw auto [destra] 160px auto;
 	grid-template-rows: 50px [main] auto 50px;
 
-	width: 100vw; height: 100vh;
+	width: 100vw; min-height: 100vh;
 	margin: 0;
 
 	// Used by the User Interface like Dialogs, blurs menus.
@@ -52,6 +53,18 @@ body {
 	// Used by menus.
 	&.menu_blur {
 		.sidebar, #editor { filter: blur(2px) }
+	}
+
+	#sidebar_holder {
+
+		position: fixed;
+		width: 100vw; min-height: 100vh;
+		margin: 0;
+
+		display: grid;
+		grid-template-columns: inherit;
+		grid-template-rows: 50px [main] auto 50px;
+
 	}
 
 }
@@ -141,7 +154,7 @@ body {
 	.body {
 		color: var(--body-color);
 		padding: 0 25px 30px 30px;
-		font-size: 20px;
+		font-size: 22px;
 		text-align: justify;
 		min-height: calc(100vh - 230px);
 		overflow: hidden;
@@ -165,8 +178,8 @@ body {
 
 	background-color: var(--blind-color);
 	position: fixed;
-	top: 0; bottom: 0;
-	left: 0; right: 0;
+	top: 0; left: 0;
+	width: 100vw; height: 100vh;
 	z-index: 990;
 
 	display: flex;
@@ -255,6 +268,7 @@ body {
 @import './style/userinterface.less';
 @import './style/settings.less';
 @import './style/filemenu.less';
+@import './style/themes.less';
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
 

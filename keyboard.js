@@ -11,6 +11,22 @@ document.addEventListener('keydown', function(e) {
 		} else { return false };
 	};
 
+	// Dialog commands.
+	if (Scrivi.dialogs.length > 0) {
+		let all = Scrivi.dialogs[0].buttons;
+		all.forEach((btn,i) => {
+			if ( btn[2] && mapmatch(map[ btn[2] ]) ) {
+				btn[1](); Scrivi.dialogs.shift();
+			};
+		});
+	};
+
+	// New File
+	if (mapmatch(map.newfile) && !Scrivi.ui.menublur && !Scrivi.ui.uiblur) {
+		e.preventDefault();
+		Scrivi.newFile('Simple');
+	};
+
 	// Save File
 	if (mapmatch(map.save) && !Scrivi.ui.menublur && !Scrivi.ui.uiblur) {
 		e.preventDefault();

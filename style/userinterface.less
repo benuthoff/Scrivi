@@ -32,6 +32,60 @@
 
 }
 
+#dialogbox {
+
+	min-width: 500px;
+	width: 40vw;
+	padding: 32px;
+	z-index: 999;
+
+	cursor: default;
+	user-select: none;
+
+	background-color: var(--bg-color);
+	border: solid 2px var(--dialog-border);
+	border-radius: 8px;
+
+	font-family: 'Nunito', sans-serif;
+
+	h1 {
+		margin: 0 0 24px 0;
+		color: var(--body-color);
+	}
+
+	.dialogbuttons {
+
+		display: flex;
+		justify-content: right;
+
+		& > div {
+			padding: 12px;
+			font-size: 20px;
+			margin-left: 12px;
+			cursor: pointer;
+
+			color: var(--icon-color);
+			background-color: var(--files-inset);
+			border: solid 2px var(--dialog-border);
+			border-radius: 8px;
+			transition: 0.1s;
+
+			&:hover {
+				color: var(--body-color);
+				border-color: var(--border-color);
+			}
+			&:active {
+				color: var(--body-color);
+				border-color: var(--border-color);
+				transform: scale(0.94);
+			}
+
+		}
+
+	}
+
+}
+
 .button {
 
 	display: inline-flex;
