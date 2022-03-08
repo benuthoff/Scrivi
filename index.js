@@ -79,7 +79,8 @@ var Scrivi = new Vue({
 
 		settings: { // Attributes saved to usersettings
 			sidebar_autohide: false,
-			authorname: 'Anonymous'
+			authorname: 'Anonymous',
+			theme: 'dark'
 		},
 
 		settingspage: 'Basic', // The current settings page open
@@ -142,6 +143,9 @@ var Scrivi = new Vue({
 	watch: {
 		dialogs: (next, prev) => {
 			Scrivi.ui.uiblur = (Scrivi.dialogs.length > 0);
+		},
+		'settings.theme': (next, prev) => {
+			$('body').attr('theme', next);
 		}
 	},
 	methods: {
