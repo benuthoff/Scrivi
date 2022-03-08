@@ -116,18 +116,34 @@
 
 				<div v-if='filesmenu.page === "home"' id='files_home'>
 					<h1>Home</h1>
+
+					<div class='filegrid'>
+						<div v-for='rf in file.dbrecent' @dblclick='openFile(rf)'>
+							<i :data-feather='filetemplates[file.dbpath[rf].template] ? filetemplates[file.dbpath[rf].template].icon : "alert-octagon"' width='32px' height='32px'></i>
+							{{ file.dbpath[rf].name }}
+						</div>
+						<div @dblclick='filesmenu.page = "lib"'>
+							<i data-feather='more-horizontal' width='32px' height='32px'></i> More Files
+						</div>
+					</div>
+
 				</div>
 				<div v-if='filesmenu.page === "lib"' id='files_lib'>
 					<h1>Library</h1>
 					<div class='filelist'>
 
 						<div v-for='(fl, fln) in getFileList().folders' class='fold'>
-							<i data-feather='folder' width='32px' height='32px'></i>{{ fln }} <!-- >> {{ fl }} --> 
+							<i data-feather='folder' width='32px' height='32px'></i>{{ fln }} <!-- >> {{ fl }} -->
 						</div>
 
-						<div v-for='fl in getFileList().files' class='file' v-on:dblclick='openFile(fl)'>
-							<i :data-feather='filetemplates[file.dbpath[fl].template] ? filetemplates[file.dbpath[fl].template].icon : "alert-octagon"' width='32px' height='32px'></i>{{ file.dbpath[fl].name }}
-							<i data-feather='more-horizontal' class='more' width='32px' height='32px'></i>
+						<div v-for='fl in getFileList().files' class='file' @dblclick='openFile(fl)'>
+							<i :data-feather='filetemplates[file.dbpath[fl].template] ? filetemplates[file.dbpath[fl].template].icon : "alert-octagon"' width='32px' height='32px'></i>
+							{{ file.dbpath[fl].name }}
+							<div class='author'>
+								<i data-feather='user' width='18px' height='18px'></i>
+								{{ file.dbpath[fl].author }}
+							</div>
+							
 						</div>
 
 					</div>

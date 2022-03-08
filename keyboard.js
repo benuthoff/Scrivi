@@ -32,6 +32,11 @@ document.addEventListener('keydown', function(e) {
 		e.preventDefault();
 		Scrivi.saveFile();
 	};
+	// Save File As
+	if (mapmatch(map.saveas) && !Scrivi.ui.menublur && !Scrivi.ui.uiblur) {
+		e.preventDefault();
+		Scrivi.toggleSaveAsDialog();
+	};
 
 	// Enter
 	if (mapmatch(map.enter)) {

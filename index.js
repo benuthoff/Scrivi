@@ -58,6 +58,7 @@ var Scrivi = new Vue({
 					// '%\\Testfile'
 				]
 			},
+			dbrecent: [],
 			dbstar: [ // Ordered list of filepath/ names of starred/ pinned files
 	
 			]
@@ -241,11 +242,15 @@ var Scrivi = new Vue({
 				Scrivi.currentfile.metadata.dateModified = date;
 				Scrivi.file.dbpath[ Scrivi.currentfile.filepath ].metastats.dateModified = date;
 
+				// Set file to recently used.
+				Scrivi.setRecentFile();
+
 				// Save to IDB.
 				let req = Scrivi.idb.transaction(['rootdrive'], 'readwrite')
 					.objectStore('rootdrive').put(Scrivi.currentfile);
 				req.onerror = ()=>{ Scrivi.notif('Error saving '+ Scrivi.currentfile.filepath +'.', {'color': 'var(--notif-error)'}) };
 				req.onsuccess = ()=>{
+					Scrivi.unsavedchanges = false;
 					Scrivi.notif('File Saved', {'icon': 'check', 'color': 'var(--notif-success)'});
 					aftersave(); // Specific function to run after saving.
 				};
@@ -324,6 +329,9 @@ var Scrivi = new Vue({
 					// Close files menu.
 					if (Scrivi.ui.filesmenu) { Scrivi.toggleFileMenu() };
 
+					// Add to list of recently used files.
+					Scrivi.setRecentFile();
+
 				};
 			};
 		},
@@ -393,6 +401,26 @@ var Scrivi = new Vue({
 			});
 		},
 
+		setRecentFile() {
+			let dbrecent = Scrivi.file.dbrecent; // Pointers
+			let currentpath = Scrivi.currentfile.filepath;
+
+			// The current file is not at the beggining of the list.
+			if (currentpath && dbrecent[0] !== currentpath) { 
+				
+				// If already in list later.
+				let a = dbrecent.indexOf(currentpath)
+				if ( a > -1 ) { dbrecent.splice(a,1) };
+				
+				dbrecent.unshift( currentpath ); // Add to beginning of list.
+
+				// Max 3 items in recent file list.
+				if (dbrecent.length > 3) { dbrecent.pop() };
+				
+				Scrivi.saveData('file'); // Save to storage.
+			};
+		},
+
 		notif(text, options) { // NOTIFICATIONS
 
 			// OPTIONS: {} || undefined
@@ -455,7 +483,7 @@ var Scrivi = new Vue({
 						if (updater && typeof req.result.value === 'object') {
 							// This if adds each property to the existent object to account for possibly added values.
 							// Only occurs if the updater peram is true.
-							Object.assign(Scrivi[label], req.result.value);
+							Scrivi[label] = { ...Scrivi[label], ...req.result.value };
 						} else {
 							Scrivi[label] = req.result.value;
 						};
@@ -524,7 +552,7 @@ var Scrivi = new Vue({
 });
 
 // For dev use OR to remove pointers.
-function _(obj) { return JSON.parse(JSON.stringify(obj)) };
+function _(obj) { return {...obj} /*return JSON.parse(JSON.stringify(obj))*/ };
 
 // Initialize Icons.
 feather.replace({'class': 'icon'});

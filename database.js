@@ -23,8 +23,8 @@ request.onsuccess = (event) => {
 	Scrivi.idb.onerror = (e)=>{ console.error('DB Error: '+ e.target.errorCode) };
 
 	// Load Data!
-	Scrivi.loadData('settings', ()=>{}, updater=true);
-	Scrivi.loadData('file', ()=>{});
+	Scrivi.loadData('settings', ()=>{}, defaultset=true, updater=true);
+	Scrivi.loadData('file', ()=>{}, defaultset=true, updater=true);
 
 	// Open empty file.
 	Scrivi.newFile('Simple');
