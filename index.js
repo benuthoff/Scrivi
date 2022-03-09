@@ -89,7 +89,7 @@ var Scrivi = new Vue({
 			{ name: 'Appearance', icon: 'droplet' },
 			{ name: 'Keyboard', icon: 'command' },
 			{ name: 'Addons', icon: 'package' },
-			{ name: 'Credits', icon: 'info' }
+			{ name: 'About', icon: 'info' }
 		],
 
 		sidebar: { // Used to render the app's sidebar(s)
@@ -98,7 +98,7 @@ var Scrivi = new Vue({
 					'icon': 'plus',
 					'name': 'New File',
 					'action': ()=>{
-						Scrivi.newFile('Simple');
+						Scrivi.newFile('Notebook');
 						//Scrivi.notif('File Created', {icon: 'check', color: 'var(--notif-success)'});
 					}
 				},
@@ -123,6 +123,11 @@ var Scrivi = new Vue({
 			]
 		},
 
+		themes: [
+			{ name: 'Dark', id: 'dark' },
+			{ name: 'Light', id: 'light' }
+		],
+
 		keyboard: { // ["keycode", Ctrl?, Shift?]
 			enter: ['Enter', false, false],
 			cancel: ['Escape', false, false], 
@@ -132,10 +137,25 @@ var Scrivi = new Vue({
 			nav_fwrd: ['Tab', false, false],
 			nav_back: ['Tab', false, true],
 
-			save: ['s', true, false],
-			saveas: ['s', true, true],
-			newfile: ['d', true, false],
+			save: ['S', true, false],
+			saveas: ['S', true, true],
+			newfile: ['D', true, false],
 		},
+		keycommandlist: [
+			'Basic',
+			['Enter', 'enter'],
+			['Cancel', 'cancel'],
+			'Files',
+			['New File', 'newfile'],
+			['Save File', 'save'],
+			['Save File As', 'saveas'],
+			'Menus',
+			['Toggle File View', 'filesmenu'],
+			['Toggle Settings', 'settings'],
+			['Navigate Forward', 'nav_fwrd'],
+			['Navigate Backward', 'nav_back']
+		],
+		keyedit: false,
 
 		dialogs: []
 
@@ -157,6 +177,7 @@ var Scrivi = new Vue({
 		toggleSettings() {
 			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
 			Scrivi.ui.settingsmenu = !Scrivi.ui.settingsmenu; // Toggle menu.
+			Scrivi.editKeyCode(false);
 			if (!Scrivi.ui.settingsmenu) {
 				Scrivi.saveData('settings');
 				Scrivi.notif('Settings saved.', {icon: 'check', color: 'var(--notif-success)'});
@@ -196,7 +217,7 @@ var Scrivi = new Vue({
 
 		},
 
-		openSettingsTab(tab) { Scrivi.settingspage = tab.name },
+		openSettingsTab(tab) { Scrivi.settingspage = tab.name; Scrivi.editKeyCode(false); },
 
 		createFileTemplate(input) {
 			Scrivi.filetemplates[input.name] = input;
@@ -204,6 +225,11 @@ var Scrivi = new Vue({
 		},
 
 		newFile(templatename) {
+
+			// On close template event.
+			if (Scrivi.currentfile.template) {
+				Scrivi.filetemplates[Scrivi.currentfile.template].events.onclosed(Scrivi.currentfile);
+			};
 
 			if (Scrivi.unsavedchanges) {
 				Scrivi.saveWarning(Scrivi.newFile, templatename);
@@ -248,6 +274,9 @@ var Scrivi = new Vue({
 
 				// Set file to recently used.
 				Scrivi.setRecentFile();
+
+				// Run save event for current template.
+				Scrivi.filetemplates[Scrivi.currentfile.template].events.onsaved( Scrivi.currentfile);
 
 				// Save to IDB.
 				let req = Scrivi.idb.transaction(['rootdrive'], 'readwrite')
@@ -303,6 +332,11 @@ var Scrivi = new Vue({
 		},
 
 		openFile(path) {
+
+			// On close template event.
+			if (Scrivi.currentfile.template) {
+				Scrivi.filetemplates[Scrivi.currentfile.template].events.onclosed(Scrivi.currentfile);
+			};
 
 			if (Scrivi.unsavedchanges) {
 				Scrivi.saveWarning(Scrivi.openFile, path);
@@ -364,6 +398,9 @@ var Scrivi = new Vue({
 				// Set HTML to saved data.
 				$(e).html( Scrivi.currentfile.filedata[ $(e).attr('fd_bind') ] );
 
+				// BREAKPOINT
+				// REMOVE ALL BINDING EVENT LISTENERS.
+
 				// Create updater for when data is changed. 
 				e.addEventListener('input', ()=>{
 
@@ -423,6 +460,12 @@ var Scrivi = new Vue({
 				
 				Scrivi.saveData('file'); // Save to storage.
 			};
+		},
+
+		editKeyCode(keyid) {
+			$('.keyinput').removeClass('edit'); // Remove Edit from all inputs.
+			Scrivi.keyedit = keyid;
+			$('#keyin_'+keyid).addClass('edit'); // Add to specific input.
 		},
 
 		notif(text, options) { // NOTIFICATIONS
@@ -544,12 +587,16 @@ var Scrivi = new Vue({
 		},
 
 		'theme-svg': {
-			template: `<svg class='prev' width='200px' height='120px' :simtheme='themeid'>\
-				<rect class='rect' x='50' y='20' rx='4' ry='4' width='100' height='80'></rect>\
-				<circle class='circ' cx='30' cy='60' r='4'></circle>\
-				<circle class='circ' cx='30' cy='40' r='4'></circle>\
-				\<circle class='circ' cx='30' cy='80' r='4'></circle></svg>`,
-			props: ['themeid']
+			template: `<div class='themedisplay' :theme='theme' @click='Scrivi.settings.theme = theme;'>
+				<svg class='prev' width='200px' height='120px'>
+					<rect class='rect' x='50' y='20' rx='4' ry='4' width='100' height='80'></rect>
+					<circle class='circ' cx='30' cy='60' r='4'></circle>
+					<circle class='circ' cx='30' cy='40' r='4'></circle>
+					<circle class='circ' cx='30' cy='80' r='4'></circle>
+				</svg>
+					<div class='label'>{{ label }}</div>
+				</div>`,
+			props: ['theme', 'label']
 		}
 
 	}

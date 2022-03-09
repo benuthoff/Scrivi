@@ -26,9 +26,9 @@ Scrivi.createFileTemplate({
 
 	events: {
 		onopened: (file)=>{}, // done
-		onclosed: (file)=>{},
+		onclosed: (file)=>{}, // done
 		onedited: (file)=>{}, // done
-		onsaved: (file)=>{}
+		onsaved: (file)=>{} // done
 	}
 
 });

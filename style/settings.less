@@ -122,4 +122,131 @@
 		margin-left: 44px;
 	}
 
+	.themedisplay {
+
+		display: inline-block;
+		border: solid 2px var(--border-color);
+		border-radius: 14px;
+		overflow: hidden;
+		width: 200px; height: 180px;
+		cursor: pointer;
+		background-color: var(--bg-color);
+		margin: 10px 0 10px 26px;
+		transition: 0.1s;
+
+		.rect {
+			stroke: var(--border-color);
+			stroke-width: 4px;
+			stroke-linecap: round;
+			fill: none;
+		}
+		.circ {
+			fill: var(--border-color);
+		}
+		.label {
+			height: 60px;
+			border-top: solid 2px var(--dialog-border);
+			color: var(--body-color);
+			font-family: 'Courier New', monospace;
+			font-size: 32px;
+			margin: 0 8px;
+			padding: 8px 0 0 14px;
+		}
+
+		&:active {
+			transform: scale(0.96);
+		}
+
+	}
+
+	.keycustom {
+
+		margin-left: 52px;
+		margin-bottom: 6px;
+
+		h2 {
+			color: var(--setting-text-color);
+			display: inline-block;
+			margin: 0;
+			font-size: 24px;
+		}
+		.keyinput {
+			display: inline-block;
+			margin-left: 24px;			
+			font-size: 24px;
+			color: var(--body-color);
+			border: solid 2px var(--dialog-border);
+			border-radius: 6px;
+			min-width: 200px;
+			height: 32px;
+			padding: 4px 8px;
+			text-align: center;
+			cursor: text;
+
+			&.edit {
+				font-size: 0;
+				&::after {
+					font-size: 24px;
+					content: 'Input keys...';
+					opacity: 0.5;
+				}
+			}
+
+		}
+
+	}
+
+	.devshowcase {
+		display: grid;
+		grid-template-columns: 184px auto;
+		margin: 24px 0 26px 32px;
+		img {
+			width: 140px; height: 140px;
+			border-radius: 100%;
+		}
+		h1 {
+			padding-top: 6px;
+			padding-bottom: 0;
+		}
+		h2 {
+			margin: 0;
+			opacity: 0.7;
+		}
+		.links {
+			margin-top: 10px;
+			.icon {
+				cursor: pointer;
+				opacity: 0.6;
+				transition: 0.1s;
+				&:hover { opacity: 1 }
+			}
+		}
+	}
+
+	.dependencies {
+		margin: 32px;
+		& > a {
+			display: inline;
+			height: 60px;
+			width: 260px;
+			padding: 20px;
+			border: solid 2px var(--dialog-border);
+			border-radius: 10px;
+			text-decoration: none;
+			display: flex;
+			margin: 0 7px 14px 7px;
+			img {
+				height: 60px;
+				padding-left: 14px;
+			}
+			span {
+				color: var(--body-color);
+				font-size: 28px;
+				align-self: center;
+				margin: 0 auto;
+			}
+		}
+
+	}
+
 }

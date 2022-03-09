@@ -117,7 +117,7 @@
 				<div v-if='filesmenu.page === "home"' id='files_home'>
 					<h1>Home</h1>
 
-					<div class='filegrid'>
+					<div class='filegrid' v-if='ui.filesmenu'>
 						<div v-for='rf in file.dbrecent' @dblclick='openFile(rf)'>
 							<i :data-feather='filetemplates[file.dbpath[rf].template] ? filetemplates[file.dbpath[rf].template].icon : "alert-octagon"' width='32px' height='32px'></i>
 							{{ file.dbpath[rf].name }}
@@ -195,9 +195,9 @@
 					<subheader text='Fonts and Size'></subheader>
 
 					<subheader text='Themes'></subheader>
+					<theme-svg v-for='t in themes' :theme='t.id' :label='t.name'></theme-svg>
 
-
-					<subheader text='Custom CSS'></subheader>
+					<!-- <subheader text='Custom CSS'></subheader> Make Custom CSS an Addon -->
 
 				</div>
 
@@ -206,6 +206,19 @@
 						<h1>Keyboard</h1>
 						<div class='divider'></div>
 					</div>
+
+					<div v-for='cmnd in keycommandlist'>
+						<subheader v-if='typeof cmnd === "string"' :text='cmnd'></subheader>
+						<div v-else-if='typeof cmnd === "object"' class='keycustom'>
+							<h2>{{ cmnd[0] }}: </h2>
+							<div class='keyinput' :id='"keyin_"+cmnd[1]' @click='editKeyCode(cmnd[1])'>
+								<span v-if=' keyboard[cmnd[1]][1] '>Ctrl + </span>
+								<span v-if=' keyboard[cmnd[1]][2] '>Shift + </span>
+								<span>{{ keyboard[cmnd[1]][0] }}</span>
+							</div><br>
+						</div>
+					</div>
+
 				</div>
 
 				<div id='setpage_Addons' v-show='settingspage === "Addons"'>
@@ -215,11 +228,37 @@
 					</div>
 				</div>
 
-				<div id='setpage_Credits' v-show='settingspage === "Credits"'>
+				<div id='setpage_About' v-show='settingspage === "About"'>
 					<div class='topbound'>
-						<h1>Credits</h1>
+						<h1>About</h1>
 						<div class='divider'></div>
 					</div>
+
+					<div class='devshowcase'>
+						<img draggable='false' src='https://avatars.githubusercontent.com/u/81537940'/>
+						<div>
+							<h1>Ben Uthoff</h1>
+							<h2>Lead Developer</h2>
+							<div class='links'>
+								<a href='https://github.com/benuthoff' target='_blank'>
+									<i data-feather='github' width='36px' height='36px'></i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<subheader text='Created Using...'></subheader>
+					<div class='dependencies'>
+						<a href='https://vuejs.org/' target='_blank'>
+							<img draggable='false' src='https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg'/>
+							<span>Vue.js</span>
+						</a>
+						<a href='https://jquery.com/' target='_blank'>
+							<img draggable='false' src='https://avatars.githubusercontent.com/u/70142'/>
+							<span>JQuery</span>
+						</a>
+					</div>
+
 				</div>
 
 			</div>
@@ -237,6 +276,7 @@
 
 <!-- Base File Types -->
 <script src='./filetemplates/Simple.js'></script>
+<script src='./filetemplates/Notebook.js'></script>
 
 
 </body>

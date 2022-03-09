@@ -11,6 +11,15 @@ document.addEventListener('keydown', function(e) {
 		} else { return false };
 	};
 
+	if (Scrivi.keyedit && e.key !== 'Shift' && e.key !== 'Control') {
+		e.preventDefault();
+		let kk = e.key.charAt(0).toUpperCase() + e.key.slice(1);
+		Scrivi.keyboard[Scrivi.keyedit] = [kk, e.ctrlKey, e.shiftKey];
+		Scrivi.editKeyCode(false);
+		Scrivi.saveData('keyboard');
+		return;
+	};
+
 	// Dialog commands.
 	if (Scrivi.dialogs.length > 0) {
 		let all = Scrivi.dialogs[0].buttons;

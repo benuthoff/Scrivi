@@ -25,6 +25,7 @@ request.onsuccess = (event) => {
 	// Load Data!
 	Scrivi.loadData('settings', ()=>{}, defaultset=true, updater=true);
 	Scrivi.loadData('file', ()=>{}, defaultset=true, updater=true);
+	Scrivi.loadData('keyboard', ()=>{}, defaultset=true, updater=true);
 
 	// Open empty file.
 	Scrivi.newFile('Simple');
