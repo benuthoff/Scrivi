@@ -15,28 +15,20 @@ Scrivi.createFileTemplate({
 				<div class='title' contenteditable spellcheck='false' fd_bind='title'></div>
 				<div class='divider'></div>
 			</div>
+
 		</div>`
 	}),
 
 	filedata: {
 		title: '',
-		menuopen: false,
+		page: false,
 		pagelist: [],
 		pages: {}
 	},
 
 	events: {
-		onopened: (file)=>{
-			file.menuopen = false;
-			Scrivi.sidebar.right.push({
-				'icon': 'menu',
-				'name': 'Notebook Pages',
-				'action': ()=>{ file.menuopen = !file.menuopen; }
-			});
-		},
-		onclosed: (file)=>{
-			Scrivi.sidebar.right.pop();
-		},
+		onopened: (file)=>{},
+		onclosed: (file)=>{},
 		onedited: (file)=>{},
 		onsaved: (file)=>{}
 	}

@@ -48,6 +48,7 @@ request.onupgradeneeded = (event) => {
 
 	appdata.add({ label: 'settings', value: Scrivi.settings }); // User Settings
 	appdata.add({ label: 'file', value: Scrivi.file }); // Root Drive Path
+	appdata.add({ label: 'keyboard', value: Scrivi.keyboard }); // Keyboard Config
 	// appdata.add({ label: 'filetemplates', value: Scrivi.filetemplates }); // Saved file templates
 
 };

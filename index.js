@@ -166,6 +166,12 @@ var Scrivi = new Vue({
 		},
 		'settings.theme': (next, prev) => {
 			$('body').attr('theme', next);
+		},
+		settingspage: (next, prev) => {
+			if (next === 'Addons') {
+				// Load from API...
+				// https://api.github.com/search/repositories?q=topic:scrivi-addon&page=1&per_page=10
+			};
 		}
 	},
 	methods: {
@@ -398,11 +404,10 @@ var Scrivi = new Vue({
 				// Set HTML to saved data.
 				$(e).html( Scrivi.currentfile.filedata[ $(e).attr('fd_bind') ] );
 
-				// BREAKPOINT
-				// REMOVE ALL BINDING EVENT LISTENERS.
+				$(e).off('input');
 
 				// Create updater for when data is changed. 
-				e.addEventListener('input', ()=>{
+				$(e).on('input', ()=>{
 
 					// Update Variables
 					let p = $(e).attr('fd_bind'); // Gets the binded variable.
@@ -528,7 +533,8 @@ var Scrivi = new Vue({
 					if (onsuccess) { onsuccess(req.result.value) }; // Custom success event.
 					if (defaultset) { // Sets Scrivi property of the same name to the value.
 						if (updater && typeof req.result.value === 'object') {
-							// This if adds each property to the existent object to account for possibly added values.
+							// This if adds each property to the existent object to-
+							// account for possibly added values.
 							// Only occurs if the updater peram is true.
 							Scrivi[label] = { ...Scrivi[label], ...req.result.value };
 						} else {
