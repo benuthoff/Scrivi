@@ -55,13 +55,13 @@
 	<!-- File Template Select -->
 	<div id='templateview' v-if='currentfile === false'>
 		<div class='topbound'>
-			<div class='title'>Choose a file type:</div>
+			<div class='title'>New File</div>
 			<div class='divider'></div>
 		</div>
-		<div class='tempflex'>
+		<div class='templist'>
 			<div v-for='t in templatelist' @click='newFile(t)'>
-				<i :data-feather='filetemplates[t].icon' width='64px' height='64px'></i>
-				<div class='title'>{{ filetemplates[t].name }}</div>
+				<i :data-feather='filetemplates[t].icon' width='52px' height='52px'></i>
+				<div>{{ filetemplates[t].name }}</div>
 			</div>
 		</div>
 	</div>
@@ -130,7 +130,10 @@
 			<div id='filemain'>
 
 				<div v-if='filesmenu.page === "home"' id='files_home'>
-					<h1>Home</h1>
+					<div class='topbound'>
+						<div class='title'>Home</div>
+						<div class='divider'></div>
+					</div>
 
 					<div class='filegrid' v-if='ui.filesmenu'>
 						<div v-for='rf in file.dbrecent' @click='openFile(rf)'>
@@ -144,14 +147,38 @@
 
 				</div>
 				<div v-if='filesmenu.page === "lib"' id='files_lib'>
-					<h1>Library</h1>
+					<div class='topbound'>
+						<div class='title'>Library</div>
+						<div class='actionbar'>
+							
+							<span v-show='filesmenu.sel.length > 0' @click='deleteWarning'>
+								<i data-feather='trash-2' width='28px' height='28px'></i>
+							</span>
+							<span v-show='filesmenu.sel.length === 1' @click=''>
+								<i data-feather='edit-3' width='28px' height='28px'></i>
+							</span>
+							<span v-show='filesmenu.sel.length === 1' @click=''>
+								<i data-feather='copy' width='28px' height='28px'></i>
+							</span>
+							<span @click=''>
+								<i data-feather='folder-plus' width='28px' height='28px'></i>
+							</span>
+							<span @click=''>
+								<i data-feather='info' width='28px' height='28px'></i>
+							</span>
+
+							<div @click='filesmenu.sel = [];'><span v-if='filesmenu.sel.length > 0'>Selected {{ filesmenu.sel.length }} of </span>{{ getFileList().files.length }} files.</div>
+						
+						</div>
+						<div class='divider'></div>
+					</div>
 					<div class='filelist'>
 
-						<div v-for='(fl, fln) in getFileList().folders' class='fold'>
+						<div v-for='(fl, fln) in getFileList().folders' class='fold' @click='selFile(fl,"file")' @dblclick=''>
 							<i data-feather='folder' width='32px' height='32px'></i>{{ fln }} <!-- >> {{ fl }} -->
 						</div>
 
-						<div v-for='fl in getFileList().files' class='file' @dblclick='openFile(fl)'>
+						<div v-for='fl in getFileList().files' class='file' @click='selFile(fl,"file")' @dblclick='openFile(fl)' :sel='filesmenu.sel.includes("file:"+fl)'>
 							<i :data-feather='filetemplates[file.dbpath[fl].template] ? filetemplates[file.dbpath[fl].template].icon : "alert-octagon"' width='32px' height='32px'></i>
 							{{ file.dbpath[fl].name }}
 							<div class='author'>

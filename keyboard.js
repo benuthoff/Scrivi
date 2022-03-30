@@ -11,6 +11,7 @@ document.addEventListener('keydown', function(e) {
 		} else { return false };
 	};
 
+	// Change Keyset for Command.
 	if (Scrivi.keyedit && e.key !== 'Shift' && e.key !== 'Control') {
 		e.preventDefault();
 		let kk = e.key.charAt(0).toUpperCase() + e.key.slice(1);
@@ -69,10 +70,15 @@ document.addEventListener('keydown', function(e) {
 	};
 
 	// Open Files Menu
-	if (mapmatch(map.filesmenu) && !Scrivi.ui.menublur && !Scrivi.ui.uiblur) {
+	if (mapmatch(map.filesmenu) && ((!Scrivi.ui.menublur && !Scrivi.ui.uiblur) || Scrivi.ui.filesmenu)) {
 		e.preventDefault();
 		Scrivi.toggleFileMenu();
 		return;
+	};
+
+	// Delete Selected files-
+	if (mapmatch(map.delete_sel) && Scrivi.ui.filesmenu && Scrivi.filesmenu.sel.length > 0) {
+		Scrivi.deleteWarning();
 	};
 
 	// Open Settings - If there are no menus open OR settings menu is open.
@@ -84,7 +90,11 @@ document.addEventListener('keydown', function(e) {
 
 	// Navigation Forward + Backward
 	if (mapmatch(map.nav_fwrd)) {
-		e.preventDefault();
+		if ($(':focus').attr('nav') === 'true') {
+			console.log('Forward!')
+		} else {
+			e.preventDefault();
+		};
 
 		if (Scrivi.ui.settingsmenu) {
 			let tab = $('#settings #tabs > div.sel').next();
@@ -100,7 +110,11 @@ document.addEventListener('keydown', function(e) {
 
 	};
 	if (mapmatch(map.nav_back)) {
-		e.preventDefault();
+		if ($(':focus').attr('nav') === 'true') {
+			console.log('Forward!')
+		} else {
+			e.preventDefault();
+		};
 
 		if (Scrivi.ui.settingsmenu) {
 			let tab = $('#settings #tabs > div.sel').prev();

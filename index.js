@@ -70,7 +70,8 @@ var Scrivi = new Vue({
 			path: '%', // The location of the user in the file explorer
 			// other examples are %\newfolder , %\otherfolder\furtherfolder
 			saveaspath: '%', // Location of the user in the saveas menu.
-			saveasname: '' // The value of the filename input in the saveas menu. 
+			saveasname: '', // The value of the filename input in the saveas menu.
+			sel: []
 		},
 
 
@@ -140,6 +141,8 @@ var Scrivi = new Vue({
 			save: ['S', true, false],
 			saveas: ['S', true, true],
 			newfile: ['D', true, false],
+
+			delete_sel: ['Delete', false, false]
 		},
 		keycommandlist: [
 			'Basic',
@@ -153,7 +156,9 @@ var Scrivi = new Vue({
 			['Toggle File View', 'filesmenu'],
 			['Toggle Settings', 'settings'],
 			['Navigate Forward', 'nav_fwrd'],
-			['Navigate Backward', 'nav_back']
+			['Navigate Backward', 'nav_back'],
+			'File Library',
+			['Delete Selected', 'delete_sel']
 		],
 		keyedit: false,
 
@@ -193,6 +198,7 @@ var Scrivi = new Vue({
 		toggleFileMenu() {
 			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
 			Scrivi.ui.filesmenu = !Scrivi.ui.filesmenu; // Toggle menu.
+			Scrivi.filesmenu.sel = [];
 		},
 
 		toggleSaveAsDialog() {
@@ -339,6 +345,57 @@ var Scrivi = new Vue({
 
 		},
 
+		selFile(path, type) {
+			let sels = Scrivi.filesmenu.sel;
+			let id = type+':'+path;
+			if (!sels.includes(id)) { // Add to list.
+				sels.push(id);
+			} else { // Remove from list.
+				sels.splice(sels.indexOf(id),1);
+			};
+		},
+		deleteWarning() {
+			Scrivi.dialogs.push({
+				text: 'Are you sure you want to delete '+Scrivi.filesmenu.sel.lenght+' items? This is permanent.',
+				buttons: [
+					['Continue', Scrivi.deleteSelected, 'enter'],
+					['Cancel', ()=>{}, 'cancel']
+				]
+			});
+		},
+		deleteSelected() {
+			
+			Scrivi.filesmenu.sel.forEach((id)=>{
+				if (id.startsWith('file:')) {
+
+					let path = id.substring(5);
+					let dir = Scrivi.getFileList().files;
+
+					// Close file if open.
+					if (Scrivi.currentfile.filepath === path) { Scrivi.closeFile() };
+					// Remove from recents list.
+					if (Scrivi.file.dbrecent.includes(path)) {
+						Scrivi.file.dbrecent.splice(Scrivi.file.dbrecent.indexOf(path),1);
+					};
+
+					delete Scrivi.file.dbpath[path]; // Remove Data.
+					dir.splice(dir.indexOf(path),1); // Remove Pointer.
+					Scrivi.saveData('file'); // Save file path data.
+
+				} else if (id.startsWith('folder:')) {
+					let name = id.substring(7);
+
+				};
+			});
+			Scrivi.filesmenu.sel = [];
+		},
+		duplicateSelected() {
+
+		},
+		renameSelected() {
+
+		},
+
 		openFile(path) {
 
 			// On close template event.
@@ -393,6 +450,7 @@ var Scrivi = new Vue({
 			Scrivi.editorcomponent = false;
 			Scrivi.unsavedchanges = false;
 
+			$('editor').empty();
 
 		},
 

@@ -47,12 +47,12 @@ body {
 
 	// Used by the User Interface like Dialogs, blurs menus.
 	&.ui_blur {
-		.sidebar, #editor, #settings, #filesmenu { filter: blur(2px) }
+		.sidebar, #editor, #templateview, #settings, #filesmenu { filter: blur(2px) }
 	}
 
 	// Used by menus.
 	&.menu_blur {
-		.sidebar, #editor { filter: blur(2px) }
+		.sidebar, #editor, #templateview { filter: blur(2px) }
 	}
 
 	#sidebar_holder {
@@ -181,33 +181,31 @@ body {
 #templateview {
 	cursor: default;
 	user-select: none;
-	--bg-color: var(--hover-color);
-	background-color: var(--hover-color);
-	.tempflex {
+	background-color: var(--bg-color);
+	.templist {
 
-		display: flex;
-		justify-content: center;
 		padding: 20px;
+		padding-top: 0;
 
 		& > div {
 
-			height: 200px;
 			display: flex;
-			flex-direction: column;
+			flex-direction: row;
 			align-items: center;
 			
-			margin: 0 14px 20px 14px;
-			cursor: pointer;
-			--local-color: var(--border-color);
-			
+			padding: 14px;
+			border: solid 2px var(--dialog-border);
+			margin-bottom: 20px;
+			border-radius: 4px;
 
-			.title, .icon {
-				font-size: 28px;
-				color: var(--local-color);
-				transition: 0.14s;
-			}
+			cursor: pointer;
+			font-size: 30px;
+			color: var(--body-color);
+			transition: 0.14s;
+
+			& > div { margin-left: 14px }
 			&:hover {
-				--local-color: var(--icon-color);
+				background-color: var(--hover-color);
 			}
 
 		}
