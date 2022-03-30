@@ -12,7 +12,7 @@ Scrivi.createFileTemplate({
 	component: Vue.extend({
 		template: `<div>
 			<div class='topbound'>
-				<div class='title' contenteditable spellcheck='false' fd_bind='title' nav='true'></div>
+				<div class='title' contenteditable spellcheck='false' fd_bind='title' nav='true' start></div>
 				<div class='divider'></div>
 			</div>
 			<div class='body' contenteditable spellcheck='false' fd_bind='body'></div>

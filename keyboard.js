@@ -63,22 +63,25 @@ document.addEventListener('keydown', function(e) {
 		// Out of settings menu.
 		if (Scrivi.ui.settingsmenu) { Scrivi.toggleSettings(); return; };
 		// Out of files menu.
-		if (Scrivi.ui.filesmenu) { Scrivi.toggleFileMenu(); return; };
+		if (Scrivi.ui.filesmenu) { Scrivi.toggleFilesMenu(); return; };
 		// Out of save-as dialog.
 		if (Scrivi.ui.saveas) { Scrivi.toggleSaveAsDialog(); return; };
+		// Out of file info dialog.
+		if (Scrivi.ui.fileinfo) { Scrivi.ui.fileinfo = false; return; };
 
 	};
 
 	// Open Files Menu
 	if (mapmatch(map.filesmenu) && ((!Scrivi.ui.menublur && !Scrivi.ui.uiblur) || Scrivi.ui.filesmenu)) {
 		e.preventDefault();
-		Scrivi.toggleFileMenu();
+		Scrivi.toggleFilesMenu();
 		return;
 	};
 
 	// Delete Selected files-
 	if (mapmatch(map.delete_sel) && Scrivi.ui.filesmenu && Scrivi.filesmenu.sel.length > 0) {
 		Scrivi.deleteWarning();
+		return;
 	};
 
 	// Open Settings - If there are no menus open OR settings menu is open.
@@ -91,7 +94,8 @@ document.addEventListener('keydown', function(e) {
 	// Navigation Forward + Backward
 	if (mapmatch(map.nav_fwrd)) {
 		if ($(':focus').attr('nav') === 'true') {
-			console.log('Forward!')
+			console.log('Forward!');
+			return;
 		} else {
 			e.preventDefault();
 		};
@@ -100,18 +104,21 @@ document.addEventListener('keydown', function(e) {
 			let tab = $('#settings #tabs > div.sel').next();
 			if (tab.length === 0) { tab = $('#settings #tabs > div').first() };
 			tab.click();
+			return;
 		};
 
 		if (Scrivi.ui.filesmenu) {
 			let tab = $('#filenav > div.sel').next();
 			if (tab.length === 0) { tab = $('#filenav > div').first() };
 			tab.click();
+			return;
 		};
 
 	};
 	if (mapmatch(map.nav_back)) {
 		if ($(':focus').attr('nav') === 'true') {
-			console.log('Forward!')
+			console.log('Forward!');
+			return;
 		} else {
 			e.preventDefault();
 		};
@@ -120,12 +127,14 @@ document.addEventListener('keydown', function(e) {
 			let tab = $('#settings #tabs > div.sel').prev();
 			if (tab.length === 0) { tab = $('#settings #tabs > div').last() };
 			tab.click();
+			return;
 		};
 
 		if (Scrivi.ui.filesmenu) {
 			let tab = $('#filenav > div.sel').prev();
 			if (tab[0].nodeName === 'H1') { tab = $('#filenav > div').last() };
 			tab.click();
+			return;
 		};
 
 	};

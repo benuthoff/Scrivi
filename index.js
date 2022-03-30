@@ -20,7 +20,8 @@ var Scrivi = new Vue({
 			uiblur: false, // Blur used by UI like dialog boxes.
 			settingsmenu: false,
 			filesmenu: false,
-			saveas: false
+			saveas: false,
+			fileinfo: false
 		},
 
 		currentfile: { // The file present in the editor.
@@ -88,6 +89,7 @@ var Scrivi = new Vue({
 		settingstabs: [ // Outlines Tabs in Settings menu
 			{ name: 'Basic', icon: 'settings' },
 			{ name: 'Appearance', icon: 'droplet' },
+			{ name: 'Sidebar', icon: 'grid'},
 			{ name: 'Keyboard', icon: 'command' },
 			{ name: 'Addons', icon: 'package' },
 			{ name: 'About', icon: 'info' }
@@ -111,7 +113,7 @@ var Scrivi = new Vue({
 				{
 					'icon': 'folder',
 					'name': 'Files',
-					'action': ()=>{ Scrivi.toggleFileMenu() }
+					'action': ()=>{ Scrivi.toggleFilesMenu() }
 				},
 				{
 					'icon': 'sliders',
@@ -195,7 +197,7 @@ var Scrivi = new Vue({
 			};
 		},
 
-		toggleFileMenu() {
+		toggleFilesMenu() {
 			Scrivi.ui.menublur = !Scrivi.ui.menublur; // Toggle blur.
 			Scrivi.ui.filesmenu = !Scrivi.ui.filesmenu; // Toggle menu.
 			Scrivi.filesmenu.sel = [];
@@ -214,6 +216,11 @@ var Scrivi = new Vue({
 				Scrivi.ui.saveas = false;
 				Scrivi.ui.menublur = false;
 			};
+		},
+
+		toggleFileInfo() {
+			Scrivi.ui.uiblur = !Scrivi.ui.uiblur; // Toggle blur.
+			Scrivi.ui.fileinfo = !Scrivi.ui.fileinfo; // Toggle menu.
 		},
 
 		getFileList(pth) { // Gets the file/folder list for a specified directory.
@@ -275,6 +282,8 @@ var Scrivi = new Vue({
 
 			t.events.onopened(Scrivi.currentfile); // Runs opening function.
 			Scrivi.fileDataBind(); // Binds data from the DOM to the file data.
+
+			$('#editor [start]').focus();
 
 		},
 
@@ -356,7 +365,7 @@ var Scrivi = new Vue({
 		},
 		deleteWarning() {
 			Scrivi.dialogs.push({
-				text: 'Are you sure you want to delete '+Scrivi.filesmenu.sel.lenght+' items? This is permanent.',
+				text: 'Are you sure you want to delete '+Scrivi.filesmenu.sel.length+' item(s)? This is permanent.',
 				buttons: [
 					['Continue', Scrivi.deleteSelected, 'enter'],
 					['Cancel', ()=>{}, 'cancel']
@@ -392,9 +401,7 @@ var Scrivi = new Vue({
 		duplicateSelected() {
 
 		},
-		renameSelected() {
-
-		},
+		editSelected() {},
 
 		openFile(path) {
 
@@ -430,7 +437,7 @@ var Scrivi = new Vue({
 					Scrivi.fileDataBind(); // Binds data from the DOM to the file data.
 
 					// Close files menu.
-					if (Scrivi.ui.filesmenu) { Scrivi.toggleFileMenu() };
+					if (Scrivi.ui.filesmenu) { Scrivi.toggleFilesMenu() };
 
 					// Add to list of recently used files.
 					Scrivi.setRecentFile();
@@ -683,7 +690,7 @@ var Scrivi = new Vue({
 });
 
 // For dev use OR to remove pointers.
-function _(obj) { return {...obj} /*return JSON.parse(JSON.stringify(obj))*/ };
+function _(obj) { return {...obj} /* JSON.parse(JSON.stringify(obj)) // old */ };
 
 // Initialize Icons.
 feather.replace({'class': 'icon'});

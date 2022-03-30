@@ -12,9 +12,9 @@ Scrivi.createFileTemplate({
 	component: Vue.extend({
 		template: `<div>
 			<div v-show='!pageview'>
-				<!-- Page Select Menu -->
+	<!-- Page Select Menu -->
 				<div class='topbound'>
-					<div class='title' contenteditable spellcheck='false' fd_bind='title'></div>
+					<div class='title' contenteditable spellcheck='false' fd_bind='title' start></div>
 					<div class='divider'></div>
 				</div>
 				<div class='pagelist'>
@@ -24,7 +24,7 @@ Scrivi.createFileTemplate({
 
 			</div>
 			<div v-show='pageview'>
-				<!-- Page View -->
+	<!-- Page View -->
 				<div class='topbound'>
 					<div class='title' contenteditable spellcheck='false'></div>
 					<div class='divider'></div>

@@ -5,11 +5,14 @@
 	<title>Scrivi</title>
 	<meta charset='utf-8'>
 	<link rel='stylesheet/less' type='text/css' href='index.less'/>
+
+	<!-- Dependencies -->
 	<script src='./external/less_4.1.1.js'></script>
 	<script src='./external/jquery-3.6.0.min.js'></script>
 	<script src='./external/vue.min.js'></script>
 	<script src='./external/feather.min.js'></script>
 
+	<!-- Embed Metadata -->
 	<meta property='og:title' content='Scrivi'/>
 	<meta property='og:type' content='website'/>
 	<meta property='og:url' content='https://benuthoff.github.io/Scrivi/'/>
@@ -114,7 +117,7 @@
 
 	<!-- Files Menu -->
 	<div class='blind' v-show='ui.filesmenu'>
-		<div class='net' @click='toggleFileMenu'></div>
+		<div class='net' @click='toggleFilesMenu'></div>
 		<div id='files'>
 
 			<div id='filenav'>
@@ -154,7 +157,7 @@
 							<span v-show='filesmenu.sel.length > 0' @click='deleteWarning'>
 								<i data-feather='trash-2' width='28px' height='28px'></i>
 							</span>
-							<span v-show='filesmenu.sel.length === 1' @click=''>
+							<span v-show='filesmenu.sel.length === 1' @click='toggleFileInfo'>
 								<i data-feather='edit-3' width='28px' height='28px'></i>
 							</span>
 							<span v-show='filesmenu.sel.length === 1' @click=''>
@@ -162,9 +165,6 @@
 							</span>
 							<span @click=''>
 								<i data-feather='folder-plus' width='28px' height='28px'></i>
-							</span>
-							<span @click=''>
-								<i data-feather='info' width='28px' height='28px'></i>
 							</span>
 
 							<div @click='filesmenu.sel = [];'><span v-if='filesmenu.sel.length > 0'>Selected {{ filesmenu.sel.length }} of </span>{{ getFileList().files.length }} files.</div>
@@ -196,9 +196,17 @@
 		</div>
 	</div>
 
+	<!-- File Info -->
+	<div v-if='ui.fileinfo' class='blind'>
+		<div class='net' @click='toggleFileInfo'></div>
+		<div id='fileinfo'>
+
+		</div>
+	</div>
+
 
 	<!-- Settings Menu -->
-	<div class='blind' v-if='ui.settingsmenu'>
+	<div class='blind' v-show='ui.settingsmenu'>
 		<div class='net' @click='toggleSettings'></div>
 		<div id='settings' class='TEMPLATE'>
 
@@ -239,7 +247,15 @@
 					<subheader text='Themes'></subheader>
 					<theme-svg v-for='t in themes' :theme='t.id' :label='t.name'></theme-svg>
 
-					<!-- <subheader text='Custom CSS'></subheader> Make Custom CSS an Addon -->
+				</div>
+
+				<div id='setpage_Sidebar' v-show='settingspage === "Sidebar"'>
+					<div class='topbound'>
+						<h1>Sidebar</h1>
+						<div class='divider'></div>
+					</div>
+
+					<!-- https://sortablejs.github.io/Sortable/ -->
 
 				</div>
 
@@ -268,6 +284,9 @@
 						<h1>Addons</h1>
 						<div class='divider'></div>
 					</div>
+
+					<!-- https://api.github.com/search/repositories?q=topic:scrivi-addon -->
+
 				</div>
 
 				<div id='setpage_About' v-show='settingspage === "About"'>
