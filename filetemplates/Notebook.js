@@ -11,19 +11,44 @@ Scrivi.createFileTemplate({
 
 	component: Vue.extend({
 		template: `<div>
-			<div class='topbound'>
-				<div class='title' contenteditable spellcheck='false' fd_bind='title'></div>
-				<div class='divider'></div>
-			</div>
+			<div v-show='!pageview'>
+				<!-- Page Select Menu -->
+				<div class='topbound'>
+					<div class='title' contenteditable spellcheck='false' fd_bind='title'></div>
+					<div class='divider'></div>
+				</div>
+				<div class='pagelist'>
+					<div v-for=''></div>
+					<div><i data-feather='plus' width='24px' height='24px'></i> New Page</div>
+				</div>
 
-		</div>`
+			</div>
+			<div v-show='pageview'>
+				<!-- Page View -->
+				<div class='topbound'>
+					<div class='title' contenteditable spellcheck='false'></div>
+					<div class='divider'></div>
+				</div>
+
+			</div>
+		</div>`,
+		data: ()=> { return { // Component Data
+			pageview: false
+		}},
+		watch: ()=> { return { // Data Change Event
+			pageview: (next, prev)=>{
+				
+			}
+		}}
 	}),
 
 	filedata: {
 		title: '',
-		page: false,
 		pagelist: [],
-		pages: {}
+		pages: {},
+
+		_title: '', // Current page's metadata.
+		_body: ''
 	},
 
 	events: {

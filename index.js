@@ -98,7 +98,7 @@ var Scrivi = new Vue({
 					'icon': 'plus',
 					'name': 'New File',
 					'action': ()=>{
-						Scrivi.newFile('Notebook');
+						Scrivi.closeFile();
 						//Scrivi.notif('File Created', {icon: 'check', color: 'var(--notif-success)'});
 					}
 				},
@@ -196,6 +196,8 @@ var Scrivi = new Vue({
 		},
 
 		toggleSaveAsDialog() {
+			// Null if no file.
+			if (Scrivi.currentfile === false) { return };
 			if (!Scrivi.ui.saveas) {
 				Scrivi.ui.saveas = true; // Show the save-as window.
 				Scrivi.ui.menublur = true;
@@ -380,6 +382,20 @@ var Scrivi = new Vue({
 			};
 		},
 
+		closeFile() {
+			// Unsaved Changes Warning
+			if (Scrivi.unsavedchanges) {
+				Scrivi.saveWarning(Scrivi.closeFile);
+				return;
+			};
+
+			Scrivi.currentfile = false;
+			Scrivi.editorcomponent = false;
+			Scrivi.unsavedchanges = false;
+
+
+		},
+
 		validFileName(name) {
 			if (name.length === 0) {
 				return [false, 'empty'];
@@ -404,7 +420,7 @@ var Scrivi = new Vue({
 				// Set HTML to saved data.
 				$(e).html( Scrivi.currentfile.filedata[ $(e).attr('fd_bind') ] );
 
-				$(e).off('input');
+				$(e).off('input'); // Removes any old events.
 
 				// Create updater for when data is changed. 
 				$(e).on('input', ()=>{

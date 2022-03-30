@@ -27,8 +27,8 @@ request.onsuccess = (event) => {
 	Scrivi.loadData('file', ()=>{}, defaultset=true, updater=true);
 	Scrivi.loadData('keyboard', ()=>{}, defaultset=true, updater=true);
 
-	// Open empty file.
-	Scrivi.newFile('Simple');
+	// Startup Action
+	Scrivi.closeFile();
 
 };
 request.onupgradeneeded = (event) => {

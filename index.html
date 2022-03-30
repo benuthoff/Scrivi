@@ -52,6 +52,21 @@
 	<div id='editor'></div>
 
 
+	<!-- File Template Select -->
+	<div id='templateview' v-if='currentfile === false'>
+		<div class='topbound'>
+			<div class='title'>Choose a file type:</div>
+			<div class='divider'></div>
+		</div>
+		<div class='tempflex'>
+			<div v-for='t in templatelist' @click='newFile(t)'>
+				<i :data-feather='filetemplates[t].icon' width='64px' height='64px'></i>
+				<div class='title'>{{ filetemplates[t].name }}</div>
+			</div>
+		</div>
+	</div>
+
+
 	<!-- UI: Dialog Boxes -->
 	<div class='blind' v-if='dialogs.length > 0' style='z-index: 999;'>
 		<div id='dialogbox'>
@@ -118,11 +133,11 @@
 					<h1>Home</h1>
 
 					<div class='filegrid' v-if='ui.filesmenu'>
-						<div v-for='rf in file.dbrecent' @dblclick='openFile(rf)'>
+						<div v-for='rf in file.dbrecent' @click='openFile(rf)'>
 							<i :data-feather='filetemplates[file.dbpath[rf].template] ? filetemplates[file.dbpath[rf].template].icon : "alert-octagon"' width='32px' height='32px'></i>
 							{{ file.dbpath[rf].name }}
 						</div>
-						<div @dblclick='filesmenu.page = "lib"'>
+						<div @click='filesmenu.page = "lib"'>
 							<i data-feather='more-horizontal' width='32px' height='32px'></i> More Files
 						</div>
 					</div>
@@ -256,6 +271,10 @@
 						<a href='https://jquery.com/' target='_blank'>
 							<img draggable='false' src='https://avatars.githubusercontent.com/u/70142'/>
 							<span>JQuery</span>
+						</a>
+						<a href='https://feathericons.com/' target='_blank'>
+							<img draggable='false' src='https://raw.githubusercontent.com/feathericons/feather/master/icons/feather.svg'/>
+							<span>Feather</span>
 						</a>
 					</div>
 
