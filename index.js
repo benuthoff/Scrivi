@@ -82,7 +82,8 @@ var Scrivi = new Vue({
 		settings: { // Attributes saved to usersettings
 			sidebar_autohide: false,
 			authorname: 'Anonymous',
-			theme: 'dark'
+			theme: 'dark',
+			addons: {}
 		},
 
 		settingspage: 'Basic', // The current settings page open
@@ -94,6 +95,8 @@ var Scrivi = new Vue({
 			{ name: 'Addons', icon: 'package' },
 			{ name: 'About', icon: 'info' }
 		],
+
+		addonshop: [],
 
 		sidebar: { // Used to render the app's sidebar(s)
 			left: [
@@ -238,7 +241,24 @@ var Scrivi = new Vue({
 
 		},
 
-		openSettingsTab(tab) { Scrivi.settingspage = tab.name; Scrivi.editKeyCode(false); },
+		openSettingsTab(tab) {
+			Scrivi.settingspage = tab.name;
+			Scrivi.editKeyCode(false);
+			if (tab.name === 'Addons') {
+				Scrivi.addonshop = [];
+				setTimeout(()=>{ // Requires timeout before loading new addons.
+					fetch('https://api.github.com/search/repositories?q=topic:scrivi-addon')
+					.then(response => response.json())
+					.then((data)=>{
+						if (data.items) {
+							Scrivi.addonshop = data.items;
+						} else {
+							Scrivi.notif('There was an error making a request.', {'color': 'var(--notif-error)'})
+						};
+					});
+				}, 100);
+			};
+		},
 
 		createFileTemplate(input) {
 			Scrivi.filetemplates[input.name] = input;

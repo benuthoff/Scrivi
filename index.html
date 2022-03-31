@@ -200,6 +200,8 @@
 	<div v-if='ui.fileinfo' class='blind'>
 		<div class='net' @click='toggleFileInfo'></div>
 		<div id='fileinfo'>
+			<i data-feather=''></i>
+			<h1>File Name</h1>
 
 		</div>
 	</div>
@@ -284,8 +286,18 @@
 						<h1>Addons</h1>
 						<div class='divider'></div>
 					</div>
+					<div id='addonshoplist'>
+						<div v-if='addonshop.length === 0' class='loading'>Loading...</div>
+						<div v-else v-for='repo in addonshop'>
+							<h1>{{ repo.name }}<span class='author'>
+								by <img :src='repo.owner.avatar_url'/>{{ repo.owner.login }}
+							</span></h1>
+							<h2>{{ repo.description }}</h2>
+						</div>
+					</div>
 
 					<!-- https://api.github.com/search/repositories?q=topic:scrivi-addon -->
+					<!-- https://raw.githubusercontent.com/{owner}/{repo}/main/index.js -->
 
 				</div>
 
@@ -313,6 +325,10 @@
 						<a href='https://vuejs.org/' target='_blank'>
 							<img draggable='false' src='https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg'/>
 							<span>Vue.js</span>
+						</a>
+						<a href='https://lesscss.org/' target='_blank'>
+							<img draggable='false' src='https://lesscss.org/public/img/less_logo.png'/>
+							<span>Less</span>
 						</a>
 						<a href='https://jquery.com/' target='_blank'>
 							<img draggable='false' src='https://avatars.githubusercontent.com/u/70142'/>
