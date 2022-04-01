@@ -293,6 +293,17 @@
 								by <img :src='repo.owner.avatar_url'/>{{ repo.owner.login }}
 							</span></h1>
 							<h2>{{ repo.description }}</h2>
+							<div class='buttons'>
+								<div @click='window.open(repo.html_url,"_blank")'>
+									<i data-feather='star'></i> {{ repo.stargazers_count }}
+								</div>
+								<div v-if='!Object.keys(settings.addons).includes(repo.name)'>
+									<i data-feather='download'></i> Download
+								</div>
+								<div v-else>
+									<i data-feather='repeat'></i> Update
+								</div>
+							</div>
 						</div>
 					</div>
 

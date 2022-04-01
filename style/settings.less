@@ -206,9 +206,11 @@
 		margin-left: 24px;
 
 		& > div:not(.loading) {
-			padding: 0 24px 14px 24px;
+			padding: 0 24px;
 			border-bottom: solid 1px var(--dialog-border);
 		}
+
+		h1 { padding-bottom: 0; }
 
 		.author {
 			display: inline-flex;
@@ -226,6 +228,24 @@
 		h2 {
 			opacity: 0.7;
 			margin: 0;
+		}
+
+		.buttons > div {
+			display: inline-flex;
+			align-items: center;
+			padding: 6px 16px;
+			font-size: 20px;
+			border: solid 2px var(--dialog-border);
+			border-radius: 6px;
+			margin: 10px 4px;
+			margin-bottom: 16px;
+			cursor: pointer;
+			transition: 0.14s;
+			color: var(--icon-color);
+			.icon { padding-right: 10px; }
+			&:hover {
+				background-color: var(--hover-color);
+			}
 		}
 
 	}
